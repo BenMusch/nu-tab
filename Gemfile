@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "2.4.0"
+ruby "2.3.1"
 
 gem "autoprefixer-rails"
 gem "delayed_job_active_record"
@@ -17,7 +17,6 @@ gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "skylight"
 gem "sprockets", ">= 3.0.0"
-gem "suspenders"
 gem "title"
 gem "uglifier"
 
@@ -37,6 +36,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails", "~> 3.5"
+  gem "rails_best_practices"
 end
 
 group :development, :staging do
