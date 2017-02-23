@@ -25,6 +25,8 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"
+  gem "annotate"
+  gem "rdoc"
 end
 
 group :development, :test do

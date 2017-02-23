@@ -26,6 +26,20 @@ After setting up, you can run the application using [Heroku Local]:
 
 [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
 
+## Documentation
+
+The documentation for this projects lives in the doc/ directory. Documentation
+is written in the [RDoc](https://github.com/rdoc/rdoc) format and will be
+automatically generated from the comments on the code
+
+To generate the documentation:
+
+    $ ./bin/generate_docs
+
+To view the documentation as an HTML document:
+
+    $ open doc/app/index.html
+
 ## Guidelines
 
 Use the following guides for getting things done, programming well, and

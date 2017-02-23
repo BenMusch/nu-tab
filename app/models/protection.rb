@@ -1,12 +1,27 @@
 # frozen_string_literal: true
+
+# Stores information about the schools a team is "protected" from hitting or
+# being judged by
+#
+# Uses Single Table Inheritance to delegate between the Protection::Primary and
+# Protection::Secondary classes
+#
+# == Schema Information
+#
+# Table name: protections
+#
+#  id         :integer          not null, primary key
+#  team_id    :integer
+#  school_id  :integer
+#  type       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Protection < ApplicationRecord
   belongs_to :team
   belongs_to :school
   self.inheritance_column = :type
 
-  # Secondary protection only applies to hybrid teams
-  # Primary protects a team from hitting Teams and Judges from a school
-  # Secondary just protects a team from having Judges from a school
   def self.types
     %w(Primary Secondary)
   end

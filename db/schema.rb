@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222200358) do
+ActiveRecord::Schema.define(version: 20170223144732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "debater_teams", force: :cascade do |t|
+    t.integer  "debater_id"
+    t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["debater_id"], name: "index_debater_teams_on_debater_id", using: :btree
+    t.index ["team_id"], name: "index_debater_teams_on_team_id", using: :btree
+  end
 
   create_table "debaters", force: :cascade do |t|
     t.string   "name"
@@ -39,11 +48,30 @@ ActiveRecord::Schema.define(version: 20170222200358) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
+  create_table "judge_schools", force: :cascade do |t|
+    t.integer  "judge_id"
+    t.integer  "school_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["judge_id"], name: "index_judge_schools_on_judge_id", using: :btree
+    t.index ["school_id"], name: "index_judge_schools_on_school_id", using: :btree
+  end
+
   create_table "judges", force: :cascade do |t|
     t.string   "name"
     t.integer  "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "protections", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "school_id"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_protections_on_school_id", using: :btree
+    t.index ["team_id"], name: "index_protections_on_team_id", using: :btree
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -76,7 +104,13 @@ ActiveRecord::Schema.define(version: 20170222200358) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "debater_teams", "debaters"
+  add_foreign_key "debater_teams", "teams"
   add_foreign_key "debaters", "schools"
+  add_foreign_key "judge_schools", "judges"
+  add_foreign_key "judge_schools", "schools"
+  add_foreign_key "protections", "schools"
+  add_foreign_key "protections", "teams"
   add_foreign_key "scratches", "judges"
   add_foreign_key "scratches", "teams"
 end

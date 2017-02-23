@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :debater_team do
+    debater nil
+    team nil
+  end
   factory :judge_school do
     judge nil
     school nil

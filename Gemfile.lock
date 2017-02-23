@@ -40,6 +40,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (7.1.4)
     autoprefixer-rails (6.7.2)
       execjs
@@ -189,6 +192,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    rdoc (4.2.1)
     recipient_interceptor (0.1.2)
       mail
     refills (0.2.0)
@@ -278,6 +282,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   autoprefixer-rails
   awesome_print
   bourbon (~> 5.0.0.beta.7)
@@ -306,6 +311,7 @@ DEPENDENCIES
   rack-timeout
   rails (~> 5.0.0)
   rails_best_practices
+  rdoc
   recipient_interceptor
   refills
   rollbar
