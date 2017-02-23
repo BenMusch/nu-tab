@@ -1,4 +1,13 @@
 FactoryGirl.define do
+  factory :judge_school do
+    judge nil
+    school nil
+  end
+  factory :protection do
+    team nil
+    school nil
+    type ""
+  end
   factory :room do
     name "MyString"
     rank 1
