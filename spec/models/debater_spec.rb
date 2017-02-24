@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: debaters
@@ -43,18 +45,18 @@ RSpec.describe Debater, type: :model do
       end
 
       it 'is >= 4 characters' do
-        debater.name = "a" * 3
+        debater.name = 'a' * 3
         expect(debater).not_to be_valid
 
-        debater.name = "a" * 4
+        debater.name = 'a' * 4
         expect(debater).to be_valid
       end
 
       it 'is < 50 characters' do
-        debater.name = "a" * 50
+        debater.name = 'a' * 50
         expect(debater).not_to be_valid
 
-        debater.name = "a" * 49
+        debater.name = 'a' * 49
         expect(debater).to be_valid
       end
     end
