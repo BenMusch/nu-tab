@@ -1,0 +1,8 @@
+engines:
+  rubocop:
+    enabled: true
+  scss-lint: true
+ratings:
+  paths:
+  - "**.scss"
+  - "**.rb"

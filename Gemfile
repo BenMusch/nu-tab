@@ -37,6 +37,8 @@ group :development, :test do
   gem "pry-rails"
   gem "rspec-rails", "~> 3.5"
   gem "rails_best_practices"
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
 end
 
 group :development, :staging do
@@ -49,7 +51,6 @@ group :test do
   gem "formulaic"
   gem "launchy"
   gem "shoulda-matchers"
-  gem "simplecov", require: false
   gem "timecop"
   gem "webmock"
 end
