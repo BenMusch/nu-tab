@@ -19,7 +19,7 @@ class Debater < ApplicationRecord
   has_one :team, through: :debater_teams
 
   validates :name, presence:   true,
-                   length:     { is: 4..50 },
+                   length:     { in: 4...50 },
                    uniqueness: { scope: :school }
   validates :school, presence: true
 end

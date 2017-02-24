@@ -12,9 +12,8 @@
 # frozen_string_literal: true
 class Room < ApplicationRecord
   validates :rank, presence:     true,
-                   greater_than: 0,
-                   less_than:    100
+                   inclusion: 0...100
   validates :name, presence:   true,
                    uniqueness: true,
-                   length:     { is: 4...50 }
+                   length:     { in: 4...50 }
 end

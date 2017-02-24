@@ -6,7 +6,9 @@
 [![Code Climate](https://codeclimate.com/github/BenMusch/nu-tab/badges/gpa.svg)](https://codeclimate.com/github/BenMusch/nu-tab)
 [![Test Coverage](https://codeclimate.com/github/BenMusch/nu-tab/badges/coverage.svg)](https://codeclimate.com/github/BenMusch/nu-tab/coverage)
 
-An attempt at APDA tabbing software built for 2017
+An attempt at APDA tabbing software built for 2017. The goal of this project is
+to port the tab logic of [mit-tab](https://github.com/jolynch/mit-tab) into a
+web application with more robust testing, documentation & clarity
 
 ## Getting Started
 

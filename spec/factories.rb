@@ -26,15 +26,15 @@ FactoryGirl.define do
     seed 1
   end
   factory :debater do
-    name 'MyString'
+    sequence(:name) { Faker::Name.unique.name }
     novice false
-    school nil
+    association :school, factory: :school
   end
   factory :judge do
     name 'MyString'
     rank 1
   end
   factory :school do
-    name 'MyString'
+    sequence(:name) { Faker::University.unique.name[0...25] }
   end
 end

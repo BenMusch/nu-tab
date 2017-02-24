@@ -18,10 +18,9 @@ class Judge < ApplicationRecord
   has_many :judge_schools
   has_many :schools, through: :judge_schools
 
-  validates :rank, presence:     true,
-                   greater_than: 0,
-                   less_than:    100
+  validates :rank, presence:  true,
+                   inclusion: 0...100
   validates :name, presence:   true,
                    uniqueness: true,
-                   length:     { is: 4...50 }
+                   length:     { in: 4...50 }
 end

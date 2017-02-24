@@ -21,5 +21,5 @@ class Team < ApplicationRecord
 
   enum seed: [:full_seed, :half_seed, :free_seed, :unseeded]
 
-  validates :name, presence: true, length: { is: 4...50 }
+  validates :name, presence: true, length: { in: 4...50 }
 end
