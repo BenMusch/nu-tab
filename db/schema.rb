@@ -64,16 +64,6 @@ ActiveRecord::Schema.define(version: 20170223144732) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "protections", force: :cascade do |t|
-    t.integer  "team_id"
-    t.integer  "school_id"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["school_id"], name: "index_protections_on_school_id", using: :btree
-    t.index ["team_id"], name: "index_protections_on_team_id", using: :btree
-  end
-
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
     t.integer  "rank"
@@ -109,8 +99,6 @@ ActiveRecord::Schema.define(version: 20170223144732) do
   add_foreign_key "debaters", "schools"
   add_foreign_key "judge_schools", "judges"
   add_foreign_key "judge_schools", "schools"
-  add_foreign_key "protections", "schools"
-  add_foreign_key "protections", "teams"
   add_foreign_key "scratches", "judges"
   add_foreign_key "scratches", "teams"
 end

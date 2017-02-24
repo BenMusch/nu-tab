@@ -13,4 +13,15 @@
 #  updated_at :datetime         not null
 #
 class Judge < ApplicationRecord
+  has_many :scratches
+  has_many :teams, through: :scratches, as: :scratched_teams
+  has_many :judge_schools
+  has_many :schools, through: :judge_schools
+
+  validates :rank, presence:     true,
+                   greater_than: 0,
+                   less_than:    100
+  validates :name, presence:   true,
+                   uniqueness: true,
+                   length:     { is: 4...50 }
 end

@@ -14,5 +14,21 @@
 require 'rails_helper'
 
 RSpec.describe Debater, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'name' do
+    it 'is present' do
+
+    end
+
+    it 'it unique within schools' do
+
+    end
+
+    it 'is >= 4 characters' do
+
+    end
+
+    it 'is <= 50 characters' do
+
+    end
+  end
 end

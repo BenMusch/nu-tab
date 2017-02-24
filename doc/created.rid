@@ -10,7 +10,6 @@ app/models/debater.rb	Thu, 23 Feb 2017 09:27:27 -0500
 app/models/debater_team.rb	Thu, 23 Feb 2017 09:41:31 -0500
 app/models/judge.rb	Thu, 23 Feb 2017 09:27:12 -0500
 app/models/judge_school.rb	Thu, 23 Feb 2017 09:32:33 -0500
-app/models/protection.rb	Thu, 23 Feb 2017 09:34:04 -0500
 app/models/room.rb	Thu, 23 Feb 2017 09:21:30 -0500
 app/models/school.rb	Thu, 23 Feb 2017 09:42:13 -0500
 app/models/scratch.rb	Thu, 23 Feb 2017 09:36:34 -0500

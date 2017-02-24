@@ -14,12 +14,12 @@
 #
 
 class Team < ApplicationRecord
-  has_many :protections
   has_many :scratches
   has_many :debater_teams
   has_many :debaters, through: :debater_teams
   has_many :judges, through: :scratches, as: :scratched_judges
-  has_many :schools, through: :protections
 
   enum seed: [:full_seed, :half_seed, :free_seed, :unseeded]
+
+  validates :name, presence: true, length: { is: 4...50 }
 end

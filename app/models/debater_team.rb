@@ -16,4 +16,18 @@
 class DebaterTeam < ApplicationRecord
   belongs_to :debater
   belongs_to :team
+
+  validates :team, presence: true
+  validates :debater, presence: true,
+                      uniqueness: { message: 'Debater cannot be in multiple teams' }
+
+  validate do
+    check_team_size
+  end
+
+  private
+
+  def check_team_size
+    errors[:team] = 'Team has too many debaters' if team.debaters.size >= 2
+  end
 end

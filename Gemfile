@@ -41,6 +41,7 @@ group :development, :test do
   gem "rails_best_practices"
   gem "simplecov"
   gem "codeclimate-test-reporter", "~> 1.0.0"
+  gem "faker"
 end
 
 group :development, :staging do

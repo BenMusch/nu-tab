@@ -16,4 +16,7 @@
 class JudgeSchool < ApplicationRecord
   belongs_to :judge
   belongs_to :school
+
+  validates :judge, presence: true
+  validates :school, presence: true
 end
