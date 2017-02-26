@@ -28,6 +28,6 @@ class DebaterTeam < ApplicationRecord
   private
 
   def check_team_size
-    errors[:team] = 'Team has too many debaters' if team.debaters.size >= 2
+    errors[:team] = 'Team has too many debaters' if team.reload.debaters.size >= 2
   end
 end

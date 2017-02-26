@@ -138,6 +138,8 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     normalize-rails (3.0.3)
+    paranoia (2.2.1)
+      activerecord (>= 4.0, < 5.1)
     pg (0.19.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -305,6 +307,7 @@ DEPENDENCIES
   listen
   neat (~> 2.0.0.beta.1)
   normalize-rails (~> 3.0.0)
+  paranoia
   pg
   pry-byebug
   pry-rails

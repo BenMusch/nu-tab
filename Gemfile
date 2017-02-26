@@ -19,6 +19,7 @@ gem "skylight"
 gem "sprockets", ">= 3.0.0"
 gem "title"
 gem "uglifier"
+gem "paranoia"
 
 group :development do
   gem "listen"

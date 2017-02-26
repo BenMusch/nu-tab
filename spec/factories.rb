@@ -22,7 +22,7 @@ FactoryGirl.define do
     type 1
   end
   factory :team do
-    name 'MyString'
+    sequence(:name) { |n| "Team #{n}" }
     seed 1
   end
   factory :debater do
