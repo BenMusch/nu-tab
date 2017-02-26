@@ -40,6 +40,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (7.1.4)
     autoprefixer-rails (6.7.2)
       execjs
@@ -93,6 +96,8 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
+    faker (1.7.3)
+      i18n (~> 0.5)
     ffi (1.9.17)
     flutie (2.0.0)
     formulaic (0.4.0)
@@ -133,6 +138,8 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     normalize-rails (3.0.3)
+    paranoia (2.2.1)
+      activerecord (>= 4.0, < 5.1)
     pg (0.19.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -189,6 +196,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    rdoc (4.2.1)
     recipient_interceptor (0.1.2)
       mail
     refills (0.2.0)
@@ -278,6 +286,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   autoprefixer-rails
   awesome_print
   bourbon (~> 5.0.0.beta.7)
@@ -289,6 +298,7 @@ DEPENDENCIES
   delayed_job_active_record
   dotenv-rails
   factory_girl_rails
+  faker
   flutie
   formulaic
   high_voltage
@@ -297,6 +307,7 @@ DEPENDENCIES
   listen
   neat (~> 2.0.0.beta.1)
   normalize-rails (~> 3.0.0)
+  paranoia
   pg
   pry-byebug
   pry-rails
@@ -306,6 +317,7 @@ DEPENDENCIES
   rack-timeout
   rails (~> 5.0.0)
   rails_best_practices
+  rdoc
   recipient_interceptor
   refills
   rollbar

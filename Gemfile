@@ -19,12 +19,15 @@ gem "skylight"
 gem "sprockets", ">= 3.0.0"
 gem "title"
 gem "uglifier"
+gem "paranoia"
 
 group :development do
   gem "listen"
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"
+  gem "annotate"
+  gem "rdoc"
 end
 
 group :development, :test do
@@ -39,6 +42,7 @@ group :development, :test do
   gem "rails_best_practices"
   gem "simplecov"
   gem "codeclimate-test-reporter", "~> 1.0.0"
+  gem "faker"
 end
 
 group :development, :staging do

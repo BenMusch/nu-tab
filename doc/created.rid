@@ -1,0 +1,16 @@
+Thu, 23 Feb 2017 09:55:02 -0500
+README.md	Thu, 23 Feb 2017 09:54:45 -0500
+app/controllers/application_controller.rb	Tue, 14 Feb 2017 20:50:12 -0500
+app/helpers/application_helper.rb	Tue, 14 Feb 2017 15:49:33 -0500
+app/helpers/flashes_helper.rb	Tue, 14 Feb 2017 15:52:45 -0500
+app/jobs/application_job.rb	Tue, 14 Feb 2017 15:49:33 -0500
+app/mailers/application_mailer.rb	Tue, 14 Feb 2017 15:49:33 -0500
+app/models/application_record.rb	Tue, 14 Feb 2017 15:49:33 -0500
+app/models/debater.rb	Thu, 23 Feb 2017 09:27:27 -0500
+app/models/debater_team.rb	Thu, 23 Feb 2017 09:41:31 -0500
+app/models/judge.rb	Thu, 23 Feb 2017 09:27:12 -0500
+app/models/judge_school.rb	Thu, 23 Feb 2017 09:32:33 -0500
+app/models/room.rb	Thu, 23 Feb 2017 09:21:30 -0500
+app/models/school.rb	Thu, 23 Feb 2017 09:42:13 -0500
+app/models/scratch.rb	Thu, 23 Feb 2017 09:36:34 -0500
+app/models/team.rb	Thu, 23 Feb 2017 09:49:28 -0500
