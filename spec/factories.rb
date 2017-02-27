@@ -1,4 +1,28 @@
 FactoryGirl.define do
+  factory :check_in do
+    round_number 1
+    check_innable_id 1
+    check_innable_type "MyString"
+  end
+  factory :debater_round_stat do
+    debater nil
+    round nil
+    speaker 1.5
+    ranks 1
+    position 1
+  end
+  factory :judge_round do
+    chair false
+    round nil
+    judge nil
+  end
+  factory :round do
+    result 1
+    room nil
+    gov_team nil
+    opp_team nil
+    round_number 1
+  end
   factory :debater_team do
     debater nil
     team nil
