@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223144732) do
+ActiveRecord::Schema.define(version: 20170227191302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "check_ins", force: :cascade do |t|
+    t.integer  "round_number"
+    t.string   "check_innable_id_type"
+    t.integer  "check_innable_id_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["check_innable_id_type", "check_innable_id_id"], name: "index_check_innables", using: :btree
+  end
+
+  create_table "debater_round_stats", force: :cascade do |t|
+    t.integer  "debater_id"
+    t.integer  "round_id"
+    t.float    "speaker"
+    t.integer  "ranks"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["debater_id"], name: "index_debater_round_stats_on_debater_id", using: :btree
+    t.index ["round_id"], name: "index_debater_round_stats_on_round_id", using: :btree
+  end
 
   create_table "debater_teams", force: :cascade do |t|
     t.integer  "debater_id"
@@ -48,6 +69,16 @@ ActiveRecord::Schema.define(version: 20170223144732) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
+  create_table "judge_rounds", force: :cascade do |t|
+    t.boolean  "chair"
+    t.integer  "round_id"
+    t.integer  "judge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["judge_id"], name: "index_judge_rounds_on_judge_id", using: :btree
+    t.index ["round_id"], name: "index_judge_rounds_on_round_id", using: :btree
+  end
+
   create_table "judge_schools", force: :cascade do |t|
     t.integer  "judge_id"
     t.integer  "school_id"
@@ -64,11 +95,34 @@ ActiveRecord::Schema.define(version: 20170223144732) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "protections", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "school_id"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_protections_on_school_id", using: :btree
+    t.index ["team_id"], name: "index_protections_on_team_id", using: :btree
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
     t.integer  "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rounds", force: :cascade do |t|
+    t.integer  "result"
+    t.integer  "room_id"
+    t.integer  "gov_team_id"
+    t.integer  "opp_team_id"
+    t.integer  "round_number"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["gov_team_id"], name: "index_rounds_on_gov_team_id", using: :btree
+    t.index ["opp_team_id"], name: "index_rounds_on_opp_team_id", using: :btree
+    t.index ["room_id"], name: "index_rounds_on_room_id", using: :btree
   end
 
   create_table "schools", force: :cascade do |t|
@@ -99,6 +153,8 @@ ActiveRecord::Schema.define(version: 20170223144732) do
   add_foreign_key "debaters", "schools"
   add_foreign_key "judge_schools", "judges"
   add_foreign_key "judge_schools", "schools"
+  add_foreign_key "protections", "schools"
+  add_foreign_key "protections", "teams"
   add_foreign_key "scratches", "judges"
   add_foreign_key "scratches", "teams"
 end

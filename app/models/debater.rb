@@ -14,6 +14,8 @@
 #  updated_at :datetime         not null
 #
 class Debater < ApplicationRecord
+  include CheckInnable
+
   belongs_to :school
   has_many :debater_teams
   has_one :team, through: :debater_teams
