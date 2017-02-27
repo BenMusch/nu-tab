@@ -13,12 +13,12 @@ FactoryGirl.define do
     type ''
   end
   factory :room do
-    name 'MyString'
-    rank 1
+    sequence(:name) { Faker::Name.unique.name }
+    sequence(:rank) { rand(99) + 1 }
   end
   factory :scratch do
-    team nil
-    judge nil
+    association :judge, factory: :school
+    association :team, factory: :team
     type 1
   end
   factory :team do
@@ -31,10 +31,10 @@ FactoryGirl.define do
     association :school, factory: :school
   end
   factory :judge do
-    name 'MyString'
-    rank 1
+    sequence(:name) { Faker::Name.unique.name }
+    sequence(:rank) { rand(99) + 1 }
   end
   factory :school do
-    sequence(:name) { Faker::University.unique.name[0...25] }
+    sequence(:name) { Faker::University.unique.name[0...10] }
   end
 end

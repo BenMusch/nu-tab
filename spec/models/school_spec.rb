@@ -14,5 +14,25 @@
 require 'rails_helper'
 
 RSpec.describe School, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:school) { build(:school, name: 'NU')}
+
+  context 'validations' do
+    before do
+      expect(school).to be_valid
+    end
+    describe 'name' do
+      it 'is no longer than 10 characters' do
+        school.name = 'A'*10
+        expect(school).to be_valid
+
+        school.name = 'A'*11
+        expect(school).not_to be_valid
+      end
+
+      it 'is unique' do
+        create(:school, name: school.name)
+        expect(school).not_to be_valid
+      end
+    end
+  end
 end
