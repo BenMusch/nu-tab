@@ -4,8 +4,8 @@ class CreateRounds < ActiveRecord::Migration[5.0]
       t.integer :result
       t.belongs_to :room
       t.integer :round_number
-      t.references :gov_team, foreign_key: true
-      t.references :opp_team, foreign_key: true
+      t.belongs_to :gov_team, references: :teams
+      t.belongs_to :opp_team, references: :teams
 
       t.timestamps
     end
