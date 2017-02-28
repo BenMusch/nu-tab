@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :pairing do
+    gov_team nil
+    opp_team nil
+    room nil
+    round_number 1
+  end
   factory :check_in do
     round_number 1
     check_innable_id 1
