@@ -25,9 +25,9 @@ class Round < ApplicationRecord
 
   enum result: [:gov_win, :opp_win, :gov_forfeit, :opp_forfeit, :all_drop, :all_win]
 
-  validates :gov_team, uniqueness: { scope: round_number }
-  validates :opp_team, uniqueness: { scope: round_number }
-  validates :room, uniqueness: { scope: round_number }
+  validates :gov_team, uniqueness: { scope: :round_number }
+  validates :opp_team, uniqueness: { scope: :round_number }
+  validates :room, uniqueness: { scope: :round_number }
 
   validate do
     if full_round?

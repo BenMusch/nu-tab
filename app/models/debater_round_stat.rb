@@ -19,10 +19,10 @@ class DebaterRoundStat < ApplicationRecord
   belongs_to :round
   enum position: [:pm, :mg, :lo, :mo]
 
-  validate :position, uniqueness: { scope:  :round },
-                      presence:   true
-  validate :ranks, in:       1...4,
-                   presence: true
-  validate :speaks, in:       TournamentSetting.min_speaks...TournamentSetting.max_speaks,
-                    presence: true
+  validates :position, uniqueness: { scope:  :round },
+                       presence:   true
+  validates :ranks, inclusion: 1...4,
+                    presence:  true
+  validates :speaks, inclusion: 22...28,
+                     presence:  true
 end
