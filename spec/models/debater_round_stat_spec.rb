@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  debater_id :integer
 #  round_id   :integer
-#  speaker    :float
+#  speaks     :float
 #  ranks      :integer
 #  position   :integer
 #  created_at :datetime         not null
