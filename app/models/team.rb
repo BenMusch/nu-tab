@@ -23,4 +23,8 @@ class Team < ApplicationRecord
 
   validates :name, presence: true, length: { in: 4...50 },
                    uniqueness: true
+
+  def rounds
+    Round.where(gov_team: self).or(Round.where(opp_team: self))
+  end
 end

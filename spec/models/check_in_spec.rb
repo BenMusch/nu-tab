@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: check_ins
@@ -42,7 +44,7 @@ RSpec.describe CheckIn, type: :model do
     judge = create(:judge)
     judge_check_in = create(:judge_check_in, subject: judge)
 
-    expect(judge_check_in.subject).to eq (judge)
+    expect(judge_check_in.subject).to eq judge
     expect(judge_check_in.subject_id).to eq(judge.id)
     expect(judge_check_in.subject_type).to eq(judge.class.to_s)
 
@@ -56,7 +58,7 @@ RSpec.describe CheckIn, type: :model do
     team = create(:team)
     team_check_in = create(:team_check_in, subject: team)
 
-    expect(team_check_in.subject).to eq (team)
+    expect(team_check_in.subject).to eq team
     expect(team_check_in.subject_id).to eq(team.id)
     expect(team_check_in.subject_type).to eq(team.class.to_s)
   end

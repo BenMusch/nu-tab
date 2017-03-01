@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: debater_round_stats
@@ -5,7 +7,7 @@
 #  id         :integer          not null, primary key
 #  debater_id :integer
 #  round_id   :integer
-#  speaker    :float
+#  speaks     :float
 #  ranks      :integer
 #  position   :integer
 #  created_at :datetime         not null

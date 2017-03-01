@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170227191302) do
   create_table "debater_round_stats", force: :cascade do |t|
     t.integer  "debater_id"
     t.integer  "round_id"
-    t.float    "speaker"
+    t.float    "speaks"
     t.integer  "ranks"
     t.integer  "position"
     t.datetime "created_at", null: false
@@ -95,16 +95,6 @@ ActiveRecord::Schema.define(version: 20170227191302) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "protections", force: :cascade do |t|
-    t.integer  "team_id"
-    t.integer  "school_id"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["school_id"], name: "index_protections_on_school_id", using: :btree
-    t.index ["team_id"], name: "index_protections_on_team_id", using: :btree
-  end
-
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
     t.integer  "rank"
@@ -115,9 +105,9 @@ ActiveRecord::Schema.define(version: 20170227191302) do
   create_table "rounds", force: :cascade do |t|
     t.integer  "result"
     t.integer  "room_id"
+    t.integer  "round_number"
     t.integer  "gov_team_id"
     t.integer  "opp_team_id"
-    t.integer  "round_number"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["gov_team_id"], name: "index_rounds_on_gov_team_id", using: :btree
@@ -153,8 +143,6 @@ ActiveRecord::Schema.define(version: 20170227191302) do
   add_foreign_key "debaters", "schools"
   add_foreign_key "judge_schools", "judges"
   add_foreign_key "judge_schools", "schools"
-  add_foreign_key "protections", "schools"
-  add_foreign_key "protections", "teams"
   add_foreign_key "scratches", "judges"
   add_foreign_key "scratches", "teams"
 end
