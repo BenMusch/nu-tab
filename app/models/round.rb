@@ -31,9 +31,12 @@ class Round < ApplicationRecord
 
   validate do
     if full_round?
-      check_complete_result
-      check_valid_result
-      check_speaks_ranks_order
+      if all_stats_submitted?
+        check_valid_result
+        check_speaks_ranks_order
+      else
+        errors.add(:base, 'Not all speaker positions have been entered')
+      end
     end
   end
 
@@ -46,7 +49,7 @@ class Round < ApplicationRecord
   end
 
   def valid_ranks?
-    winning_team_stats.ranks >= losing_team_stats.ranks
+    winning_team_stats.ranks <= losing_team_stats.ranks
   end
 
   def valid_speaks?
@@ -62,30 +65,24 @@ class Round < ApplicationRecord
   end
 
   def opp_team_stats
-    TeamRoundStats.new [debater_round_stats.lo, debater_round_stats.mo]
+    TeamRoundStats.new debater_round_stats.lo.first, debater_round_stats.mo.first
   end
 
   def gov_team_stats
-    TeamRoundSats.new [debater_round_stats.pm, debater_round_stats.mg]
+    TeamRoundStats.new debater_round_stats.pm.first, debater_round_stats.mg.first
   end
 
   private
 
-  def check_complete_result
-    unless all_stats_submitted?
-      errors.add('Not all speaker positions have been entered')
-    end
-  end
-
   def check_valid_result
-    errors.add('Ranks are invalid') unless valid_ranks?
-    errors.add('Speaks are invalid') unless valid_speaks?
+    errors.add(:base, 'Ranks are invalid') unless valid_ranks?
+    errors.add(:base, 'Speaks are invalid') unless valid_speaks?
   end
 
   def check_speaks_ranks_order
     if debater_round_stats.order(:ranks, :debater_id) !=
         debater_round_stats.order(:ranks, :debater_id)
-      errors.add('Speaks/Ranks are mis-matched')
+      errors.add(:base, 'Speaks/Ranks are mis-matched')
     end
   end
 end

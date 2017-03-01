@@ -6,7 +6,7 @@
 #  id         :integer          not null, primary key
 #  debater_id :integer
 #  round_id   :integer
-#  speaker    :float
+#  speaks     :float
 #  ranks      :integer
 #  position   :integer
 #  created_at :datetime         not null
@@ -20,8 +20,9 @@ class DebaterRoundStat < ApplicationRecord
 
   validates :position, uniqueness: { scope:  :round },
                        presence:   true
-  validates :ranks, inclusion: 1...4,
-                    presence:  true
-  validates :speaks, inclusion: 22...28,
+  validates :ranks, inclusion:  1..4,
+                    presence:   true,
+                    uniqueness: { scope: :round }
+  validates :speaks, inclusion: 22..28,
                      presence:  true
 end

@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 class TeamRoundStats
-  def initialize(team_members)
-    @team_stats = team_stats
+  def initialize(leader, member)
+    @leader = leader
+    @member = member
   end
 
   def speaks
-    team_stats.map(&:speaks).reduce(:+)
+    leader.speaks + member.speaks
   end
 
   def ranks
-    team_stats.map(&:ranks).reduce(:+)
+    leader.ranks + member.ranks
   end
 
   private
 
-  attr_reader :team_members
+  attr_reader :leader, :member
 end
