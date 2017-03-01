@@ -62,11 +62,11 @@ class Round < ApplicationRecord
   end
 
   def opp_team_stats
-    TeamRoundStats.new [debater_round_stats.lo, debater_round_stats.mg].flatten
+    TeamRoundStats.new [debater_round_stats.lo, debater_round_stats.mo]
   end
 
   def gov_team_stats
-    TeamRoundSats.new [debater_round_stats.pm, debater_round_stats.mg].flatten
+    TeamRoundSats.new [debater_round_stats.pm, debater_round_stats.mg]
   end
 
   private

@@ -7,8 +7,15 @@ FactoryGirl.define do
   end
   factory :check_in do
     round_number 1
-    check_innable_id 1
-    check_innable_type "MyString"
+  end
+  factory :judge_check_in, parent: :check_in do
+    association :subject, factory: :judge
+  end
+  factory :room_check_in, parent: :check_in do
+    association :subject, factory: :room
+  end
+  factory :team_check_in, parent: :check_in do
+    association :subject, factory: :team
   end
   factory :debater_round_stat do
     debater nil

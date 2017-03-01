@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 20170227191302) do
 
   create_table "check_ins", force: :cascade do |t|
     t.integer  "round_number"
-    t.string   "check_innable_type"
-    t.integer  "check_innable_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["check_innable_type", "check_innable_id"], name: "index_check_innables", using: :btree
+    t.string   "subject_type"
+    t.integer  "subject_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["subject_type", "subject_id"], name: "index_subjects", using: :btree
   end
 
   create_table "debater_round_stats", force: :cascade do |t|
