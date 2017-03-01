@@ -53,7 +53,7 @@ class Round < ApplicationRecord
   end
 
   def valid_speaks?
-    losing_team_stats.speaks >= winning_team_stats.ranks
+    winning_team_stats.speaks >= losing_team_stats.speaks
   end
 
   def winning_team_stats
