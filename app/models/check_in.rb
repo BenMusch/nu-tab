@@ -2,14 +2,17 @@
 #
 # Table name: check_ins
 #
-#  id                 :integer          not null, primary key
-#  round_number       :integer
-#  check_innable_type :string
-#  check_innable_id   :integer
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id           :integer          not null, primary key
+#  round_number :integer
+#  subject_type :string
+#  subject_id   :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 
 class CheckIn < ApplicationRecord
-  belongs_to :check_innable, polymorphic: true
+  belongs_to :subject, polymorphic: true
+
+  validates :round_number, presence: true
+  validates :subject, presence: true
 end
