@@ -34,13 +34,16 @@ class DebaterRoundStat < ApplicationRecord
   private
 
   def validate_team_membership
-    if round.gov_team.member?(debater) && opp?
-      errors.add('Debater position must by PM or MG')
-    elsif round.opp_team.member?(debater) && gov?
-      errors.add('Debater position must by LO or MO')
+    if team_and_position_mismatch?
+      errors.add("Debater's speaker position does not match their team")
     elsif !(round.opp_team.member?(debater) || round.gov_team.member?(debater))
       errors.add('Debater is not a member of either team in the round')
     end
+  end
+
+  def team_and_position_mismatch?
+    opposite_team = opp? ? round.gov_team : round.opp_team
+    opposite_team.member? debater
   end
 
   def opp?

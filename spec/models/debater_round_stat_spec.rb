@@ -24,12 +24,11 @@ RSpec.describe DebaterRoundStat, type: :model do
     let(:opp_debater)   { create(:debater, team: opp) }
     let(:other_debater) { create(:debater, team: create(:team)) }
     let(:round)         { create(:round, gov_team: gov, opp_team: opp) }
-    let(:debater)       { create(:debater)}
-    let(:stats)         { build(:debater_round_stat, round: round,
-                                                     debater: gov_debater,
-                                                     speaks: 25,
-                                                     ranks: 1,
-                                                     position: :pm) }
+    let(:debater)       { create(:debater) }
+    let(:stats) do
+      build(:debater_round_stat, round: round, debater: gov_debater, speaks: 25,
+                                 ranks: 1,     position: :pm)
+    end
 
     before do
       expect(stats).to be_valid
