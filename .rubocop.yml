@@ -3,7 +3,9 @@ AllCops:
   Exclude:
     - config/**/*
     - db/**/*
-    - app/models/discourse_single_sign_on.rb
+
+Bundler/OrderedGems:
+  enabled: false
 
 Metrics/LineLength:
   Description: 'Limit lines to 120 characters.'
