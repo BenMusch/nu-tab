@@ -12,8 +12,8 @@
 #  updated_at :datetime         not null
 #
 class School < ApplicationRecord
-  has_many :debater_teams, through: :debaters
-  has_many :teams, through: :debater_teams
+  has_many :debaters
+  has_many :teams, through: :debaters
   has_many :judges
   has_many :debaters
 

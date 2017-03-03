@@ -13,6 +13,8 @@
 #  updated_at :datetime         not null
 #
 class Judge < ApplicationRecord
+  include CheckInnable
+
   has_many :scratches
   has_many :teams, through: :scratches, as: :scratched_teams
   has_many :judge_schools

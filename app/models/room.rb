@@ -11,6 +11,8 @@
 
 # frozen_string_literal: true
 class Room < ApplicationRecord
+  include CheckInnable
+
   validates :rank, presence:     true,
                    inclusion: 0...100
   validates :name, presence:   true,
