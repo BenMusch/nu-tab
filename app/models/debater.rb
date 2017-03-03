@@ -17,8 +17,7 @@ class Debater < ApplicationRecord
   include CheckInnable
 
   belongs_to :school
-  has_many :debater_teams
-  has_one :team, through: :debater_teams
+  belongs_to :team
 
   validates :name, presence:   true,
                    length:     { in: 4...50 },

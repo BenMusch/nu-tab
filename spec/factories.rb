@@ -1,11 +1,4 @@
 FactoryGirl.define do
-  factory :pairing do
-    gov_team nil
-    opp_team nil
-    room nil
-    round_number 1
-  end
-
   factory :check_in do
     round_number 1
   end
@@ -38,15 +31,10 @@ FactoryGirl.define do
 
   factory :round do
     result nil
-    room nil
-    gov_team nil
-    opp_team nil
+    association :room, factory: :room
+    association :gov_team, factory: :team
+    association :opp_team, factory: :team
     round_number 1
-  end
-
-  factory :debater_team do
-    debater nil
-    team nil
   end
 
   factory :judge_school do

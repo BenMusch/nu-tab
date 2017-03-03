@@ -20,19 +20,12 @@ RSpec.describe Round, type: :model do
   context 'validations' do
     let(:gov)   { create(:team) }
     let(:opp)   { create(:team) }
-    let(:pm)    { create(:debater) }
-    let(:mg)    { create(:debater) }
-    let(:lo)    { create(:debater) }
-    let(:mo)    { create(:debater) }
+    let(:pm)    { create(:debater, team: gov) }
+    let(:mg)    { create(:debater, team: gov) }
+    let(:lo)    { create(:debater, team: opp) }
+    let(:mo)    { create(:debater, team: opp) }
     let(:room)  { create(:room) }
     let(:round) { create(:round, gov_team: gov, opp_team: opp, room: room, round_number: 1) }
-
-    before do
-      create(:debater_team, team: opp, debater: lo)
-      create(:debater_team, team: opp, debater: mo)
-      create(:debater_team, team: gov, debater: pm)
-      create(:debater_team, team: gov, debater: mg)
-    end
 
     it 'has a gov_team' do
       round.gov_team = nil

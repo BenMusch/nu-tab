@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227191302) do
+ActiveRecord::Schema.define(version: 20170303025538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,22 +36,15 @@ ActiveRecord::Schema.define(version: 20170227191302) do
     t.index ["round_id"], name: "index_debater_round_stats_on_round_id", using: :btree
   end
 
-  create_table "debater_teams", force: :cascade do |t|
-    t.integer  "debater_id"
-    t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["debater_id"], name: "index_debater_teams_on_debater_id", using: :btree
-    t.index ["team_id"], name: "index_debater_teams_on_team_id", using: :btree
-  end
-
   create_table "debaters", force: :cascade do |t|
     t.string   "name"
     t.boolean  "novice"
     t.integer  "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "team_id"
     t.index ["school_id"], name: "index_debaters_on_school_id", using: :btree
+    t.index ["team_id"], name: "index_debaters_on_team_id", using: :btree
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -138,9 +131,8 @@ ActiveRecord::Schema.define(version: 20170227191302) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "debater_teams", "debaters"
-  add_foreign_key "debater_teams", "teams"
   add_foreign_key "debaters", "schools"
+  add_foreign_key "debaters", "teams"
   add_foreign_key "judge_schools", "judges"
   add_foreign_key "judge_schools", "schools"
   add_foreign_key "scratches", "judges"

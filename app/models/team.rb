@@ -15,8 +15,7 @@
 
 class Team < ApplicationRecord
   has_many :scratches
-  has_many :debater_teams
-  has_many :debaters, through: :debater_teams
+  has_many :debaters
   has_many :judges, through: :scratches, as: :scratched_judges
 
   enum seed: [:full_seed, :half_seed, :free_seed, :unseeded]
@@ -26,5 +25,9 @@ class Team < ApplicationRecord
 
   def rounds
     Round.where(gov_team: self).or(Round.where(opp_team: self))
+  end
+
+  def member?(debater)
+    debater.team == self
   end
 end

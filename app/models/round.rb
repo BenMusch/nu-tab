@@ -32,7 +32,7 @@ class Round < ApplicationRecord
   validates :round_number, presence: true
 
   validate do
-    validate_teams
+    validate_teams               if gov_team && opp_team
     validate_standard_result     if full_round?
     validate_non_standard_result if forfeit? || all_drop? || all_win?
   end
@@ -68,7 +68,6 @@ class Round < ApplicationRecord
   private
 
   def validate_teams
-    return unless gov_team && opp_team
     errors.add(:base, 'Gov and Opp must be different teams') if gov_team == opp_team
     validate_not_paired_in gov_team
     validate_not_paired_in opp_team
