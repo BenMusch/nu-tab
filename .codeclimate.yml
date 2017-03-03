@@ -1,6 +1,9 @@
 engines:
   rubocop:
     enabled: true
+    checks:
+      Bundler/OrderedGems:
+        enabled: false
   scss-lint:
     enabled: true
 ratings:
