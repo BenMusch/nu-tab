@@ -14,6 +14,8 @@
 #
 
 class Team < ApplicationRecord
+  include CheckInnable
+
   has_many :scratches
   has_many :debaters
   has_many :judges, through: :scratches, as: :scratched_judges

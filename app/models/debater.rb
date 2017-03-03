@@ -16,8 +16,6 @@
 #
 
 class Debater < ApplicationRecord
-  include CheckInnable
-
   belongs_to :school
   belongs_to :team
 

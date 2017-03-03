@@ -15,8 +15,6 @@
 #
 
 class Round < ApplicationRecord
-  include CheckInnable
-
   belongs_to :room
   belongs_to :gov_team, class_name: 'Team'
   belongs_to :opp_team, class_name: 'Team'
