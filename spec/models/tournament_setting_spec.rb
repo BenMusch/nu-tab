@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tournament_settings
@@ -83,10 +85,10 @@ RSpec.describe TournamentSetting, type: :model do
   describe '#get_bool' do
     context 'when the setting is not 0 or 1' do
       it 'raises an error' do
-        expect{ TournamentSetting.get_bool('invalid') }.to raise_error(ArgumentError)
+        expect { TournamentSetting.get_bool('invalid') }.to raise_error(ArgumentError)
 
         TournamentSetting.set('key', 2)
-        expect{ TournamentSetting.get_bool('key') }.to raise_error(ArgumentError)
+        expect { TournamentSetting.get_bool('key') }.to raise_error(ArgumentError)
       end
     end
 

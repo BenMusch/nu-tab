@@ -40,6 +40,6 @@ class TournamentSetting < ApplicationRecord
   def self.get_bool(key)
     val = get(key)
     raise ArgumentError, 'Setting is not a boolean' if val != 0 && val != 1
-    return val == 1
+    val == 1
   end
 end
