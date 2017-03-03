@@ -12,7 +12,9 @@
 #  school_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  team_id    :integer
 #
+
 class Debater < ApplicationRecord
   include CheckInnable
 
