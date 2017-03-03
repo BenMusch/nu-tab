@@ -147,6 +147,13 @@ ActiveRecord::Schema.define(version: 20170305182003) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tournament_settings", force: :cascade do |t|
+    t.string   "key"
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "byes", "teams"
   add_foreign_key "debaters", "schools"
   add_foreign_key "debaters", "teams"
