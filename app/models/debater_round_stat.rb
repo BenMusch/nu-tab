@@ -35,9 +35,9 @@ class DebaterRoundStat < ApplicationRecord
 
   def validate_team_membership
     if team_and_position_mismatch?
-      errors.add("Debater's speaker position does not match their team")
+      errors.add(:position, "Debater's speaker position does not match their team")
     elsif !(round.opp_team.member?(debater) || round.gov_team.member?(debater))
-      errors.add('Debater is not a member of either team in the round')
+      errors.add(:debater, 'Debater is not a member of either team in the round')
     end
   end
 

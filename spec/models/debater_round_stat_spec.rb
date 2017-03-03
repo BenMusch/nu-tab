@@ -34,6 +34,19 @@ RSpec.describe DebaterRoundStat, type: :model do
       expect(stats).to be_valid
     end
 
+    it 'validates debaters to be a member of the team their position indicates' do
+      stats.position = :lo
+      expect(stats).not_to be_valid
+    end
+
+    it 'forces the debater to be a member of one of the teams' do
+      stats.debater = other_debater
+      expect(stats).not_to be_valid
+
+      stats.position = :lo
+      expect(stats).not_to be_valid
+    end
+
     describe 'speaks' do
       it 'is present' do
         stats.speaks = nil
