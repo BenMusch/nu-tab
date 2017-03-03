@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :tournament_setting do
+    key "MyString"
+    value 1
+  end
   factory :check_in do
     round_number 1
   end
