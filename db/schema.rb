@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303214526) do
+ActiveRecord::Schema.define(version: 20170304034525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "byes", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "round_number"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["team_id"], name: "index_byes_on_team_id", using: :btree
+  end
 
   create_table "check_ins", force: :cascade do |t|
     t.integer  "round_number"
@@ -138,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170303214526) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "byes", "teams"
   add_foreign_key "debaters", "schools"
   add_foreign_key "debaters", "teams"
   add_foreign_key "judge_schools", "judges"

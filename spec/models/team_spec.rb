@@ -48,5 +48,7 @@ RSpec.describe Team, type: :model do
         expect(team).to be_valid
       end
     end
+
+    # TODO force teams to have two debaters
   end
 end

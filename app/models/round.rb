@@ -56,11 +56,11 @@ class Round < ApplicationRecord
   end
 
   def opp_team_stats
-    TeamRoundStats.new debater_round_stats.lo.first, debater_round_stats.mo.first
+    Stats::Round::TeamPolicy.new opp_team, self
   end
 
   def gov_team_stats
-    TeamRoundStats.new debater_round_stats.pm.first, debater_round_stats.mg.first
+    Stats::Round::TeamPolicy.new gov_team, self
   end
 
   private

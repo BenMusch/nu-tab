@@ -19,6 +19,7 @@ class Team < ApplicationRecord
   has_many :scratches
   has_many :debaters
   has_many :judges, through: :scratches, as: :scratched_judges
+  has_many :byes
 
   enum seed: [:full_seed, :half_seed, :free_seed, :unseeded]
 

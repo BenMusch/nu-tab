@@ -18,6 +18,9 @@
 class Debater < ApplicationRecord
   belongs_to :school
   belongs_to :team
+  has_many :debater_round_stats
+  has_many :rounds, through: :team
+  has_many :byes, through: :team
 
   validates :name, presence:   true,
                    length:     { in: 4...50 },
