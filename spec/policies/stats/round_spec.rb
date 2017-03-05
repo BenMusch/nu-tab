@@ -13,8 +13,8 @@ end
 
 RSpec.describe Stats::Round do
   let(:policy_class) { Stats::Round.policy_for(team, round) }
-  let(:team)         { create(:team) }
-  let(:round)        { create(:round, gov_team: team, opp_team: create(:team)) }
+  let(:team)         { create(:team_with_debaters) }
+  let(:round)        { create(:round, gov_team: team, opp_team: create(:team_with_debaters)) }
 
   describe '#policy_for' do
     context 'when the round is a bye' do

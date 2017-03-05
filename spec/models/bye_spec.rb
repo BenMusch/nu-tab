@@ -14,7 +14,7 @@
 require 'rails_helper'
 
 RSpec.describe Bye, type: :model do
-  let(:bye) { build(:bye, team: create(:team), round_number: 1) }
+  let(:bye) { build(:bye, team: create(:team_with_debaters), round_number: 1) }
 
   context 'validations' do
     before do
@@ -28,7 +28,7 @@ RSpec.describe Bye, type: :model do
       end
 
       it 'is not paired into this round' do
-        round = create(:round, gov_team: create(:team), opp_team: bye.team, round_number: 1)
+        round = create(:round, gov_team: create(:team_with_debaters), opp_team: bye.team, round_number: 1)
         expect(bye).not_to be_valid
         round.destroy
 

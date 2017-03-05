@@ -2,10 +2,10 @@
 require 'rails_helper'
 
 RSpec.describe Stats::Round::TeamPolicy do
-  let(:debater1)            { create(:debater, team: team) }
-  let(:debater2)            { create(:debater, team: team) }
-  let(:team)                { create(:team) }
-  let(:round)               { create(:round, gov_team: team, opp_team: create(:team)) }
+  let(:debater1)            { team.debaters.first }
+  let(:debater2)            { team.debaters.last }
+  let(:team)                { create(:team_with_debaters) }
+  let(:round)               { create(:round, gov_team: team, opp_team: create(:team_with_debaters)) }
   let(:mock_debater_policy) { double }
   let(:policy)              { described_class.new(team, round, debater_policy: mock_debater_policy) }
 

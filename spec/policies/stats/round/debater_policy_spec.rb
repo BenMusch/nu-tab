@@ -2,8 +2,8 @@
 require 'rails_helper'
 
 RSpec.shared_context 'it has a full round' do
-  let(:team)       { create(:team) }
-  let(:other_team) { create(:team) }
+  let(:team)       { create(:team_with_debaters) }
+  let(:other_team) { create(:team_with_debaters) }
   let(:debater)    { create(:debater, team: team) }
   let(:round)      { create(:round, gov_team: team, opp_team: other_team, round_number: 2) }
 end
@@ -55,18 +55,18 @@ RSpec.describe Stats::Round::AverageStatsPolicy do
   let(:policy) { described_class.new(debater, round) }
 
   before do
-    debater = create(:debater, team: create(:team))
-    round = create(:round, gov_team: debater.team, opp_team: create(:team), round_number: rand(5))
+    debater = create(:team_with_debaters).debaters.first
+    round = create(:round, gov_team: debater.team, opp_team: create(:team_with_debaters), round_number: rand(5))
     create(:debater_round_stat, round: round, debater: debater, speaks: 26, ranks: 3)
 
-    debater = create(:debater, team: create(:team))
-    round = create(:round, gov_team: debater.team, opp_team: create(:team), round_number: rand(5))
+    debater = create(:team_with_debaters).debaters.first
+    round = create(:round, gov_team: debater.team, opp_team: create(:team_with_debaters), round_number: rand(5))
     create(:debater_round_stat, round: round, debater: debater, speaks: 26.25, ranks: 4)
   end
 
   context 'with other round stats in the database' do
-    let(:round1) { create(:round, gov_team: team, opp_team: create(:team), round_number: 1) }
-    let(:round3) { create(:round, gov_team: team, opp_team: create(:team), round_number: 3) }
+    let(:round1) { create(:round, gov_team: team, opp_team: create(:team_with_debaters), round_number: 1) }
+    let(:round3) { create(:round, gov_team: team, opp_team: create(:team_with_debaters), round_number: 3) }
     let!(:round1_stats) do
       create(:debater_round_stat, round: round1, debater: debater, speaks: 25, ranks: 1)
     end
