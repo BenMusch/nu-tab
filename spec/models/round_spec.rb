@@ -91,6 +91,13 @@ RSpec.describe Round, type: :model do
       expect(other_round).to be_valid
     end
 
+    it "can't have teams that have a bye for the round number" do
+      round = build(:round, gov_team: gov, opp_team: opp, room: room, round_number: 2)
+      expect(round).to be_valid
+      create(:bye, team: gov, round_number: 2)
+      expect(round).not_to be_valid
+    end
+
     context 'when result is present' do
       context 'when result is a gov_win or opp_win' do
         it 'has to have two full teams' do

@@ -19,7 +19,8 @@ class TournamentSetting < ApplicationRecord
     'max_speaks' => 28,
     'min_speaks' => 22,
     'rounds' => 5,
-    'current_round' => 1
+    'current_round' => 1,
+    'punish_forfeits' => 0
   }.freeze
 
   def self.get(key)
