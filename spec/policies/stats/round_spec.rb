@@ -18,7 +18,7 @@ RSpec.describe Stats::Round do
 
   describe '#policy_for' do
     context 'when the round is a bye' do
-      let(:round) { create(:bye, team: team)}
+      let(:round) { create(:bye, team: team) }
 
       it 'returns an AverageStatsPolicy' do
         expect(policy_class).to be Stats::Round::AverageStatsPolicy

@@ -10,7 +10,7 @@ end
 
 RSpec.describe Stats::Round::StandardPolicy do
   include_context 'it has a full round'
-  let(:policy)     { described_class.new(debater, round) }
+  let(:policy) { described_class.new(debater, round) }
   let!(:stats) do
     create(:debater_round_stat, round: round, debater: debater, speaks: 25.5, ranks: 3)
   end
@@ -35,7 +35,7 @@ end
 
 RSpec.describe Stats::Round::PunitivePolicy do
   include_context 'it has a full round'
-  let(:policy)     { described_class.new(debater, round) }
+  let(:policy) { described_class.new(debater, round) }
 
   describe '#speaks' do
     it "returns the speaks of the debater's stats for the round" do
@@ -52,7 +52,7 @@ end
 
 RSpec.describe Stats::Round::AverageStatsPolicy do
   include_context 'it has a full round'
-  let(:policy)     { described_class.new(debater, round) }
+  let(:policy) { described_class.new(debater, round) }
 
   before do
     debater = create(:debater, team: create(:team))

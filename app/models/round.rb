@@ -58,12 +58,12 @@ class Round < ApplicationRecord
 
   def opp_stats
     Stats::Round::TeamPolicy.new opp_team, self,
-      debater_policy: Stats::Round.policy_for(opp_team, self)
+                                 debater_policy: Stats::Round.policy_for(opp_team, self)
   end
 
   def gov_stats
     Stats::Round::TeamPolicy.new gov_team, self,
-      debater_policy: Stats::Round.policy_for(gov_team, self)
+                                 debater_policy: Stats::Round.policy_for(gov_team, self)
   end
 
   private
@@ -74,6 +74,7 @@ class Round < ApplicationRecord
     validate_not_paired_in opp_team
   end
 
+  # rubocop:disable Metrics/AbcSize
   def validate_not_paired_in(team)
     rounds = team.rounds.where(round_number: round_number).where.not(id: id)
     byes = team.byes.where(round_number: round_number)
@@ -82,6 +83,7 @@ class Round < ApplicationRecord
     field = gov_team == team ? :gov_team : :opp_team
     errors.add(field, 'is already paired in this round')
   end
+  # rubocop:enable Metrics/AbcSize
 
   def validate_standard_result
     if all_stats_submitted?

@@ -2,20 +2,14 @@
 module Stats
   module Round
     def self.policy_for(team, round)
-      if round.bye?
+      if round.bye? || round.all_win?
         AverageStatsPolicy
       elsif round.standard_result?
         StandardPolicy
-      elsif round.forfeit?
+      elsif round.forfeit? || round.all_drop?
         round.winner?(team) ? AverageStatsPolicy : self.forfeit_policy
-      elsif round.all_drop?
-        self.forfeit_policy
-      elsif round.all_win?
-        AverageStatsPolicy
       end
     end
-
-    private
 
     def self.forfeit_policy
       TournamentSetting.get_bool('punish_forfeits') ? PunitivePolicy : AverageStatsPolicy
