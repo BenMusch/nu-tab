@@ -18,11 +18,12 @@ require 'rails_helper'
 
 RSpec.describe DebaterRoundStat, type: :model do
   context 'validations' do
-    let(:gov)           { create(:team) }
-    let(:opp)           { create(:team) }
-    let(:gov_debater)   { create(:debater, team: gov) }
-    let(:opp_debater)   { create(:debater, team: opp) }
-    let(:other_debater) { create(:debater, team: create(:team)) }
+    let(:school)        { create(:school) }
+    let(:gov)           { create(:team, debaters: [gov_debater, create(:debater)], school: school) }
+    let(:opp)           { create(:team, debaters: [opp_debater, create(:debater)], school: school) }
+    let(:gov_debater)   { create(:debater, school: school) }
+    let(:opp_debater)   { create(:debater, school: school) }
+    let(:other_debater) { create(:team_with_debaters).debaters.first }
     let(:round)         { create(:round, gov_team: gov, opp_team: opp) }
     let(:debater)       { create(:debater) }
     let(:stats) do

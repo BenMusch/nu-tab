@@ -49,7 +49,7 @@ FactoryGirl.define do
   end
 
   factory :room do
-    sequence(:name) { Faker::Name.unique.name }
+    sequence(:name) { |n| "Room #{n}" }
     sequence(:rank) { rand(99) + 1 }
   end
 
@@ -62,10 +62,18 @@ FactoryGirl.define do
   factory :team do
     sequence(:name) { |n| "Team #{n}" }
     seed 1
+    association :school, factory: :school
+  end
+
+  factory :team_with_debaters, parent: :team do
+    after(:build) do |team|
+      team.debaters = create_list(:debater, (2 - team.debaters.size),
+                                  team: team, school_id: team.school_id)
+    end
   end
 
   factory :debater do
-    sequence(:name) { Faker::Name.unique.name }
+    sequence(:name) { |n| "Debater #{n}" }
     novice false
     association :school, factory: :school
   end
@@ -76,6 +84,6 @@ FactoryGirl.define do
   end
 
   factory :school do
-    sequence(:name) { Faker::University.unique.name[0...10] }
+    sequence(:name) { |n| "School #{n}" }
   end
 end
