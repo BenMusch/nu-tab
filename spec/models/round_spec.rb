@@ -18,14 +18,15 @@ require 'rails_helper'
 
 RSpec.describe Round, type: :model do
   context 'validations' do
-    let(:gov)   { create(:team) }
-    let(:opp)   { create(:team) }
-    let(:pm)    { create(:debater, team: gov) }
-    let(:mg)    { create(:debater, team: gov) }
-    let(:lo)    { create(:debater, team: opp) }
-    let(:mo)    { create(:debater, team: opp) }
-    let(:room)  { create(:room) }
-    let(:round) { create(:round, gov_team: gov, opp_team: opp, room: room, round_number: 1) }
+    let(:school) { create(:school) }
+    let(:gov)    { create(:team, debaters: [pm, mg], school: school) }
+    let(:opp)    { create(:team, debaters: [lo, mo], school: school) }
+    let(:pm)     { create(:debater, school: school) }
+    let(:mg)     { create(:debater, school: school) }
+    let(:lo)     { create(:debater, school: school) }
+    let(:mo)     { create(:debater, school: school) }
+    let(:room)   { create(:room) }
+    let(:round)  { create(:round, gov_team: gov, opp_team: opp, room: room, round_number: 1) }
 
     it 'has a gov_team' do
       round.gov_team = nil
@@ -53,25 +54,25 @@ RSpec.describe Round, type: :model do
     end
 
     it "can't have teams that are already paired in to the same round number" do
-      other_round = build(:round, gov_team: gov, opp_team: create(:team),
+      other_round = build(:round, gov_team: gov, opp_team: create(:team_with_debaters),
                                   round_number: round.round_number, room: create(:room))
       expect(other_round).not_to be_valid
       other_round.round_number = round.round_number + 1
       expect(other_round).to be_valid
 
-      other_round = build(:round, gov_team: create(:team), opp_team: gov,
+      other_round = build(:round, gov_team: create(:team_with_debaters), opp_team: gov,
                                   round_number: round.round_number, room: create(:room))
       expect(other_round).not_to be_valid
       other_round.round_number = round.round_number + 1
       expect(other_round).to be_valid
 
-      other_round = build(:round, gov_team: opp, opp_team: create(:team),
+      other_round = build(:round, gov_team: opp, opp_team: create(:team_with_debaters),
                                   round_number: round.round_number, room: create(:room))
       expect(other_round).not_to be_valid
       other_round.round_number = round.round_number + 1
       expect(other_round).to be_valid
 
-      other_round = build(:round, gov_team: create(:team), opp_team: opp,
+      other_round = build(:round, gov_team: create(:team_with_debaters), opp_team: opp,
                                   round_number: round.round_number, room: create(:room))
       expect(other_round).not_to be_valid
       other_round.round_number = round.round_number + 1

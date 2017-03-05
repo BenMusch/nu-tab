@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CheckInnable do
-  let(:model_types) { [:judge, :room, :team] }
+  let(:model_types) { [:judge, :room, :team_with_debaters] }
   let(:model)       { create(model_types.sample) }
 
   describe '#checked_in_for_round?' do

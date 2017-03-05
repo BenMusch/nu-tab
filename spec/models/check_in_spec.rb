@@ -18,7 +18,8 @@ RSpec.describe CheckIn, type: :model do
   context 'validations' do
     let(:check_in) do
       model = [:judge, :team, :room].sample
-      build("#{model}_check_in".to_sym, subject: create(model), round_number: 1)
+      factory = model == :team ? :team_with_debaters : model
+      build("#{model}_check_in".to_sym, subject: create(factory), round_number: 1)
     end
 
     before do
@@ -55,7 +56,7 @@ RSpec.describe CheckIn, type: :model do
     expect(room_check_in.subject_id).to eq(room.id)
     expect(room_check_in.subject_type).to eq(room.class.to_s)
 
-    team = create(:team)
+    team = create(:team_with_debaters)
     team_check_in = create(:team_check_in, subject: team)
 
     expect(team_check_in.subject).to eq team
