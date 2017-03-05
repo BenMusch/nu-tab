@@ -13,4 +13,46 @@
 
 class Bye < ApplicationRecord
   belongs_to :team
+
+  validates :team, presence: true, uniqueness: { scope: :round_number }
+
+  validate do
+    validate_not_paired_in
+  end
+
+  def bye?
+    true
+  end
+
+  def standard_result?
+    false
+  end
+
+  def winner
+    team
+  end
+
+  def forfeit?
+    false
+  end
+
+  def winner?(team)
+    team == self.team
+  end
+
+  def all_drop?
+    false
+  end
+
+  def all_win?
+    false
+  end
+
+  private
+
+  def validate_not_paired_in
+    return unless team
+    rounds = team.rounds.where(round_number: round_number)
+    errors.add(:team, 'is already paired in') if rounds.any?
+  end
 end

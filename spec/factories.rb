@@ -3,6 +3,12 @@ FactoryGirl.define do
     key 'key'
     value 1
   end
+
+  factory :bye do
+    association :team, factory: :team
+    round_number 1
+  end
+
   factory :check_in do
     round_number 1
   end

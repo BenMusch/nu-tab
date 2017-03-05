@@ -31,36 +31,39 @@ class Round < ApplicationRecord
 
   validate do
     validate_teams               if gov_team && opp_team
-    validate_standard_result     if full_round?
+    validate_standard_result     if standard_result?
     validate_non_standard_result if forfeit? || all_drop? || all_win?
   end
 
-  def all_stats_submitted?
-    debater_round_stats.count == 4
+  def bye?
+    false
   end
 
-  def full_round?
+  def standard_result?
     gov_win? || opp_win?
+  end
+
+  def winner?(team)
+    return true if all_win?
+    if team == gov_team
+      gov_win? || opp_forfeit?
+    elsif team == opp_team
+      opp_win? || gov_forfeit?
+    end
   end
 
   def forfeit?
     gov_forfeit? || opp_forfeit?
   end
 
-  def winning_team_stats
-    gov_win? ? gov_team_stats : opp_team_stats
+  def opp_stats
+    Stats::Round::TeamPolicy.new opp_team, self,
+      debater_policy: Stats::Round.policy_for(opp_team, self)
   end
 
-  def losing_team_stats
-    gov_win? ? opp_team_stats : gov_team_stats
-  end
-
-  def opp_team_stats
-    Stats::Round::TeamPolicy.new opp_team, self
-  end
-
-  def gov_team_stats
-    Stats::Round::TeamPolicy.new gov_team, self
+  def gov_stats
+    Stats::Round::TeamPolicy.new gov_team, self,
+      debater_policy: Stats::Round.policy_for(gov_team, self)
   end
 
   private
@@ -72,7 +75,10 @@ class Round < ApplicationRecord
   end
 
   def validate_not_paired_in(team)
-    return unless team.rounds.where(round_number: round_number).where.not(id: id).any?
+    rounds = team.rounds.where(round_number: round_number).where.not(id: id)
+    byes = team.byes.where(round_number: round_number)
+    return unless rounds.any? || byes.any?
+
     field = gov_team == team ? :gov_team : :opp_team
     errors.add(field, 'is already paired in this round')
   end
@@ -93,15 +99,29 @@ class Round < ApplicationRecord
   end
 
   def valid_ranks?
-    winning_team_stats.ranks <= losing_team_stats.ranks
+    winner_stats.ranks <= loser_stats.ranks
   end
 
   def valid_speaks?
-    winning_team_stats.speaks >= losing_team_stats.speaks
+    winner_stats.speaks >= loser_stats.speaks
   end
 
   def valid_speaks_ranks_order?
     speaks = debater_round_stats.order(ranks: :desc).pluck(:speaks)
     speaks.sort == speaks
+  end
+
+  def winner_stats
+    return nil if all_drop? || all_win?
+    winner?(gov_team) ? gov_stats : opp_stats
+  end
+
+  def loser_stats
+    return nil if all_drop? || all_win?
+    winner?(opp_team) ? gov_stats : opp_stats
+  end
+
+  def all_stats_submitted?
+    debater_round_stats.count == 4
   end
 end

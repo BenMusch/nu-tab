@@ -14,5 +14,27 @@
 require 'rails_helper'
 
 RSpec.describe Bye, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:bye) { build(:bye, team: create(:team), round_number: 1) }
+
+  context 'validations' do
+    before do
+      expect(bye).to be_valid
+    end
+
+    describe 'team' do
+      it 'is present' do
+        bye.team = nil
+        expect(bye).not_to be_valid
+      end
+
+      it 'is not paired into this round' do
+        round = create(:round, gov_team: create(:team), opp_team: bye.team, round_number: 1)
+        expect(bye).not_to be_valid
+        round.destroy
+
+        create(:bye, team: bye.team, round_number: 1)
+        expect(bye).not_to be_valid
+      end
+    end
+  end
 end
