@@ -57,13 +57,23 @@ class Round < ApplicationRecord
   end
 
   def opp_stats
-    Stats::Round::TeamPolicy.new opp_team, self,
-                                 debater_policy: Stats::Round.policy_for(opp_team, self)
+    Stats::Round::TeamPolicy.new opp_team, self
   end
 
   def gov_stats
-    Stats::Round::TeamPolicy.new gov_team, self,
-                                 debater_policy: Stats::Round.policy_for(gov_team, self)
+    Stats::Round::TeamPolicy.new gov_team, self
+  end
+
+  def iron_person?(debater)
+    debater_round_stats.where(debater: debater).size == 2
+  end
+
+  def didnt_compete?(debater)
+    debater_round_stats.where(debater: debater).size == 0
+  end
+
+  def teams
+    [gov_team, opp_team]
   end
 
   private

@@ -6,15 +6,15 @@ RSpec.describe Stats::Round::TeamPolicy do
   let(:debater2)            { team.debaters.last }
   let(:team)                { create(:team_with_debaters) }
   let(:round)               { create(:round, gov_team: team, opp_team: create(:team_with_debaters)) }
-  let(:mock_debater_policy) { double }
-  let(:policy)              { described_class.new(team, round, debater_policy: mock_debater_policy) }
+  let(:policy)              { described_class.new(team, round) }
 
   before do
-    allow(mock_debater_policy).to receive(:new).and_return(nil)
-    allow(mock_debater_policy).to receive(:new).with(debater1, round).
-      and_return(double(speaks: 25, ranks: 1))
-    allow(mock_debater_policy).to receive(:new).with(debater2, round).
-      and_return(double(speaks: 25.75, ranks: 2))
+    # force TeamPolicy to use a mock policy
+    allow(Stats::Round).to receive(:policy_for).and_return(nil)
+    allow(Stats::Round).to receive(:policy_for).with(debater1, round)
+      .and_return(double(speaks: 25.75, ranks: 2))
+    allow(Stats::Round).to receive(:policy_for).with(debater2, round)
+      .and_return(double(speaks: 25, ranks: 1))
   end
 
   describe '#speaks' do

@@ -2,9 +2,11 @@
 module Stats
   module Round
     class TeamPolicy
-      def initialize(team, round, debater_policy: Stats::Round::StandardPolicy)
-        @leader_stats = debater_policy.new team.debaters.first, round
-        @member_stats = debater_policy.new team.debaters.last, round
+      def initialize(team, round)
+        leader = team.debaters.first
+        member = team.debaters.last
+        @leader_stats = Stats::Round.policy_for(leader, round)
+        @member_stats = Stats::Round.policy_for(member, round)
       end
 
       def speaks
