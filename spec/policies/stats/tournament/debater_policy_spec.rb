@@ -64,9 +64,9 @@ RSpec.describe Stats::Tournament::DebaterPolicy do
       round2 = create(:round, gov_team: team, opp_team: create(:team_with_debaters),
                               round_number: 2)
       allow(Stats::Round).to receive(:policy_for).with(debater, round1).
-        and_return(double("round1_stats", speaks: 10, ranks: 1))
+        and_return(double('round1_stats', speaks: 10, ranks: 1))
       allow(Stats::Round).to receive(:policy_for).with(debater, round2).
-        and_return(double("round2_stats", speaks: 10, ranks: 1))
+        and_return(double('round2_stats', speaks: 10, ranks: 1))
     end
 
     it 'returns 0' do

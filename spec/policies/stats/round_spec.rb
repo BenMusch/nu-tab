@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-
 RSpec.describe Stats::Round do
   let(:policy_class) { Stats::Round.policy_for(debater, round) }
   let(:team)         { create(:team_with_debaters) }

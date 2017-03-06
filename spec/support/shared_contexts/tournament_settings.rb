@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.shared_context 'with a punitive forfeit policy' do
   before do
     TournamentSetting.set('punish_forfeits', 1)
