@@ -69,7 +69,7 @@ class Round < ApplicationRecord
   end
 
   def didnt_compete?(debater)
-    debater_round_stats.where(debater: debater).size == 0
+    debater_round_stats.where(debater: debater).empty?
   end
 
   def teams

@@ -17,10 +17,10 @@ module Stats
         stats.ranks
       end
 
-      def ==(other_obj)
-        other_obj.class == self.class &&
-          debater == other_obj.debater &&
-          round == other_obj.round
+      def ==(other)
+        other.class == self.class &&
+          debater == other.debater &&
+          round == other.round
       end
 
       protected

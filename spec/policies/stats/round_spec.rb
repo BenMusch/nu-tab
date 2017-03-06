@@ -1,15 +1,6 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.shared_context 'with a punitive forfeit policy' do
-  before do
-    TournamentSetting.set('punish_forfeits', 1)
-  end
-
-  after do
-    TournamentSetting.set('punish_forfeits', false)
-  end
-end
 
 RSpec.describe Stats::Round do
   let(:policy_class) { Stats::Round.policy_for(debater, round) }
@@ -33,7 +24,7 @@ RSpec.describe Stats::Round do
           positions = round.gov_team == team ? [:mg, :pm] : [:lo, :mo]
           team.debaters.each do |debater|
             create(:debater_round_stat, round: round, debater: debater, speaks: 25,
-                   ranks: ranks.pop, position: positions.pop)
+                                        ranks: ranks.pop, position: positions.pop)
           end
         end
       end

@@ -11,10 +11,10 @@ RSpec.describe Stats::Round::TeamPolicy do
   before do
     # force TeamPolicy to use a mock policy
     allow(Stats::Round).to receive(:policy_for).and_return(nil)
-    allow(Stats::Round).to receive(:policy_for).with(debater1, round)
-      .and_return(double(speaks: 25.75, ranks: 2))
-    allow(Stats::Round).to receive(:policy_for).with(debater2, round)
-      .and_return(double(speaks: 25, ranks: 1))
+    allow(Stats::Round).to receive(:policy_for).with(debater1, round).
+      and_return(double(speaks: 25.75, ranks: 2))
+    allow(Stats::Round).to receive(:policy_for).with(debater2, round).
+      and_return(double(speaks: 25, ranks: 1))
   end
 
   describe '#speaks' do

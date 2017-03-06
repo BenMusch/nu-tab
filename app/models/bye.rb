@@ -48,11 +48,11 @@ class Bye < ApplicationRecord
     false
   end
 
-  def iron_person?(debater)
+  def iron_person?(*)
     false
   end
 
-  def didnt_compete?(debater)
+  def didnt_compete?(*)
     true
   end
 
