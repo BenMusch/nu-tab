@@ -28,4 +28,17 @@ RSpec.describe Stats::Round::TeamPolicy do
       expect(policy.ranks).to eq 3
     end
   end
+
+  context 'with an iron person' do
+    before do
+      # ignore the ranks, the team policy should just use the mocked policies
+      create(:debater_round_stat, round: round, debater: debater1, position: :pm, ranks: 2)
+      create(:debater_round_stat, round: round, debater: debater1, position: :mg, ranks: 1)
+    end
+
+    it 'uses the stats from the iron person both times' do
+      expect(policy.speaks).to eq 51.5
+      expect(policy.ranks).to eq 4
+    end
+  end
 end

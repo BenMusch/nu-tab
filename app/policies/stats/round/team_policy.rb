@@ -3,10 +3,8 @@ module Stats
   module Round
     class TeamPolicy
       def initialize(team, round)
-        leader = team.debaters.first
-        member = team.debaters.last
-        @leader_stats = Stats::Round.policy_for(leader, round)
-        @member_stats = Stats::Round.policy_for(member, round)
+        @team = team
+        @round = round
       end
 
       def speaks
@@ -19,7 +17,30 @@ module Stats
 
       private
 
-      attr_reader :leader_stats, :member_stats
+      attr_reader :team, :round
+
+      def leader_stats
+        @leader_stats ||= Stats::Round.policy_for(leader, round)
+      end
+
+      def member_stats
+        @member_stats ||= Stats::Round.policy_for(member, round)
+      end
+
+      def iron_person
+        team.debaters.each do |debater|
+          return debater if round.iron_person? debater
+        end
+        nil
+      end
+
+      def member
+        @member ||= iron_person || team.debaters.last
+      end
+
+      def leader
+        @leader ||= iron_person || team.debaters.first
+      end
     end
   end
 end
