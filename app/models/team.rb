@@ -42,6 +42,12 @@ class Team < ApplicationRecord
     debater.team == self
   end
 
+  def opponents
+    Team.where(id: rounds.select(:gov_team_id)).
+      or(Team.where(id: rounds.select(:opp_team_id))).
+      where.not(id: id)
+  end
+
   private
 
   def validate_team_size

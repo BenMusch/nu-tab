@@ -2,13 +2,18 @@
 module Stats
   module Round
     # rubocop:disable Metrics/PerceivedComplexity
-    def self.policy_for(team, round)
+    def self.policy_for(debater, round)
       if round.bye? || round.all_win?
-        AverageStatsPolicy
+        AverageStatsPolicy.new debater, round
+      elsif round.didnt_compete?(debater)
+        klass = round.winner?(debater.team) ? AverageStatsPolicy : self.forfeit_policy
+        klass.new debater, round
+      elsif round.iron_person?(debater)
+        IronPersonPolicy.new debater, round
       elsif round.standard_result?
-        StandardPolicy
-      elsif round.forfeit? || round.all_drop?
-        round.winner?(team) ? AverageStatsPolicy : self.forfeit_policy
+        StandardPolicy.new debater, round
+      else
+        BlankPolicy.new debater, round
       end
     end
     # rubocop:enable Metrics/PerceivedComplexity

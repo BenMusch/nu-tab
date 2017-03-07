@@ -49,6 +49,8 @@ class Round < ApplicationRecord
       gov_win? || opp_forfeit?
     elsif team == opp_team
       opp_win? || gov_forfeit?
+    else
+      false
     end
   end
 
@@ -57,13 +59,23 @@ class Round < ApplicationRecord
   end
 
   def opp_stats
-    Stats::Round::TeamPolicy.new opp_team, self,
-                                 debater_policy: Stats::Round.policy_for(opp_team, self)
+    Stats::Round::TeamPolicy.new opp_team, self
   end
 
   def gov_stats
-    Stats::Round::TeamPolicy.new gov_team, self,
-                                 debater_policy: Stats::Round.policy_for(gov_team, self)
+    Stats::Round::TeamPolicy.new gov_team, self
+  end
+
+  def iron_person?(debater)
+    debater_round_stats.where(debater: debater).size == 2
+  end
+
+  def didnt_compete?(debater)
+    result && debater_round_stats.where(debater: debater).empty?
+  end
+
+  def teams
+    [gov_team, opp_team]
   end
 
   private

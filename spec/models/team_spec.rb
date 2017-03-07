@@ -15,13 +15,13 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  let(:school) { create(:school) }
-  let(:team) do
-    build(:team, name: 'Team Name', seed: :unseeded, school: school,
-                 debaters: create_list(:debater, 2, school: school))
-  end
-
   context 'validations' do
+    let(:school) { create(:school) }
+    let(:team) do
+      build(:team, name: 'Team Name', seed: :unseeded, school: school,
+                   debaters: create_list(:debater, 2, school: school))
+    end
+
     before do
       expect(team).to be_valid
     end
@@ -83,6 +83,25 @@ RSpec.describe Team, type: :model do
         team.debaters = create_list(:debater, 3)
         expect(team).not_to be_valid
       end
+    end
+  end
+
+  describe '#opponents' do
+    let(:team)      { create(:team_with_debaters) }
+    let(:opponents) { create_list(:team_with_debaters, 5) }
+
+    before do
+      opponents.each_with_index do |opponent, i|
+        if i.even?
+          create(:round, gov_team: team, opp_team: opponent, round_number: i)
+        else
+          create(:round, gov_team: opponent, opp_team: team, round_number: i)
+        end
+      end
+    end
+
+    it 'returns all of the teams that a team has been in round with' do
+      expect(team.opponents).to match_array(opponents)
     end
   end
 end

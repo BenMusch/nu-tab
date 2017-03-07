@@ -48,6 +48,14 @@ class Bye < ApplicationRecord
     false
   end
 
+  def iron_person?(*)
+    false
+  end
+
+  def didnt_compete?(*)
+    true
+  end
+
   private
 
   def validate_not_paired_in

@@ -2,6 +2,8 @@
 module Stats
   module Round
     class StandardPolicy
+      attr_reader :debater, :round
+
       def initialize(debater, round)
         @debater = debater
         @round = round
@@ -15,9 +17,13 @@ module Stats
         stats.ranks
       end
 
-      private
+      def ==(other)
+        other.class == self.class &&
+          debater == other.debater &&
+          round == other.round
+      end
 
-      attr_reader :debater, :round
+      protected
 
       def stats
         @stats ||= debater.debater_round_stats.find_by(round: round)

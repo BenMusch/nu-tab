@@ -5,7 +5,6 @@ if ENV.fetch("COVERAGE", true)
 end
 
 require "webmock/rspec"
-
 # http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
