@@ -18,9 +18,15 @@
 class Debater < ApplicationRecord
   belongs_to :school
   belongs_to :team
+  has_many :debater_round_stats
+  has_many :byes, through: :team
 
   validates :name, presence:   true,
                    length:     { in: 4...50 },
                    uniqueness: { scope: :school }
   validates :school, presence: true
+
+  def rounds
+    team.rounds
+  end
 end

@@ -91,6 +91,13 @@ RSpec.describe Round, type: :model do
       expect(other_round).to be_valid
     end
 
+    it "can't have teams that have a bye for the round number" do
+      round = build(:round, gov_team: gov, opp_team: opp, room: room, round_number: 2)
+      expect(round).to be_valid
+      create(:bye, team: gov, round_number: 2)
+      expect(round).not_to be_valid
+    end
+
     context 'when result is present' do
       context 'when result is a gov_win or opp_win' do
         it 'has to have two full teams' do
@@ -219,6 +226,59 @@ RSpec.describe Round, type: :model do
             round.debater_round_stats.destroy_all
           end
         end
+      end
+    end
+  end
+
+  describe '#winner?' do
+    let(:gov)   { create(:team_with_debaters) }
+    let(:opp)   { create(:team_with_debaters) }
+    let(:round) { create(:round, gov_team: gov, opp_team: opp) }
+
+    context 'with no result' do
+      it 'returns false' do
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be false
+      end
+    end
+
+    context 'forfeits' do
+      it 'returns whether the team was not the team that forfeited' do
+        round.result = :gov_forfeit
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be true
+
+        round.result = :opp_forfeit
+        expect(round.winner?(gov)).to be true
+        expect(round.winner?(opp)).to be false
+      end
+    end
+
+    context 'gov/opp wins' do
+      it 'returns whether the passed team was the winning side' do
+        round.result = :gov_win
+        expect(round.winner?(gov)).to be true
+        expect(round.winner?(opp)).to be false
+
+        round.result = :opp_win
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be true
+      end
+    end
+
+    context 'all_wins' do
+      it 'returns true' do
+        round.result = :all_win
+        expect(round.winner?(gov)).to be true
+        expect(round.winner?(opp)).to be true
+      end
+    end
+
+    context 'all_drops' do
+      it 'returns false' do
+        round.result = :all_drop
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be false
       end
     end
   end
