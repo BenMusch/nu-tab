@@ -29,11 +29,13 @@ RSpec.describe Stats::Round do
       end
 
       context 'when the round is an iron person round' do
+        let(:iron_person)   { team.debaters.first }
+        let(:didnt_compete) { team.debaters.last }
+
         before do
-          pm = round.debater_round_stats.pm.debater
-          mg_stats = round.debater_round_stats.mg
-          mg_stats.debater = pm
-          mg_stats.save!
+          partner_stats = round.debater_round_stats.where(debater: didnt_compete).first
+          partner_stats.debater = iron_person
+          partner_stats.save!
         end
 
         before(:each) do
@@ -46,20 +48,23 @@ RSpec.describe Stats::Round do
             include_context 'with a punitive forfeit policy'
 
             it 'returns a PunitivePolicy' do
-              expect(policy_class).to eq Stats::Round::PunitivePolicy.new debater, round
+              expect(Stats::Round.policy_for(didnt_compete, round)).
+                to eq Stats::Round::PunitivePolicy.new didnt_compete, round
             end
           end
 
           context 'with a lenient forfeit policy' do
             it 'returns an AverageStatsPolicy' do
-              expect(policy_class).to eq Stats::Round::AverageStatsPolicy.new debater, round
+              expect(Stats::Round.policy_for(didnt_compete, round)).
+                to eq Stats::Round::AverageStatsPolicy.new didnt_compete, round
             end
           end
         end
 
         context 'for the competing debater' do
           it 'returns an IronPersonPolicy' do
-            expect(policy_class).to eq Stats::Round::IronPersonPolicy.new debater, round
+            expect(Stats::Round.policy_for(iron_person, round)).
+              to eq Stats::Round::IronPersonPolicy.new iron_person, round
           end
         end
       end

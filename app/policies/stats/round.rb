@@ -5,9 +5,11 @@ module Stats
     def self.policy_for(debater, round)
       if round.bye? || round.all_win?
         AverageStatsPolicy.new debater, round
-      elsif round.didnt_compete?(debater)
+      elsif round.forfeit? || round.all_drop?
         klass = round.winner?(debater.team) ? AverageStatsPolicy : self.forfeit_policy
         klass.new debater, round
+      elsif round.didnt_compete?(debater)
+        self.forfeit_policy.new debater, round
       elsif round.iron_person?(debater)
         IronPersonPolicy.new debater, round
       elsif round.standard_result?
