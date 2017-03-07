@@ -28,6 +28,42 @@ RSpec.describe Stats::Round do
         end
       end
 
+      context 'when the round is an iron person round' do
+        before do
+          pm = round.debater_round_stats.pm.debater
+          mg_stats = round.debater_round_stats.mg
+          mg_stats.debater = pm
+          mg_stats.save!
+        end
+
+        before(:each) do
+          round.reload
+          round.result = :gov_win
+        end
+
+        context 'for the non-competing debater' do
+          context 'with a punitive forfeit policy' do
+            include_context 'with a punitive forfeit policy'
+
+            it 'returns a PunitivePolicy' do
+              expect(policy_class).to eq Stats::Round::PunitivePolicy.new debater, round
+            end
+          end
+
+          context 'with a lenient forfeit policy' do
+            it 'returns an AverageStatsPolicy' do
+              expect(policy_class).to eq Stats::Round::AverageStatsPolicy.new debater, round
+            end
+          end
+        end
+
+        context 'for the competing debater' do
+          it 'returns an IronPersonPolicy' do
+            expect(policy_class).to eq Stats::Round::IronPersonPolicy.new debater, round
+          end
+        end
+      end
+
       it 'returns a StandardPolicy' do
         round.reload
         round.result = :gov_win

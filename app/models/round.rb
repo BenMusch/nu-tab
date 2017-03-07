@@ -49,8 +49,6 @@ class Round < ApplicationRecord
       gov_win? || opp_forfeit?
     elsif team == opp_team
       opp_win? || gov_forfeit?
-    else
-      false
     end
   end
 
