@@ -19,7 +19,7 @@ RSpec.describe Team, type: :model do
     let(:school) { create(:school) }
     let(:team) do
       build(:team, name: 'Team Name', seed: :unseeded, school: school,
-                  debaters: create_list(:debater, 2, school: school))
+                   debaters: create_list(:debater, 2, school: school))
     end
 
     before do
@@ -92,7 +92,7 @@ RSpec.describe Team, type: :model do
 
     before do
       opponents.each_with_index do |opponent, i|
-        if i % 2 == 0
+        if i.even?
           create(:round, gov_team: team, opp_team: opponent, round_number: i)
         else
           create(:round, gov_team: opponent, opp_team: team, round_number: i)

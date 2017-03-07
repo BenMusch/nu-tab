@@ -19,11 +19,11 @@ RSpec.describe Stats::Tournament::TeamPolicy do
       opponent = create(:team_with_debaters)
       round = create(:round, gov_team: team, opp_team: opponent, round_number: round_num)
       allow(Stats::Round::TeamPolicy).to receive(:new).with(opponent, round).
-        and_return(double(speaks: 0, ranks: 0, win?: round_num % 2 == 1))
+        and_return(double(speaks: 0, ranks: 0, win?: round_num.odd?))
       allow(Stats::Round::TeamPolicy).to receive(:new).with(team, round).
         and_return(double("round#{round_num}_stats", speaks: speaks[i],
                                                      ranks: ranks[i],
-                                                     win?: round_num % 2 == 0))
+                                                     win?: round_num.even?))
     end
   end
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 module RoundsHelper
+  # rubocop:disable Metrics/AbcSize
   def create_round_stats(round:, result:)
     return unless [:gov_win, :opp_win].include? result
 
@@ -18,10 +19,11 @@ module RoundsHelper
                                   debater: debater, position: opp_positions.pop)
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def create_round_list(count, **attributes)
     count.times do |i|
-      create(:round, round_number: i+1, **attributes)
+      create(:round, round_number: i + 1, **attributes)
     end
   end
 end
