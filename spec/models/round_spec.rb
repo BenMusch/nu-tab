@@ -229,4 +229,57 @@ RSpec.describe Round, type: :model do
       end
     end
   end
+
+  describe '#winner?' do
+    let(:gov)   { create(:team_with_debaters) }
+    let(:opp)   { create(:team_with_debaters) }
+    let(:round) { create(:round, gov_team: gov, opp_team: opp) }
+
+    context 'with no result' do
+      it 'returns false' do
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be false
+      end
+    end
+
+    context 'forfeits' do
+      it 'returns whether the team was not the team that forfeited' do
+        round.result = :gov_forfeit
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be true
+
+        round.result = :opp_forfeit
+        expect(round.winner?(gov)).to be true
+        expect(round.winner?(opp)).to be false
+      end
+    end
+
+    context 'gov/opp wins' do
+      it 'returns whether the passed team was the winning side' do
+        round.result = :gov_win
+        expect(round.winner?(gov)).to be true
+        expect(round.winner?(opp)).to be false
+
+        round.result = :opp_win
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be true
+      end
+    end
+
+    context 'all_wins' do
+      it 'returns true' do
+        round.result = :all_win
+        expect(round.winner?(gov)).to be true
+        expect(round.winner?(opp)).to be true
+      end
+    end
+
+    context 'all_drops' do
+      it 'returns false' do
+        round.result = :all_drop
+        expect(round.winner?(gov)).to be false
+        expect(round.winner?(opp)).to be false
+      end
+    end
+  end
 end

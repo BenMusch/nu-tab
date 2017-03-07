@@ -37,4 +37,10 @@ RSpec.describe Bye, type: :model do
       end
     end
   end
+
+  describe 'winner?' do
+    it 'returns true' do
+      expect(bye.winner?(bye.team)).to be true
+    end
+  end
 end

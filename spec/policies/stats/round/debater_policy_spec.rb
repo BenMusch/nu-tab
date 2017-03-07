@@ -125,3 +125,20 @@ RSpec.describe Stats::Round::AverageStatsPolicy do
     end
   end
 end
+
+RSpec.describe Stats::Round::BlankPolicy do
+  include_context 'it has a full round'
+  let(:policy) { described_class.new(debater, round) }
+
+  describe '#speaks' do
+    it 'returns 0' do
+      expect(policy.speaks).to eq 0
+    end
+  end
+
+  describe '#ranks' do
+    it 'averages the two ranks' do
+      expect(policy.ranks).to eq 0
+    end
+  end
+end

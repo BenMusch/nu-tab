@@ -13,6 +13,10 @@ module Stats
 
       attr_reader :rounds, :debater
 
+      def opponents
+        @opponents ||= debater.team.opponents
+      end
+
       def round_stats
         @round_stats ||= rounds.map { |round| Stats::Round.policy_for(debater, round) }
       end

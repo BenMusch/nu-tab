@@ -49,6 +49,8 @@ class Round < ApplicationRecord
       gov_win? || opp_forfeit?
     elsif team == opp_team
       opp_win? || gov_forfeit?
+    else
+      false
     end
   end
 
@@ -69,7 +71,7 @@ class Round < ApplicationRecord
   end
 
   def didnt_compete?(debater)
-    debater_round_stats.where(debater: debater).empty?
+    result && debater_round_stats.where(debater: debater).empty?
   end
 
   def teams

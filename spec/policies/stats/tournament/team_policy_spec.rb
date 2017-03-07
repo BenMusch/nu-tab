@@ -9,13 +9,50 @@ RSpec.describe Stats::Tournament::TeamPolicy do
 
   before do
     allow(Stats::Round::TeamPolicy).to receive(:new).and_return(nil)
+    # mock policies for each of the rounds
+    #  - the speaks and ranks are the speaks and ranks in the array in the let
+    #  bindings
+    #  - win? is true for every even round (2 rounds out of 5)
+    #  - win? is true for the opponent every odd round (3 out of 5)
     speaks.size.times do |i|
       round_num = i + 1
-      round = create(:round, gov_team: team, opp_team: create(:team_with_debaters),
-                             round_number: round_num)
+      opponent = create(:team_with_debaters)
+      round = create(:round, gov_team: team, opp_team: opponent, round_number: round_num)
+      allow(Stats::Round::TeamPolicy).to receive(:new).with(opponent, round).
+        and_return(double(speaks: 0, ranks: 0, win?: round_num % 2 == 1))
       allow(Stats::Round::TeamPolicy).to receive(:new).with(team, round).
         and_return(double("round#{round_num}_stats", speaks: speaks[i],
-                                                     ranks: ranks[i]))
+                                                     ranks: ranks[i],
+                                                     win?: round_num % 2 == 0))
+    end
+  end
+
+  describe '#average_opponent_wins' do
+    before do
+      # give each opponent 1 win
+      team.opponents.each do |opponent|
+        round = create(:round, gov_team: opponent, opp_team: create(:team_with_debaters),
+                               round_number: speaks.size + 1)
+        allow(Stats::Round::TeamPolicy).to receive(:new).with(opponent, round).
+          and_return(double(speaks: 0, ranks: 0, win?: true))
+      end
+    end
+
+    it 'returns the number of wins the opponents have' do
+      # each opponent has 1 win, every odd # opponent has an additional win
+      expect(stats.average_opponent_wins).to eq 1.6
+    end
+  end
+
+  describe '#wins' do
+    it 'returns the number of round policies where win? is true' do
+      expect(stats.wins).to be 2
+    end
+  end
+
+  describe '#losses' do
+    it 'returns the number of round policies where win? is true' do
+      expect(stats.losses).to be 3
     end
   end
 

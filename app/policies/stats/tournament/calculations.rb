@@ -26,9 +26,9 @@ module Stats
         double_adjust(sorted_ranks).reduce(:+) || 0
       end
 
-      def opponent_wins
-        # TODO: implement this
-        # - ensure that teams aren't punished for having the bye (use wins/round)
+      def average_opponent_wins
+        opponents.map { |opponent| TeamPolicy.new(opponent).wins }.reduce(:+) /
+          opponents.size.to_f
       end
 
       private

@@ -15,6 +15,10 @@ module Stats
         leader_stats.ranks + member_stats.ranks
       end
 
+      def win?
+        round.winner?(team)
+      end
+
       private
 
       attr_reader :team, :round

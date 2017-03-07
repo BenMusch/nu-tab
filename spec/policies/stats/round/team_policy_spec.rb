@@ -5,7 +5,8 @@ RSpec.describe Stats::Round::TeamPolicy do
   let(:debater1)            { team.debaters.first }
   let(:debater2)            { team.debaters.last }
   let(:team)                { create(:team_with_debaters) }
-  let(:round)               { create(:round, gov_team: team, opp_team: create(:team_with_debaters)) }
+  let(:other_team)          { create(:team_with_debaters) }
+  let(:round)               { create(:round, gov_team: team, opp_team: other_team) }
   let(:policy)              { described_class.new(team, round) }
 
   before do
@@ -15,6 +16,18 @@ RSpec.describe Stats::Round::TeamPolicy do
       and_return(double(speaks: 25.75, ranks: 2))
     allow(Stats::Round).to receive(:policy_for).with(debater2, round).
       and_return(double(speaks: 25, ranks: 1))
+  end
+
+  describe '#win?' do
+    before do
+      allow(round).to receive(:winner?).with(team).and_return(true)
+      allow(round).to receive(:winner?).with(other_team).and_return(false)
+    end
+
+    it 'returns the value based on the rounds #winner? method' do
+      expect(policy.win?).to be true
+      expect(described_class.new(other_team, round).win?).to be false
+    end
   end
 
   describe '#speaks' do

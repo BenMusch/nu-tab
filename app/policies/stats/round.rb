@@ -12,6 +12,8 @@ module Stats
         IronPersonPolicy.new debater, round
       elsif round.standard_result?
         StandardPolicy.new debater, round
+      else
+        BlankPolicy.new debater, round
       end
     end
     # rubocop:enable Metrics/PerceivedComplexity

@@ -38,6 +38,12 @@ RSpec.describe Stats::Round do
       end
     end
 
+    context 'when no result is entered' do
+      it 'returns a blank policy' do
+        expect(policy_class).to eq Stats::Round::BlankPolicy.new debater, round
+      end
+    end
+
     context 'when the round is a forfeit that the team won' do
       it 'returns an AverageStatsPolicy' do
         round.result = :opp_forfeit
