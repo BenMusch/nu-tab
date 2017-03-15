@@ -28,6 +28,10 @@ class Debater < ApplicationRecord
                    uniqueness: { scope: :school }
   validates :school, presence: true
 
+  def stats
+    @stats ||= Stats::Tournament::DebaterPolicy.new(self)
+  end
+
   def rounds
     team.rounds
   end

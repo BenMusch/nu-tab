@@ -10,7 +10,7 @@ module Rankable
 
   def <=>(other)
     RANKING_PRIORITY.each do |attr|
-      difference = stats.send(attr) - other.stats.send(attr)
+      difference = other.stats.send(attr) - stats.send(attr)
       next if difference.zero?
       return attr.include?('ranks') ? -1 * difference : difference
     end

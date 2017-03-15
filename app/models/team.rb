@@ -50,7 +50,7 @@ class Team < ApplicationRecord
   end
 
   def <=>(other)
-    return stats.wins - other.stats.wins unless stats.wins == other.stats.wins
+    return other.stats.wins - stats.wins unless stats.wins == other.stats.wins
     super(other)
   end
 
