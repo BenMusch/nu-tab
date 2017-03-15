@@ -16,6 +16,8 @@
 #
 
 class Debater < ApplicationRecord
+  include Rankable
+
   belongs_to :school
   belongs_to :team
   has_many :debater_round_stats

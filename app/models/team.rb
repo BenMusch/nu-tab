@@ -16,6 +16,7 @@
 
 class Team < ApplicationRecord
   include CheckInnable
+  include Rankable
 
   belongs_to :school
   has_many :scratches
@@ -46,6 +47,15 @@ class Team < ApplicationRecord
     Team.where(id: rounds.select(:gov_team_id)).
       or(Team.where(id: rounds.select(:opp_team_id))).
       where.not(id: id)
+  end
+
+  def <=>(obj)
+    return stats.wins - obj.stats.wins unless stats.wins == obj.stats.wins
+    super(obj)
+  end
+
+  def stats
+    Stats::Tournament::TeamPolicy.new(self)
   end
 
   private
