@@ -49,13 +49,13 @@ class Team < ApplicationRecord
       where.not(id: id)
   end
 
-  def <=>(obj)
-    return stats.wins - obj.stats.wins unless stats.wins == obj.stats.wins
-    super(obj)
+  def <=>(other)
+    return stats.wins - other.stats.wins unless stats.wins == other.stats.wins
+    super(other)
   end
 
   def stats
-    Stats::Tournament::TeamPolicy.new(self)
+    @stats ||= Stats::Tournament::TeamPolicy.new(self)
   end
 
   private
