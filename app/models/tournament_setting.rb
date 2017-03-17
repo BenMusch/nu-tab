@@ -20,7 +20,14 @@ class TournamentSetting < ApplicationRecord
     'min_speaks' => 22,
     'rounds' => 5,
     'current_round' => 1,
-    'punish_forfeits' => 0
+    'punish_forfeits' => 0,
+    'imperfect_pairing_penalty' => -1,
+    'four_opp_count_penalty' => -10,
+    'four_gov_penalty' => -100,
+    'five_opp_penalty' => -1000,
+    'same_school_penalty' => -10000,
+    'hit_pull_up_before_penalty' => -100000,
+    'hit_team_before_penalty' => -1000000
   }.freeze
 
   def self.get(key)
