@@ -9,7 +9,8 @@ module Pairing
       end
 
       def initialize(team1, team2, **kwargs)
-        @team1, @team2 = team1, team2
+        @team1 = team1
+        @team2 = team2
         post_initialize(**kwargs)
       end
 
@@ -23,8 +24,7 @@ module Pairing
         TournamentSetting.get(self.penalty_name)
       end
 
-      def post_initialize(**kwargs)
-      end
+      def post_initialize(**kwargs) end
     end
 
     class ImperfectPairingPenalty < Base
@@ -40,22 +40,30 @@ module Pairing
 
       attr_reader :teams_list
 
-      def variance_from_optimal_pairing
-        if TournamentSetting.get('current_round') == 1
-          (team1.seed - optimal_opponent(team2).seed).abs +
-            (team2.seed - optimal_opponent(team1).seed).abs
-        else
-          (index_of(team1) - index_of(optimal_opponent(team2))).abs +
-            (index_of(team2) - index_of(optimal_opponent(team1))).abs
-        end
-      end
-
       def post_initialize(**kwargs)
         @teams_list = kwargs[:team_list].to_a
       end
 
+      def variance_from_optimal_pairing
+        if TournamentSetting.get('current_round') == 1
+          seed_variance
+        else
+          power_pairing_variance
+        end
+      end
+
+      def seed_variance
+        (team1.seed - optimal_opponent(team2).seed).abs +
+          (team2.seed - optimal_opponent(team1).seed).abs
+      end
+
+      def power_pairing_variance
+        (index_of(team1) - index_of(optimal_opponent(team2))).abs +
+          (index_of(team2) - index_of(optimal_opponent(team1))).abs
+      end
+
       def index_of(team)
-        teams_list.find_index(team)
+        teams_list.index(team)
       end
 
       def optimal_opponent(team)
