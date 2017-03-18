@@ -7,12 +7,12 @@ module Pairing
       end
 
       def value
-        is_pull_up? && hit_pull_up? ? penalty : 0
+        pull_up? && hit_pull_up? ? penalty : 0
       end
 
       protected
 
-      def is_pull_up?
+      def pull_up?
         team1.stats.wins != team2.stats.wins
       end
 

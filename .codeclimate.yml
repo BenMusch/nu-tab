@@ -4,6 +4,8 @@ engines:
     checks:
       Bundler/OrderedGems:
         enabled: false
+      Rubocop/Bundler/OrderedGems:
+        enabled: false
   scss-lint:
     enabled: true
 ratings:
