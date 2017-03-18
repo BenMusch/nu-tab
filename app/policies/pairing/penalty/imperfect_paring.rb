@@ -1,33 +1,18 @@
 # frozen_string_literal: true
+
+# The penalty for a team not being paired against the optimal power-paired
+# opponent. The penalty is proportional to the avg. number of spots in the
+# power-pairing that the actual opponent strays from their ideal opponent.
+#
+# For example, if the top team in a bracket is paired against the bottom team,
+# the penalty is zero, because that is the optimal pairing.
+#
+# If the 2nd best team is paired against the 4th worst team, then the penalty
+# would be 2 * the penalty for an imperfect pairing, because each team should
+# have been hitting an oppoenent two spots higher/lower in the pairing
 module Pairing
   module Penalty
-    class Base
-      attr_reader :team1, :team2
-
-      def self.penalty_name
-        raise NoMethodError, 'all sublasses must implement .penalty_name'
-      end
-
-      def initialize(team1, team2, **kwargs)
-        @team1 = team1
-        @team2 = team2
-        post_initialize(**kwargs)
-      end
-
-      def value
-        raise NoMethodError, 'all sublasses must implement #value'
-      end
-
-      protected
-
-      def penalty
-        TournamentSetting.get(self.penalty_name)
-      end
-
-      def post_initialize(**kwargs) end
-    end
-
-    class ImperfectPairingPenalty < Base
+    class ImperfectPairing < Base
       def self.penalty_name
         'imperfect_pairing_penalty'
       end
@@ -40,6 +25,9 @@ module Pairing
 
       attr_reader :teams_list
 
+      # This subclass expects a team_list kwarg to be passed to post_initialize.
+      # This should be an even number of sorted teams, which is used to determine
+      # the placements in the power-pairing
       def post_initialize(**kwargs)
         @teams_list = kwargs[:team_list].to_a
       end

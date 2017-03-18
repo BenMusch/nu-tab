@@ -36,7 +36,7 @@ class Team < ApplicationRecord
   end
 
   def rounds
-    Round.where(gov_team: self).or(Round.where(opp_team: self))
+    opps.or(govs)
   end
 
   def member?(debater)
@@ -56,6 +56,14 @@ class Team < ApplicationRecord
 
   def stats
     @stats ||= Stats::Tournament::TeamPolicy.new(self)
+  end
+
+  def govs
+    Round.where(gov_team: self)
+  end
+
+  def opps
+    Round.where(opp_team: self)
   end
 
   private

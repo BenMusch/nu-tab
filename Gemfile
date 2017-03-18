@@ -20,6 +20,7 @@ gem "sprockets", ">= 3.0.0"
 gem "title"
 gem "uglifier"
 gem "paranoia"
+gem "graph_matching"
 
 group :development do
   gem "listen"
