@@ -16,7 +16,7 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  let(:team)      { create(:team_with_debaters) }
+  let(:team) { create(:team_with_debaters) }
 
   describe 'validations' do
     let(:school) { create(:school) }
