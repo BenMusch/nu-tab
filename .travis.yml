@@ -4,4 +4,7 @@ rvm:
 addons:
   postgresql: "9.6"
 install: bundle install
+before_script:
+  - bundle exec rails db:create
+  - bundle exec rails db:migrate
 script: bundle exec rspec
