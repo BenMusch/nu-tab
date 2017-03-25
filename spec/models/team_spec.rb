@@ -3,12 +3,13 @@
 #
 # Table name: teams
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  seed       :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  school_id  :integer
+#  id          :integer          not null, primary key
+#  name        :string
+#  seed        :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  school_id   :integer
+#  hit_pull_up :boolean          default("false")
 #
 
 # frozen_string_literal: true

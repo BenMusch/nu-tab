@@ -241,3 +241,80 @@ RSpec.describe Pairing::Penalty::HitBefore do
     end
   end
 end
+
+RSpec.describe Pairing::Penalty::HitPullUpBefore do
+  describe '#value' do
+    let(:penalty) { described_class.new team1, team2 }
+    let(:team1)   { create(:team_with_debaters) }
+    let(:team2)   { create(:team_with_debaters) }
+
+    context 'when a team has hit the pull up before' do
+      let(:team1){ create(:team_with_debaters, hit_pull_up: true) }
+
+      context 'when the teams have the same number of wins' do
+        it 'returns 0' do
+          allow(team1).to receive(:stats) { double(wins: 2) }
+          allow(team2).to receive(:stats) { double(wins: 2) }
+          expect(penalty.value).to be 0
+        end
+      end
+
+      context 'when the teams have a different number of wins' do
+        context 'when the team that has hit the pull up is hitting the pull up' do
+          it 'returns the penalty' do
+            allow(team1).to receive(:stats) { double(wins: 2) }
+            allow(team2).to receive(:stats) { double(wins: 1) }
+            expect(penalty.value).to be TournamentSetting.get('hit_pull_up_before_penalty')
+          end
+        end
+
+        context "when the team that hasn't hit the pull up is hitting the pull up" do
+          it 'returns 0' do
+            allow(team1).to receive(:stats) { double(wins: 1) }
+            allow(team2).to receive(:stats) { double(wins: 2) }
+            expect(penalty.value).to be 0
+          end
+        end
+      end
+    end
+
+    context 'with teams that have not hit the pull up before' do
+      it 'returns 0' do
+        allow(team1).to receive(:stats) { double(wins: 1) }
+        allow(team2).to receive(:stats) { double(wins: 2) }
+        expect(penalty.value).to be 0
+
+        allow(team1).to receive(:stats) { double(wins: 2) }
+        allow(team2).to receive(:stats) { double(wins: 1) }
+        expect(penalty.value).to be 0
+
+        allow(team1).to receive(:stats) { double(wins: 2) }
+        allow(team2).to receive(:stats) { double(wins: 2) }
+        expect(penalty.value).to be 0
+      end
+    end
+  end
+end
+
+RSpec.describe Pairing::Penalty::SameSchool do
+  describe '#value' do
+    let(:penalty) { described_class.new team1, team2 }
+    let(:team1)   { create(:team_with_debaters) }
+
+    context 'when the teams are from the same school' do
+      let(:team2)   { create(:team_with_debaters, school: team1.school) }
+
+      it 'returns the same_school_penalty' do
+        expect(penalty.value).to be TournamentSetting.get('same_school_penalty')
+      end
+    end
+
+    context 'when the teams are not from the same school' do
+      let(:team2)   { create(:team_with_debaters, school: create(:school)) }
+
+      it 'returns 0' do
+        expect(penalty.value).to be 0
+      end
+    end
+  end
+end

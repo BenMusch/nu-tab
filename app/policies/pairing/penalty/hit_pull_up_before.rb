@@ -7,17 +7,15 @@ module Pairing
       end
 
       def value
-        pull_up? && hit_pull_up? ? penalty : 0
+        team_hitting_pull_up.try(:hit_pull_up) ? penalty : 0
       end
 
       protected
 
-      def pull_up?
-        team1.stats.wins != team2.stats.wins
-      end
-
-      def hit_pull_up?
-        team1.hit_pull_up || team2.hit_pull_up
+      # returns the team hitting the pull-up. nil if no pull-up
+      def team_hitting_pull_up
+        return nil if team1.stats.wins == team2.stats.wins
+        team1.stats.wins > team2.stats.wins ? team1 : team2
       end
     end
   end
