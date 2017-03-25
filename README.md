@@ -1,6 +1,6 @@
 # Nu-tab
 
-[![Codeship Status for benmusch/nu-tab](https://codeship.com/projects/b391e820-d527-0134-caef-66656fa4ab2f/status?branch=master)](https://www.codeship.com/projects/202400)
+[![Codeship Status](https://codeship.com/projects/b391e820-d527-0134-caef-66656fa4ab2f/status?branch=master)](https://www.codeship.com/projects/202400)
 [![Code Climate](https://codeclimate.com/github/BenMusch/nu-tab/badges/gpa.svg)](https://codeclimate.com/github/BenMusch/nu-tab)
 [![Test Coverage](https://codeclimate.com/github/BenMusch/nu-tab/badges/coverage.svg)](https://codeclimate.com/github/BenMusch/nu-tab/coverage)
 
