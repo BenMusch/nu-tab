@@ -28,7 +28,7 @@ module Pairing
       protected
 
       def penalty
-        TournamentSetting.get(self.penalty_name)
+        TournamentSetting.get(self.class.penalty_name)
       end
 
       # Called after initialization in all subclasses to allow for additional

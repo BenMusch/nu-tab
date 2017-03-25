@@ -3,7 +3,7 @@
 # Penalty for having num_rounds / 2 + 2 opps
 module Pairing
   module Penalty
-    class HighGov < SideCount
+    class MaxOpp < SideCount
       def self.penalty_name
         'max_opp_penalty'
       end

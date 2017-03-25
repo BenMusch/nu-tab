@@ -6,7 +6,7 @@ module Pairing
   module Penalty
     class SideCount < Base
       def self.side
-        raise NoMethodError, 'Sublcasses of Pairing::Penalty::Sidecount must define .side'
+        raise NoMethodError, 'Sublcasses of Pairing::Penalty::SideCount must define .side'
       end
 
       def value
@@ -15,7 +15,7 @@ module Pairing
 
       protected
 
-      def at_threshold
+      def at_threshold?
         side_count(team1) >= threshold && side_count(team2) >= threshold
       end
 
@@ -24,7 +24,7 @@ module Pairing
       end
 
       def side_count(team)
-        team.send("#{self.side}s").count
+        team.send("#{self.class.side}s").count
       end
 
       def threshold
