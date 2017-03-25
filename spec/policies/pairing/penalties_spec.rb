@@ -215,3 +215,29 @@ RSpec.describe Pairing::Penalty::MaxOpp do
     end
   end
 end
+
+RSpec.describe Pairing::Penalty::HitBefore do
+  describe '#value' do
+    let(:penalty) { described_class.new team1, team2 }
+    let(:team1)   { create(:team_with_debaters) }
+    let(:team2)   { create(:team_with_debaters) }
+
+    before do
+      allow(team1).to receive(:has_hit?).and_return(false)
+      allow(team1).to receive(:has_hit?).with(team2).and_return(true)
+    end
+
+    context 'with teams that have hit before' do
+      it 'returns hit_before_penalty' do
+        expect(penalty.value).to be TournamentSetting.get('hit_before_penalty')
+      end
+    end
+
+    context 'with teams that have not hit before' do
+      it 'returns 0' do
+        penalty = described_class.new team1, create(:team_with_debaters)
+        expect(penalty.value).to be 0
+      end
+    end
+  end
+end
