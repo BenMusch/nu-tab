@@ -12,7 +12,7 @@ RSpec.describe Pairing::Penalty::ImperfectPairing do
         TournamentSetting.set('current_round', 2)
       end
 
-      it 'returns imperfect_pairing_penalty * the number of "slots" per team that the pairing is shifted from the perfect pairing' do
+      it 'returns the penalty for each "slot" that the pairing is shifted from the perfect pairing' do
         teams = create_list(:team_with_debaters, 6)
 
         # ideal power-pairings
@@ -48,7 +48,7 @@ RSpec.describe Pairing::Penalty::ImperfectPairing do
         TournamentSetting.set('current_round', 1)
       end
 
-      it 'returns imperfect_pairing_penalty * the number of "slots" per team that the pairing is shifted from the perfect pairing' do
+      it 'returns the penalty for each change in seed that the pairing is shifted from the perfect pairing' do
         full_seed  = create(:team_with_debaters, seed: :full_seed)
         half_seed  = create(:team_with_debaters, seed: :half_seed)
         half_seed2 = create(:team_with_debaters, seed: :half_seed)
@@ -223,8 +223,8 @@ RSpec.describe Pairing::Penalty::HitBefore do
     let(:team2)   { create(:team_with_debaters) }
 
     before do
-      allow(team1).to receive(:has_hit?).and_return(false)
-      allow(team1).to receive(:has_hit?).with(team2).and_return(true)
+      allow(team1).to receive(:hit?).and_return(false)
+      allow(team1).to receive(:hit?).with(team2).and_return(true)
     end
 
     context 'with teams that have hit before' do

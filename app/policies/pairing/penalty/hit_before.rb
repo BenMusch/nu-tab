@@ -7,7 +7,7 @@ module Pairing
       end
 
       def value
-        team1.has_hit?(team2) ? penalty : 0
+        team1.hit?(team2) ? penalty : 0
       end
     end
   end

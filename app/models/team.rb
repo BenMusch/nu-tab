@@ -66,7 +66,7 @@ class Team < ApplicationRecord
     Round.where(opp_team: self)
   end
 
-  def has_hit?(other_team)
+  def hit?(other_team)
     opponents.exists?(team: other_team)
   end
 
