@@ -16,7 +16,9 @@
 require 'rails_helper'
 
 RSpec.describe Team, type: :model do
-  context 'validations' do
+  let(:team)      { create(:team_with_debaters) }
+
+  describe 'validations' do
     let(:school) { create(:school) }
     let(:team) do
       build(:team, name: 'Team Name', seed: :unseeded, school: school,
@@ -88,7 +90,6 @@ RSpec.describe Team, type: :model do
   end
 
   describe '#opponents' do
-    let(:team)      { create(:team_with_debaters) }
     let(:opponents) { create_list(:team_with_debaters, 5) }
 
     before do
@@ -103,6 +104,38 @@ RSpec.describe Team, type: :model do
 
     it 'returns all of the teams that a team has been in round with' do
       expect(team.opponents).to match_array(opponents)
+    end
+  end
+
+  describe '#govs' do
+    it 'returns the rounds a team has been the gov team' do
+      govs = create_round_list(2, gov_team: team, opp_team: create(:team_with_debaters))
+      create_round_list(2, 2, gov_team: create(:team_with_debaters), opp_team: team)
+
+      expect(team.govs.to_a).to match_array govs
+    end
+  end
+
+  describe '#opps' do
+    it 'returns the rounds a team has been the gov team' do
+      create_round_list(2, gov_team: team, opp_team: create(:team_with_debaters))
+      opps = create_round_list(2, 2, gov_team: create(:team_with_debaters), opp_team: team)
+
+      expect(team.opps.to_a).to match_array opps
+    end
+  end
+
+  describe '#hit?' do
+    it 'returns whether or not the team has hit the other team' do
+      opponent1 = create(:team_with_debaters)
+      opponent2 = create(:team_with_debaters)
+      create(:round, gov_team: team, opp_team: opponent1, round_number: 1)
+      create(:round, gov_team: opponent2, opp_team: team, round_number: 2)
+
+      team.reload
+      expect(team.hit?(opponent1)).to be true
+      expect(team.hit?(opponent2)).to be true
+      expect(team.hit?(create(:team_with_debaters))).to be false
     end
   end
 end

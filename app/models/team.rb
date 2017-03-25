@@ -68,7 +68,7 @@ class Team < ApplicationRecord
   end
 
   def hit?(other_team)
-    opponents.exists?(team: other_team)
+    opponents.exists?(id: other_team.id)
   end
 
   private

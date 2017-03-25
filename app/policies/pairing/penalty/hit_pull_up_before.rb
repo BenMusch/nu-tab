@@ -14,8 +14,12 @@ module Pairing
 
       # returns the team hitting the pull-up. nil if no pull-up
       def team_hitting_pull_up
-        return nil if team1.stats.wins == team2.stats.wins
+        return nil unless pull_up?
         team1.stats.wins > team2.stats.wins ? team1 : team2
+      end
+
+      def pull_up?
+        team1.stats.wins != team2.stats.wins
       end
     end
   end

@@ -21,9 +21,9 @@ module RoundsHelper
   end
   # rubocop:enable Metrics/AbcSize
 
-  def create_round_list(count, **attributes)
-    count.times do |i|
-      create(:round, round_number: i + 1, **attributes)
+  def create_round_list(count, offset=0, **attributes)
+    (1..count).map do |i|
+      create(:round, round_number: i + offset, **attributes)
     end
   end
 end

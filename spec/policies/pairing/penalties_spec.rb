@@ -249,7 +249,7 @@ RSpec.describe Pairing::Penalty::HitPullUpBefore do
     let(:team2)   { create(:team_with_debaters) }
 
     context 'when a team has hit the pull up before' do
-      let(:team1){ create(:team_with_debaters, hit_pull_up: true) }
+      let(:team1) { create(:team_with_debaters, hit_pull_up: true) }
 
       context 'when the teams have the same number of wins' do
         it 'returns 0' do
@@ -302,7 +302,7 @@ RSpec.describe Pairing::Penalty::SameSchool do
     let(:team1)   { create(:team_with_debaters) }
 
     context 'when the teams are from the same school' do
-      let(:team2)   { create(:team_with_debaters, school: team1.school) }
+      let(:team2) { create(:team_with_debaters, school: team1.school) }
 
       it 'returns the same_school_penalty' do
         expect(penalty.value).to be TournamentSetting.get('same_school_penalty')
@@ -310,7 +310,7 @@ RSpec.describe Pairing::Penalty::SameSchool do
     end
 
     context 'when the teams are not from the same school' do
-      let(:team2)   { create(:team_with_debaters, school: create(:school)) }
+      let(:team2) { create(:team_with_debaters, school: create(:school)) }
 
       it 'returns 0' do
         expect(penalty.value).to be 0
