@@ -7,7 +7,7 @@ module Pairing
       @teams = teams
     end
 
-    def generate
+    def generate!
       balanced_brackets = []
       raw_brackets.each_with_index do |bracket, i|
         unless bracket.size.even?
@@ -16,6 +16,7 @@ module Pairing
         end
         balanced_brackets << bracket
       end
+      balanced_brackets
     end
 
     private
@@ -24,7 +25,8 @@ module Pairing
 
     # Teams, grouped by wins. Not adjusted for pull-ups
     def raw_brackets
-      @raw_brackets ||= teams.group_by { |team| team.stats.wins }
+      @raw_brackets ||= teams.chunk { |team| team.stats.wins }.
+        map { |bracket| bracket[1] }
     end
 
     # Gets the lowest-ranked team from the bracket that hasn't been the pull up.

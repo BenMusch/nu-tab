@@ -6,7 +6,7 @@ RSpec.describe Pairing::Penalty do
     it 'call adds all of the classes in PENALTY_CLASSES' do
       mock_penalty1 = double(:penalty1)
       mock_penalty2 = double(:penalty2)
-      stub_const("Pairing::Penalty::PENALTY_CLASSES", [mock_penalty1, mock_penalty2])
+      stub_const('Pairing::Penalty::PENALTY_CLASSES', [mock_penalty1, mock_penalty2])
 
       team1 = create(:team_with_debaters)
       team2 = create(:team_with_debaters)
