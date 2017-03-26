@@ -44,6 +44,7 @@ module Pairing
         [team1, team2, weight]
       end
 
+      # rubocop:disable Metrics/AbcSize
       def ==(other)
         return false unless other.class == self.class
 
@@ -55,6 +56,7 @@ module Pairing
           false
         end
       end
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end
