@@ -7,8 +7,8 @@ module Pairing
       @teams = teams
     end
 
-    def generate
-      Bye.create(round_number: TabSetting.get('current_round'), team: team) if team
+    def generate!
+      Bye.create(round_number: TournamentSetting.get('current_round'), team: team) if team
     end
 
     private

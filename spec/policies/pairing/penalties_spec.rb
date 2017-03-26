@@ -12,15 +12,13 @@ RSpec.describe Pairing::Penalty do
       team2 = create(:team_with_debaters)
       teams = [team1, team2]
 
-      allow(mock_penalty1).to receive(:new).and_return(mock_penalty1)
-      allow(mock_penalty1).to receive(:value).and_return(0)
-      allow(mock_penalty1).to receive(:value).with(team1, team2, team_list: teams).
-        and_return(1)
+      allow(mock_penalty1).to receive(:new).and_return(double(value: 0))
+      allow(mock_penalty1).to receive(:new).with(team1, team2, team_list: teams).
+        and_return(double(value: 1))
 
-      allow(mock_penalty2).to receive(:new).and_return(mock_penalty2)
-      allow(mock_penalty2).to receive(:value).and_return(0)
-      allow(mock_penalty2).to receive(:value).with(team1, team2, team_list: teams).
-        and_return(2)
+      allow(mock_penalty2).to receive(:new).and_return(double(value: 0))
+      allow(mock_penalty2).to receive(:new).with(team1, team2, team_list: teams).
+        and_return(double(value: 2))
 
       expect(Pairing::Penalty.calculate(team1, team2, teams)).to be 3
     end
