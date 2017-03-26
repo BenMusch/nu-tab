@@ -5,10 +5,10 @@ module Pairing
   class PairingGenerator
     def initialize(teams, round_number)
       @teams = if round_number == 1
-                teams.sort
-              else
-                teams.sort_by(&:seed)
-              end
+                 teams.sort
+               else
+                 teams.sort_by(&:seed)
+               end
     end
 
     def generate

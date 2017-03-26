@@ -3,7 +3,7 @@
 # Generates brackets of teams with equal wins, with pull-ups if necessary
 module Pairing
   class BracketGenerator
-    def teams(teams)
+    def initialize(teams)
       @teams = teams
     end
 
@@ -11,8 +11,8 @@ module Pairing
       balanced_brackets = []
       raw_brackets.each_with_index do |bracket, i|
         unless bracket.size.even?
-         next_bracket = raw_brackets[i+1]
-         bracket << get_pull_up(next_bracket)
+          next_bracket = raw_brackets[i+1]
+          bracket << get_pull_up(next_bracket)
         end
         balanced_brackets << bracket
       end
