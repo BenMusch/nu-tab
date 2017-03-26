@@ -11,7 +11,7 @@ module Pairing
       balanced_brackets = []
       raw_brackets.each_with_index do |bracket, i|
         unless bracket.size.even?
-          next_bracket = raw_brackets[i+1]
+          next_bracket = raw_brackets[i + 1]
           bracket << get_pull_up(next_bracket)
         end
         balanced_brackets << bracket
