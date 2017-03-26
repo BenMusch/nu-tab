@@ -26,7 +26,7 @@ module Pairing
     # Teams, grouped by wins. Not adjusted for pull-ups
     def raw_brackets
       @raw_brackets ||= teams.chunk { |team| team.stats.wins }.
-        map { |bracket| bracket[1] }
+                              map   { |bracket| bracket[1] }
     end
 
     # Gets the lowest-ranked team from the bracket that hasn't been the pull up.
