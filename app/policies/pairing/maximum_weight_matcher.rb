@@ -6,57 +6,36 @@ module Pairing
   class MaximumWeightMatcher
     def initialize(bracket)
       @bracket = bracket
+      # store the integer keys for each team because the graph matching library
+      # requires consecutive, positive integers for vertices
+      @vertex_nums = {}
     end
 
     # Returns the optimal matching of the teams, where each pairing is an array
     # of the two teams
     def match!
-      graph.maximum_weighted_matching(false)
+      matching = graph.maximum_weighted_matching(true).to_a
+      matching.map { |edge| [vertex_nums.key(edge[0]), vertex_nums.key(edge[1])] }
     end
 
     private
 
-    attr_reader :bracket
+    attr_reader :bracket, :vertex_nums
 
     def all_edges
       @all_edges ||= bracket.combination(2).map do |pairing|
-        Edge.new(pairing[0], pairing[1],
-                 Pairing::Penalty.calculate(pairing[0], pairing[1], bracket))
+        team1 = pairing[0]
+        team2 = pairing[1]
+
+        vertex_nums[team1] ||= bracket.find_index(team1) + 1
+        vertex_nums[team2] ||= bracket.find_index(team2) + 1
+
+        [vertex_nums[team1], vertex_nums[team2], Pairing::Penalty.calculate(team1, team2, bracket)]
       end
     end
 
     def graph
-      @graph ||= GraphMatching::Graph::WeightedGraph[all_edges.map(&:to_a)]
-    end
-
-    # Class to represent a weighted edge in the graph, where each team is a
-    # vertex
-    class Edge
-      attr_reader :team1, :team2, :weight
-
-      def initialize(team1, team2, weight)
-        @team1  = team1
-        @team2  = team2
-        @weight = weight
-      end
-
-      def to_a
-        [team1, team2, weight]
-      end
-
-      # rubocop:disable Metrics/AbcSize
-      def ==(other)
-        return false unless other.class == self.class
-
-        if other.team1 == team1
-          other.team2 == team2
-        elsif other.team2 == team1
-          other.team1 == team2
-        else
-          false
-        end
-      end
-      # rubocop:enable Metrics/AbcSize
+      @graph ||= GraphMatching::Graph::WeightedGraph[*all_edges.map(&:to_a)]
     end
   end
 end

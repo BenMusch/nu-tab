@@ -56,6 +56,10 @@ class Team < ApplicationRecord
     super(other)
   end
 
+  def ==(other)
+    other.id == id
+  end
+
   def stats
     @stats ||= Stats::Tournament::TeamPolicy.new(self)
   end
