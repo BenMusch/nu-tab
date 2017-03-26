@@ -12,7 +12,11 @@ gem "rails", "~> 5.0.0"
 gem "skylight" # application performance monitoring
 gem "sprockets", ">= 3.0.0"
 gem "uglifier"
-gem "graph_matching" # minimum-weight matching for pairing algorithm
+# max-weight algorithm used for pairing.
+# Official gem requires vertices to be ints, my fork allows for the vertices to
+# be Ruby objects
+gem "graph_matching", git: "https://github.com/BenMusch/graph_matching",
+                      branch: "dont-require-int-vertices"
 
 group :development do
   gem "listen"

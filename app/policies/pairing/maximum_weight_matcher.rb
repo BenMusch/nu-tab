@@ -10,7 +10,7 @@ module Pairing
 
     # Returns the optimal matching of the teams, where each pairing is an array
     # of the two teams
-    def matching
+    def match!
       graph.maximum_weighted_matching(false)
     end
 
@@ -26,6 +26,7 @@ module Pairing
     end
 
     def graph
+      binding.pry
       @graph ||= GraphMatching::Graph::WeightedGraph[all_edges.map(&:to_a)]
     end
 
