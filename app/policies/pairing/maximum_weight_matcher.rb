@@ -26,7 +26,6 @@ module Pairing
     end
 
     def graph
-      binding.pry
       @graph ||= GraphMatching::Graph::WeightedGraph[all_edges.map(&:to_a)]
     end
 
