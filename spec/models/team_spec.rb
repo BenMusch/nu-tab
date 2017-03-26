@@ -3,13 +3,14 @@
 #
 # Table name: teams
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  seed        :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  school_id   :integer
-#  hit_pull_up :boolean          default("false")
+#  id           :integer          not null, primary key
+#  name         :string
+#  seed         :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  school_id    :integer
+#  hit_pull_up  :boolean          default("false")
+#  been_pull_up :boolean          default("false")
 #
 
 # frozen_string_literal: true
@@ -136,6 +137,21 @@ RSpec.describe Team, type: :model do
       expect(team.hit?(opponent1)).to be true
       expect(team.hit?(opponent2)).to be true
       expect(team.hit?(create(:team_with_debaters))).to be false
+    end
+  end
+
+  describe '#gotten_bye?' do
+    it 'returns whether or not the team has gotten a bye' do
+      create(:round, gov_team: team, opp_team: create(:team_with_debaters), round_number: 1)
+      create(:round, gov_team: create(:team_with_debaters), opp_team: team, round_number: 2)
+
+      team.reload
+      expect(team.gotten_bye?).to be false
+
+      create(:bye, team: team, round_number: 3)
+
+      team.reload
+      expect(team.gotten_bye?).to be true
     end
   end
 end

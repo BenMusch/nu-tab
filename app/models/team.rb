@@ -6,13 +6,14 @@
 #
 # Table name: teams
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  seed        :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  school_id   :integer
-#  hit_pull_up :boolean          default("false")
+#  id           :integer          not null, primary key
+#  name         :string
+#  seed         :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  school_id    :integer
+#  hit_pull_up  :boolean          default("false")
+#  been_pull_up :boolean          default("false")
 #
 
 class Team < ApplicationRecord
@@ -69,6 +70,10 @@ class Team < ApplicationRecord
 
   def hit?(other_team)
     opponents.exists?(id: other_team.id)
+  end
+
+  def gotten_bye?
+    byes.any?
   end
 
   private
