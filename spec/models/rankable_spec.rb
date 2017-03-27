@@ -3,18 +3,57 @@ require 'rails_helper'
 
 RSpec.describe Rankable do
   context 'ranking teams' do
-    it 'ranks teams in order of wins & then the attributes in RANKING_PRIORITY' do
-      team1 = create_with_stats(:team_with_debaters, wins: 1)
-      team2 = create_with_stats(:team_with_debaters, speaks: 1)
-      team3 = create_with_stats(:team_with_debaters, ranks: 0)
-      team4 = create_with_stats(:team_with_debaters, single_adjusted_speaks: 1)
-      team5 = create_with_stats(:team_with_debaters, single_adjusted_ranks: 0)
-      team6 = create_with_stats(:team_with_debaters, double_adjusted_speaks: 1)
-      team7 = create_with_stats(:team_with_debaters, double_adjusted_ranks: 0)
-      team8 = create_with_stats(:team_with_debaters, average_opponent_wins: 1)
+    let(:team1) { create_with_stats(:team_with_debaters, wins: 1) }
+    let(:team2) { create_with_stats(:team_with_debaters, speaks: 1) }
+    let(:team3) { create_with_stats(:team_with_debaters, ranks: 0) }
+    let(:team4) { create_with_stats(:team_with_debaters, single_adjusted_speaks: 1) }
+    let(:team5) { create_with_stats(:team_with_debaters, single_adjusted_ranks: 0) }
+    let(:team6) { create_with_stats(:team_with_debaters, double_adjusted_speaks: 1) }
+    let(:team7) { create_with_stats(:team_with_debaters, double_adjusted_ranks: 0) }
+    let(:team8) { create_with_stats(:team_with_debaters, average_opponent_wins: 1) }
+    let(:ordered) { [team1, team2, team3, team4, team5, team6, team7, team8] }
 
-      ordered = [team1, team2, team3, team4, team5, team6, team7, team8]
-      expect(ordered.shuffle.sort).to eq ordered
+    context 'with rounds and/or byes' do
+      before do
+        allow_any_instance_of(Team).to receive(:byes) { [double] }
+        allow_any_instance_of(Team).to receive(:rounds) { [double] }
+      end
+
+      it 'ranks teams in order of wins & then the attributes in RANKING_PRIORITY' do
+        expect(ordered.shuffle.sort).to eq ordered
+      end
+    end
+
+    context 'without rounds and/or byes' do
+      let(:ordered) { [team1, team2, team3, team4] }
+
+      before do
+        allow_any_instance_of(Team).to receive(:byes) { [] }
+        allow_any_instance_of(Team).to receive(:rounds) { [] }
+      end
+
+      it 'sorts by seed, from full_seed to unseeded' do
+        ordered.each_with_index do |team, i|
+          team.seed = Team.seeds.keys[i]
+          team.save
+        end
+        ordered.map!(&:reload)
+
+        expect(ordered.shuffle.sort).to eq ordered
+      end
+    end
+
+    context "when some teams have rounds/byes and some don't" do
+      before do
+        allow_any_instance_of(Team).to receive(:byes) { [double] }
+        allow_any_instance_of(Team).to receive(:rounds) { [double] }
+        allow(team1).to receive(:byes) { [] }
+        allow(team1).to receive(:rounds) { [] }
+      end
+
+      it 'raises an error' do
+        expect { ordered.shuffle.sort }.to raise_exception
+      end
     end
   end
 
@@ -36,9 +75,9 @@ RSpec.describe Rankable do
 end
 
 def create_with_stats(model, **stats)
-  team = create(model)
-  allow(team).to receive(:stats).and_return(stats_double(**stats))
-  team
+  fixture = create(model)
+  allow(fixture).to receive(:stats).and_return(stats_double(**stats))
+  fixture
 end
 
 def stats_double(wins: 0, speaks: 0, ranks: 1, single_adjusted_speaks: 0,

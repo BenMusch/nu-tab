@@ -14,7 +14,10 @@ module Rankable
       next if difference.zero?
       return attr.include?('ranks') ? -1 * difference : difference
     end
+    coin_flip
+  end
 
+  def coin_flip
     rand(2).zero? ? -1 : 1
   end
 end

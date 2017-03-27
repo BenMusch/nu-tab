@@ -154,4 +154,58 @@ RSpec.describe Team, type: :model do
       expect(team.gotten_bye?).to be true
     end
   end
+
+  describe '#had_rounds?' do
+    context 'with byes' do
+      before do
+        create(:bye, team: team)
+      end
+
+      it 'is true' do
+        expect(team.reload.had_rounds?).to be true
+      end
+    end
+
+    context 'with rounds' do
+      before do
+        create(:round, gov_team: team, opp_team: create(:team_with_debaters))
+      end
+
+      it 'is true' do
+        expect(team.reload.had_rounds?).to be true
+      end
+    end
+
+    context 'without rounds or byes' do
+      it 'is false' do
+        expect(team.reload.had_rounds?).to be false
+      end
+    end
+  end
+
+  describe '#seed_int' do
+    context 'unseeded' do
+      it 'is 3' do
+        expect(create(:team_with_debaters, seed: :unseeded).seed_int).to be 3
+      end
+    end
+
+    context 'free seeds' do
+      it 'is 2' do
+        expect(create(:team_with_debaters, seed: :free_seed).seed_int).to be 2
+      end
+    end
+
+    context 'half seeds' do
+      it 'is 1' do
+        expect(create(:team_with_debaters, seed: :half_seed).seed_int).to be 1
+      end
+    end
+
+    context 'full seeds' do
+      it 'is 0' do
+        expect(create(:team_with_debaters, seed: :full_seed).seed_int).to be 0
+      end
+    end
+  end
 end

@@ -1,23 +1,15 @@
 # frozen_string_literal: true
 
-# Generates the pairings for the current round
+# Generates the pairings for the given teams
 module Pairing
   class PairingGenerator
-    def initialize(teams, round_number)
-      @teams = if round_number == 1
-                 teams.sort
-               else
-                 # sort by seed, then randomly shuffle amongst equal seeds
-                 teams.sort do |a, b|
-                   return b.seed - a.seed unless a.seed == b.seed
-                   rand(2).zero? ? -1 : 1
-                 end
-               end
+    def initialize(teams, pairing_algorithm: MaximumWeightMatching)
+      @pairing_alg = pairing_algorithm
+      @teams = teams
     end
 
     def generate!
-      teams.delete!(bye.try(:team))
-      raw_pairings.each do |pairing|
+      raw_pairings.map do |pairing|
         gov, opp = assign_sides(pairing)
 
         Round.new(round_number: round_number, gov_team: gov, opp_team: opp)
@@ -26,11 +18,7 @@ module Pairing
 
     private
 
-    attr_reader :teams, :round_number
-
-    def bye
-      @bye ||= ByeGenerator.new(teams).generate!
-    end
+    attr_reader :teams, :round_number, :pairing_alg
 
     def brackets
       @brackets ||= BracketGenerator.new(teams).generate!
@@ -38,8 +26,8 @@ module Pairing
 
     def raw_pairings
       @raw_pairings ||= brackets.map do |bracket|
-        MaximumWeightMatcher.new(bracket).match!
-      end.flatten
+        pairing_alg.new(bracket).match!
+      end.flatten(1)
     end
 
     # expect an array of 2 teams, returns with the gov team as [gov, opp] based
