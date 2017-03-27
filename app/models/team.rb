@@ -51,10 +51,6 @@ class Team < ApplicationRecord
       where.not(id: id)
   end
 
-  def == (other)
-    self.class == other.class && other.id == id
-  end
-
   def <=>(other)
     if had_rounds? && other.had_rounds?
       return other.stats.wins - stats.wins unless stats.wins == other.stats.wins
