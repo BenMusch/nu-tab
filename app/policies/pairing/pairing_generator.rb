@@ -36,7 +36,7 @@ module Pairing
       if pairing[0].govs.count != pairing[1].govs.count
         pairing.sort_by { |team| team.govs.count }
       elsif pairing[0].opps.count != pairing[1].opps.count
-        pairing.sort_by { |team| team.opps.count }
+        pairing.sort_by { |team| team.opps.count }.reverse
       else
         pairing.shuffle
       end

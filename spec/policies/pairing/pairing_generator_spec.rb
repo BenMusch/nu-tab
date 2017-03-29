@@ -26,8 +26,6 @@ RSpec.describe Pairing::PairingGenerator do
   let(:rounds)       { generator.generate! }
 
   before(:each) do
-    # force pairings to be reversed when 'randomized'
-    allow(Kernel).to receive(:rand).with(2).and_return(0)
     # puts all teams into 1 bracket
     allow(Pairing::BracketGenerator).to receive(:new).with(teams).
       and_return(double(generate!: [teams]))
@@ -39,6 +37,24 @@ RSpec.describe Pairing::PairingGenerator do
       rounds.each do |round|
         expect(round.class).to be Round
       end
+    end
+
+    it 'assigns gov/opps to the round to whichever team has the least rounds on that side' do
+      # when one team has more govs, the other team is gov
+      allow(teams[0]).to receive(:govs) { double(count: 1) }
+      allow(teams[1]).to receive(:govs) { double(count: 2) }
+
+      # when teams have same gov count but different opp count, it gives the gov
+      # to the team with the most opps
+      allow(teams[2]).to receive(:govs) { double(count: 1) }
+      allow(teams[3]).to receive(:govs) { double(count: 1) }
+      allow(teams[2]).to receive(:opps) { double(count: 0) }
+      allow(teams[3]).to receive(:opps) { double(count: 1) }
+
+      expect(rounds[0].gov_team).to eq teams[0]
+      expect(rounds[0].opp_team).to eq teams[1]
+      expect(rounds[1].gov_team).to eq teams[3]
+      expect(rounds[1].opp_team).to eq teams[2]
     end
   end
 end
