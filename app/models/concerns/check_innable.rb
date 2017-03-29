@@ -11,7 +11,6 @@ module CheckInnable
     end
   end
 
-
   def checked_in_for_round?(round_number)
     CheckIn.exists?(subject: self, round_number: round_number)
   end
