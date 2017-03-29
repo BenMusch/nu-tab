@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe Pairing::JudgePolicy do
   let(:judge)  { create(:judge) }
   let(:team)   { create(:team_with_debaters) }
-  let(:policy) { described_class.new(judge, team)  }
+  let(:policy) { described_class.new(judge, team) }
 
   before do
     # generate scratches and rounds that shouldn't affect the conflict
