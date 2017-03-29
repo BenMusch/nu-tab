@@ -42,8 +42,8 @@ FactoryGirl.define do
   factory :round do
     result nil
     association :room, factory: :room
-    association :gov_team, factory: :team
-    association :opp_team, factory: :team
+    association :gov_team, factory: :team_with_debaters
+    association :opp_team, factory: :team_with_debaters
     round_number 1
   end
 
