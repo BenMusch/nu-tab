@@ -3,7 +3,8 @@
 # Generates the pairings for the given teams
 module Pairing
   class PairingGenerator
-    def initialize(teams, pairing_algorithm: MaximumWeightMatching)
+    def initialize(teams, round_number:, pairing_algorithm: MaximumWeightMatching)
+      @round_number = round_number
       @pairing_alg = pairing_algorithm
       @teams = teams
     end
@@ -18,7 +19,7 @@ module Pairing
 
     private
 
-    attr_reader :teams, :round_number, :pairing_alg
+    attr_reader :teams, :pairing_alg, :round_number
 
     def brackets
       @brackets ||= BracketGenerator.new(teams).generate!

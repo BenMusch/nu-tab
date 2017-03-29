@@ -77,8 +77,8 @@ FactoryGirl.define do
 
   factory :team_with_debaters, parent: :team do
     after(:build) do |team|
-      team.debaters = create_list(:debater, (2 - team.debaters.size),
-                                  team: team, school_id: team.school_id)
+      team.debaters = build_list(:debater, (2 - team.debaters.size),
+                                 team: team, school_id: team.school_id)
     end
   end
 
