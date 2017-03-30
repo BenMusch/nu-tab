@@ -3,8 +3,7 @@
 # Generates the pairings for the given teams
 module Pairing
   class PairingGenerator
-    def initialize(teams, round_number:, pairing_algorithm: MaximumWeightMatching)
-      @round_number = round_number
+    def initialize(teams, pairing_algorithm: ::Pairing::MaximumWeightMatcher)
       @pairing_alg = pairing_algorithm
       @teams = teams
     end
@@ -13,7 +12,7 @@ module Pairing
       raw_pairings.map do |pairing|
         gov, opp = assign_sides(pairing)
 
-        Round.new(round_number: round_number, gov_team: gov, opp_team: opp)
+        Round.new(gov_team: gov, opp_team: opp)
       end
     end
 

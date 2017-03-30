@@ -20,6 +20,8 @@ class Round < ApplicationRecord
   belongs_to :opp_team, class_name: 'Team'
   has_many :debater_round_stats
   has_many :debaters, through: :debater_round_stats
+  has_many :judge_rounds
+  has_many :judges, through: :judge_rounds
 
   enum result: [:gov_win, :opp_win, :gov_forfeit, :opp_forfeit, :all_drop, :all_win]
 
@@ -74,6 +76,10 @@ class Round < ApplicationRecord
 
   def teams
     [gov_team, opp_team]
+  end
+
+  def <=>(other)
+    teams.min <=> other.teams.min
   end
 
   private

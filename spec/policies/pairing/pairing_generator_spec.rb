@@ -22,7 +22,7 @@ end
 
 RSpec.describe Pairing::PairingGenerator do
   let(:teams)        { create_list(:team_with_debaters, 6) }
-  let(:generator)    { Pairing::PairingGenerator.new(teams, pairing_algorithm: DummyMatching, round_number: 2) }
+  let(:generator)    { Pairing::PairingGenerator.new(teams, pairing_algorithm: DummyMatching) }
   let(:rounds)       { generator.generate! }
 
   before(:each) do
@@ -38,12 +38,6 @@ RSpec.describe Pairing::PairingGenerator do
       expect(rounds.class).to be Array
       rounds.each do |round|
         expect(round.class).to be Round
-      end
-    end
-
-    it 'sets the round_number of the rounds to the current round' do
-      rounds.each do |round|
-        expect(round.round_number).to be 2
       end
     end
 

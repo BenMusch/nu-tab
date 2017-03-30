@@ -1,52 +1,56 @@
 # frozen_string_literal: true
-class RoundGenerator
-  def initialize(round_number)
-    @round_number = round_number
-  end
+module Pairing
+  class RoundsGenerator
+    def initialize(round_number)
+      @round_number = round_number
+    end
 
-  def generate!
-    rounds.each do |round|
-      round.room = rooms.unshift
+    def generate!
+      rounds.sort.each do |round|
+        round.round_number = round_number
+        round.room = rooms.pop
 
-      judges.each do |judge|
-        next if JudgePolicy.new(judge, round.gov_team).conflicted? ||
-          JudgePolicy.new(judge, round.opp_team).conflicted?
+        judges.each do |judge|
+          next if JudgePolicy.new(judge, round.gov_team).conflicted? ||
+            JudgePolicy.new(judge, round.opp_team).conflicted?
 
-        round.judge_rounds.build(judge: judge)
+          round.judges << judges.pop
+          break
+        end
+      end
+
+      ActiveRecord::Base.transaction do
+        bye.save!
+        rounds.each(&:save!)
       end
     end
 
-    ActiveRecord::Base.transaction do
-      bye.save!
-      rounds.save!
+    private
+
+    attr_reader :round_number
+
+    def teams_for_pairing
+      @teams_for_pairing ||= teams - [bye.try(:team)]
     end
-  end
 
-  private
+    def bye
+      @bye ||= ByeGenerator.new(teams).generate!
+    end
 
-  attr_reader :round_number
+    def teams
+      @teams ||= Team.checked_in(round_number).to_a.sort
+    end
 
-  def teams_for_pairing
-    @teams_for_pairing ||= teams - [bye.try(:team)]
-  end
+    def rooms
+      @rooms ||= Room.checked_in(round_number).order(:rank).to_a
+    end
 
-  def bye
-    @bye ||= ByeGenerator.new(teams).generate!
-  end
+    def judges
+      @judges ||= Judge.checked_in(round_number).order(:rank).to_a
+    end
 
-  def teams
-    @teams ||= Team.checked_in(round_number).sort
-  end
-
-  def rooms
-    @rooms ||= Room.checked_in(round_number).order(rank: :desc)
-  end
-
-  def judges
-    @judges ||= Judge.checked_in(round_number).order(rank: :desc)
-  end
-
-  def rounds
-    @rounds ||= PairingGenerator.new(teams_for_pairing, round_number).generate!
+    def rounds
+      @rounds ||= PairingGenerator.new(teams_for_pairing).generate!
+    end
   end
 end
