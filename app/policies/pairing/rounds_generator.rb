@@ -5,8 +5,8 @@ module Pairing
       @round_number = round_number
     end
 
-    def generate!
-      rounds.sort.each do |round|
+    def rounds
+      @rounds ||= pairings.sort.each do |round|
         round.round_number = round_number
         round.room = rooms.pop
 
@@ -18,7 +18,9 @@ module Pairing
           break
         end
       end
+    end
 
+    def generate!
       ActiveRecord::Base.transaction do
         bye.save!
         rounds.each(&:save!)
@@ -49,8 +51,8 @@ module Pairing
       @judges ||= Judge.checked_in(round_number).order(:rank).to_a
     end
 
-    def rounds
-      @rounds ||= PairingGenerator.new(teams_for_pairing).generate!
+    def pairings
+      @pairings ||= PairingGenerator.new(teams_for_pairing).generate!.sort
     end
   end
 end
