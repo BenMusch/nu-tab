@@ -3,13 +3,14 @@
 #
 # Table name: teams
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  seed        :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  school_id   :integer
-#  hit_pull_up :boolean          default("false")
+#  id           :integer          not null, primary key
+#  name         :string
+#  seed         :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  school_id    :integer
+#  hit_pull_up  :boolean          default("false")
+#  been_pull_up :boolean          default("false")
 #
 
 # frozen_string_literal: true
@@ -136,6 +137,75 @@ RSpec.describe Team, type: :model do
       expect(team.hit?(opponent1)).to be true
       expect(team.hit?(opponent2)).to be true
       expect(team.hit?(create(:team_with_debaters))).to be false
+    end
+  end
+
+  describe '#gotten_bye?' do
+    it 'returns whether or not the team has gotten a bye' do
+      create(:round, gov_team: team, opp_team: create(:team_with_debaters), round_number: 1)
+      create(:round, gov_team: create(:team_with_debaters), opp_team: team, round_number: 2)
+
+      team.reload
+      expect(team.gotten_bye?).to be false
+
+      create(:bye, team: team, round_number: 3)
+
+      team.reload
+      expect(team.gotten_bye?).to be true
+    end
+  end
+
+  describe '#had_rounds?' do
+    context 'with byes' do
+      before do
+        create(:bye, team: team)
+      end
+
+      it 'is true' do
+        expect(team.reload.had_rounds?).to be true
+      end
+    end
+
+    context 'with rounds' do
+      before do
+        create(:round, gov_team: team, opp_team: create(:team_with_debaters))
+      end
+
+      it 'is true' do
+        expect(team.reload.had_rounds?).to be true
+      end
+    end
+
+    context 'without rounds or byes' do
+      it 'is false' do
+        expect(team.reload.had_rounds?).to be false
+      end
+    end
+  end
+
+  describe '#seed_int' do
+    context 'unseeded' do
+      it 'is 3' do
+        expect(create(:team_with_debaters, seed: :unseeded).seed_int).to be 3
+      end
+    end
+
+    context 'free seeds' do
+      it 'is 2' do
+        expect(create(:team_with_debaters, seed: :free_seed).seed_int).to be 2
+      end
+    end
+
+    context 'half seeds' do
+      it 'is 1' do
+        expect(create(:team_with_debaters, seed: :half_seed).seed_int).to be 1
+      end
+    end
+
+    context 'full seeds' do
+      it 'is 0' do
+        expect(create(:team_with_debaters, seed: :full_seed).seed_int).to be 0
+      end
     end
   end
 end

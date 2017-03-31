@@ -6,13 +6,14 @@
 #
 # Table name: teams
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  seed        :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  school_id   :integer
-#  hit_pull_up :boolean          default("false")
+#  id           :integer          not null, primary key
+#  name         :string
+#  seed         :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  school_id    :integer
+#  hit_pull_up  :boolean          default("false")
+#  been_pull_up :boolean          default("false")
 #
 
 class Team < ApplicationRecord
@@ -51,12 +52,23 @@ class Team < ApplicationRecord
   end
 
   def <=>(other)
-    return other.stats.wins - stats.wins unless stats.wins == other.stats.wins
-    super(other)
+    if had_rounds? && other.had_rounds?
+      return other.stats.wins - stats.wins unless stats.wins == other.stats.wins
+      super(other)
+    elsif !had_rounds? && !other.had_rounds?
+      return seed_int - other.seed_int unless other.seed_int == seed_int
+      coin_flip
+    else
+      raise "Can't compare team with rounds to one without"
+    end
   end
 
   def stats
     @stats ||= Stats::Tournament::TeamPolicy.new(self)
+  end
+
+  def had_rounds?
+    rounds.any? || gotten_bye?
   end
 
   def govs
@@ -69,6 +81,14 @@ class Team < ApplicationRecord
 
   def hit?(other_team)
     opponents.exists?(id: other_team.id)
+  end
+
+  def gotten_bye?
+    byes.any?
+  end
+
+  def seed_int
+    Team.seeds[seed]
   end
 
   private

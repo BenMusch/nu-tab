@@ -1,6 +1,30 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
+RSpec.describe Pairing::Penalty do
+  describe '.calculate' do
+    it 'call adds all of the classes in PENALTY_CLASSES' do
+      mock_penalty1 = double(:penalty1)
+      mock_penalty2 = double(:penalty2)
+      stub_const('Pairing::Penalty::PENALTY_CLASSES', [mock_penalty1, mock_penalty2])
+
+      team1 = create(:team_with_debaters)
+      team2 = create(:team_with_debaters)
+      teams = [team1, team2]
+
+      allow(mock_penalty1).to receive(:new).and_return(double(value: 0))
+      allow(mock_penalty1).to receive(:new).with(team1, team2, team_list: teams).
+        and_return(double(value: 1))
+
+      allow(mock_penalty2).to receive(:new).and_return(double(value: 0))
+      allow(mock_penalty2).to receive(:new).with(team1, team2, team_list: teams).
+        and_return(double(value: 2))
+
+      expect(Pairing::Penalty.calculate(team1, team2, teams)).to be 3
+    end
+  end
+end
+
 RSpec.describe Pairing::Penalty::ImperfectPairing do
   describe '#value' do
     before do

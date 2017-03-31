@@ -41,8 +41,8 @@ module Pairing
       end
 
       def seed_variance
-        (seed_int(team1) - seed_int(optimal_opponent(team2))).abs +
-          (seed_int(team2) - seed_int(optimal_opponent(team1))).abs
+        (team1.seed_int - optimal_opponent(team2).seed_int).abs +
+          (team2.seed_int - optimal_opponent(team1).seed_int).abs
       end
 
       def power_pairing_variance
@@ -60,10 +60,6 @@ module Pairing
 
       def bracket_size
         @bracket_size ||= teams_list.size
-      end
-
-      def seed_int(team)
-        Team.seeds[team.seed]
       end
     end
   end

@@ -31,7 +31,6 @@ class TournamentSetting < ApplicationRecord
   }.freeze
 
   def self.get(key)
-    return nil unless exists?(key: key) || DEFAULTS[key]
     exists?(key: key) ? find_by(key: key).value : DEFAULTS[key]
   end
 

@@ -4,6 +4,11 @@ module CheckInnable
 
   included do
     has_many :check_ins, as: :check_innable
+
+    def self.checked_in(round_number)
+      where(id: CheckIn.select(:subject_id).
+                        where(round_number: round_number, subject_type: table_name.singularize.capitalize))
+    end
   end
 
   def checked_in_for_round?(round_number)

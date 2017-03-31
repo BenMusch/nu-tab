@@ -2,25 +2,17 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
-gem "autoprefixer-rails"
-gem "delayed_job_active_record"
-gem "flutie"
-gem "rollbar"
-gem "jquery-rails"
-gem "normalize-rails", "~> 3.0.0"
-gem "pg"
-gem "puma"
-gem "rack-canonical-host"
+gem "autoprefixer-rails" # prefix CSS with browser names
+gem "delayed_job_active_record" # Async jobs. TODO: use sidekiq
+gem "rollbar" # error-reporting
+gem "pg" # postgres
+gem "puma" # puma server
+gem "rack-canonical-host" # use a canonical host for the application
 gem "rails", "~> 5.0.0"
-gem "recipient_interceptor"
-gem "sass-rails", "~> 5.0"
-gem "simple_form"
-gem "skylight"
+gem "skylight" # application performance monitoring
 gem "sprockets", ">= 3.0.0"
-gem "title"
 gem "uglifier"
-gem "paranoia"
-gem "graph_matching"
+gem "graph_matching" # max-weight matching algorithm used to pair
 
 group :development do
   gem "listen"
@@ -63,8 +55,3 @@ end
 group :staging, :production do
   gem "rack-timeout"
 end
-
-gem 'high_voltage'
-gem 'bourbon', '~> 5.0.0.beta.7'
-gem 'neat', '~> 2.0.0.beta.1'
-gem 'refills', group: [:development, :test]

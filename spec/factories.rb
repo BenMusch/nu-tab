@@ -42,8 +42,8 @@ FactoryGirl.define do
   factory :round do
     result nil
     association :room, factory: :room
-    association :gov_team, factory: :team
-    association :opp_team, factory: :team
+    association :gov_team, factory: :team_with_debaters
+    association :opp_team, factory: :team_with_debaters
     round_number 1
   end
 
@@ -77,8 +77,8 @@ FactoryGirl.define do
 
   factory :team_with_debaters, parent: :team do
     after(:build) do |team|
-      team.debaters = create_list(:debater, (2 - team.debaters.size),
-                                  team: team, school_id: team.school_id)
+      team.debaters = build_list(:debater, (2 - team.debaters.size),
+                                 team: team, school_id: team.school_id)
     end
   end
 
