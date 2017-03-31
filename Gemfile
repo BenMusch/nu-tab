@@ -15,7 +15,11 @@ gem "uglifier"
 gem "graph_matching" # max-weight matching algorithm used to pair
 
 gem "jquery-rails"
-gem "sass-rails"
+gem "sass-rails", "~> 5.0"
+gem "normalize-rails"
+gem "bourbon", "~> 5.0.0.beta.7"
+gem "neat", "~> 2.0.0.beta.1"
+gem "high_voltage"
 
 group :development do
   gem "listen"
@@ -39,6 +43,7 @@ group :development, :test do
   gem "simplecov"
   gem "codeclimate-test-reporter", "~> 1.0.0"
   gem "faker"
+  gem "refills"
 end
 
 group :development, :staging do
