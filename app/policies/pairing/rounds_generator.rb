@@ -6,7 +6,7 @@ module Pairing
     end
 
     def rounds
-      @rounds ||= pairings.sort.each do |round|
+      @rounds ||= pairings.each do |round|
         round.round_number = round_number
         round.room = rooms.pop
 
