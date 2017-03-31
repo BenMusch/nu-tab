@@ -15,6 +15,7 @@ gem "uglifier"
 gem "graph_matching" # max-weight matching algorithm used to pair
 
 gem "jquery-rails"
+gem "sass-rails"
 
 group :development do
   gem "listen"
