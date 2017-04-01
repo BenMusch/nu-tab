@@ -27,19 +27,13 @@ After setting up, you can run the application using [Heroku Local]:
 
 [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
 
-## Documentation
+## Development
 
-The documentation for this projects lives in the doc/ directory. Documentation
-is written in the [RDoc](https://github.com/rdoc/rdoc) format and will be
-automatically generated from the comments on the code
+The back-end stack is a traditional ruby-on-rails app.
 
-To generate the documentation:
-
-    $ ./bin/generate_docs
-
-To view the documentation as an HTML document:
-
-    $ open doc/app/index.html
+The front-end is build with the `react_on_rails` gem. The front-end React
+components live in the `client` directory. Tests are written using `jest` and
+packages are managed using `yarn`.
 
 ## Guidelines
 

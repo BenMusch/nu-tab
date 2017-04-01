@@ -1,3 +1,2 @@
-doc/*
 app/assets/javascripts/cable.js
 client/webpack.config.js
