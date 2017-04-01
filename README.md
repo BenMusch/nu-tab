@@ -3,6 +3,7 @@
 [![Codeship Status](https://codeship.com/projects/b391e820-d527-0134-caef-66656fa4ab2f/status?branch=master)](https://www.codeship.com/projects/202400)
 [![Code Climate](https://codeclimate.com/github/BenMusch/nu-tab/badges/gpa.svg)](https://codeclimate.com/github/BenMusch/nu-tab)
 [![Test Coverage](https://codeclimate.com/github/BenMusch/nu-tab/badges/coverage.svg)](https://codeclimate.com/github/BenMusch/nu-tab/coverage)
+[![Dependency Status](https://gemnasium.com/badges/github.com/BenMusch/nu-tab.svg)](https://gemnasium.com/github.com/BenMusch/nu-tab)
 
 An attempt at APDA tabbing software built for 2017. The goal of this project is
 to port the tab logic of [mit-tab](https://github.com/jolynch/mit-tab) into a
