@@ -12,8 +12,8 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  school_id    :integer
-#  hit_pull_up  :boolean          default("false")
-#  been_pull_up :boolean          default("false")
+#  hit_pull_up  :boolean          default(FALSE)
+#  been_pull_up :boolean          default(FALSE)
 #
 
 class Team < ApplicationRecord
