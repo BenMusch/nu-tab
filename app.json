@@ -35,7 +35,10 @@
   },
   "buildpacks": [
     {
-      "url": "https://github.com/heroku/heroku-buildpack-nodejs#yarn"
+      "url": "https://github.com/heroku/heroku-buildpack-ruby"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
     }
   ],
   "addons":[
