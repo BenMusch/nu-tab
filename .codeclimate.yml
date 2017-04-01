@@ -8,7 +8,13 @@ engines:
         enabled: false
   scss-lint:
     enabled: true
+  eslint:
+    enabled: true
+    paths:
+      - "client/**.jsx?"
 ratings:
   paths:
   - "**.scss"
   - "**.rb"
+  - "**.js"
+  - "**.jsx"
