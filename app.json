@@ -33,6 +33,11 @@
       "required":true
     }
   },
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs#yarn"
+    }
+  ],
   "addons":[
     "heroku-postgresql"
   ]
