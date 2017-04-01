@@ -11,7 +11,7 @@ engines:
   eslint:
     enabled: true
     paths:
-      - "client/**.jsx?"
+      - "./client/**.jsx"
 ratings:
   paths:
   - "**.scss"
