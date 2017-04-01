@@ -12,6 +12,7 @@ engines:
     enabled: true
     paths:
       - "./client/**.jsx"
+      - "./client/**.js"
 ratings:
   paths:
   - "**.scss"
