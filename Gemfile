@@ -62,6 +62,7 @@ end
 
 group :staging, :production do
   gem "rack-timeout"
+  gem "bundler"
 end
 
 gem 'mini_racer', platforms: :ruby
