@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-RAILS_ENV   = ENV['RAILS_ENV'] || 'test'
+RAILS_ENV = ENV['RAILS_ENV'] || 'test'
 NODE_ENV = ENV['NODE_ENV'] || RAILS_ENV
 
-APP_PATH    = File.expand_path('../', __dir__)
+APP_PATH = File.expand_path('../', __dir__)
 CLIENT_PATH = File.expand_path('../client', __dir__)
 
-SET_NODE_PATH  = "NODE_PATH=#{CLIENT_PATH}/node_modules"
-JEST_BIN    = '../client/node_modules/jest/bin/jest.js'
+SET_NODE_PATH = "NODE_PATH=#{CLIENT_PATH}/node_modules"
+JEST_BIN = '../client/node_modules/jest/bin/jest.js'
 
 Dir.chdir(CLIENT_PATH) do
   exec "#{SET_NODE_PATH} #{JEST_BIN} #{ARGV.join(" ")}"
