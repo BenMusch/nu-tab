@@ -5,6 +5,13 @@ module Pairing
       @round_number = round_number
     end
 
+    def generate!
+      ActiveRecord::Base.transaction do
+        bye.try(:save!)
+        rounds.each(&:save!)
+      end
+    end
+
     def rounds
       @rounds ||= pairings.each do |round|
         round.round_number = round_number
@@ -17,13 +24,6 @@ module Pairing
           round.judges << judges.pop
           break
         end
-      end
-    end
-
-    def generate!
-      ActiveRecord::Base.transaction do
-        bye.save!
-        rounds.each(&:save!)
       end
     end
 
