@@ -20,7 +20,7 @@ class TournamentSetting < ApplicationRecord
     'min_speaks' => 22,
     'rounds' => 5,
     'current_round' => 1,
-    'pairing_released' => 0,
+    'pairings_released' => 0,
     'punish_forfeits' => 0,
     'imperfect_pairing_penalty' => -1,
     'high_opp_penalty' => -50,

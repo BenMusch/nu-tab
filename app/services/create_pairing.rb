@@ -9,6 +9,7 @@ class CreatePairing
 
     Pairing::RoundsGenerator.new(current_round).generate!
     TournamentSetting.set('current_round', current_round + 1)
+    TournamentSetting.set('pairings_released', 0)
   end
 
   private

@@ -44,4 +44,12 @@ RSpec.describe CreatePairing do
 
     expect(TournamentSetting.get('current_round')).to eq current_round + 1
   end
+
+  it 'sets pairings to unreleased' do
+    TournamentSetting.set('pairings_released', 1)
+
+    create_pairing.create!
+
+    expect(TournamentSetting.get('pairings_released')).to eq 0
+  end
 end
