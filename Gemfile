@@ -14,7 +14,7 @@ gem "sprockets", ">= 3.0.0"
 gem "uglifier"
 gem "graph_matching" # max-weight matching algorithm used to pair
 
-gem "jquery-rails"
+gem "react_on_rails"
 gem "sass-rails", "~> 5.0"
 gem "normalize-rails"
 gem "bourbon", "~> 5.0.0.beta.7"
@@ -63,3 +63,5 @@ end
 group :staging, :production do
   gem "rack-timeout"
 end
+
+gem 'mini_racer', platforms: :ruby

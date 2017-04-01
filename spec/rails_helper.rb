@@ -13,6 +13,10 @@ module Features
 end
 
 RSpec.configure do |config|
+  # Ensure that if we are running js tests, we are using latest webpack assets
+  # This will use the defaults of :js and :server_rendering meta tags
+  ReactOnRails::TestHelper.configure_rspec_to_compile_assets(config)
+
   config.include Features, type: :feature
   config.infer_base_class_for_anonymous_controllers = false
   config.infer_spec_type_from_file_location!
