@@ -294,7 +294,6 @@ DEPENDENCIES
   awesome_print
   bourbon (~> 5.0.0.beta.7)
   bullet
-  bundler
   bundler-audit (>= 0.5.0)
   capybara-webkit
   codeclimate-test-reporter (~> 1.0.0)
