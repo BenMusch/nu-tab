@@ -10,12 +10,9 @@ engines:
     enabled: true
   eslint:
     enabled: true
-    paths:
-      - "./client/**.jsx"
-      - "./client/**.js"
 ratings:
   paths:
   - "**.scss"
   - "**.rb"
-  - "**.js"
-  - "**.jsx"
+  - "client/**.js"
+  - "client/**.jsx"
