@@ -17,21 +17,21 @@ RSpec.feature 'Viewing schools', js: true do
   end
 
   scenario 'creating a school' do
-   visit schools_path
+    visit schools_path
 
-   fill_in 'School Name', with: invalid_school_name
-   click_on 'Submit'
-   expect(page).not_to have_link invalid_school_name
+    fill_in 'School Name', with: invalid_school_name
+    click_on 'Submit'
+    expect(page).not_to have_link invalid_school_name
 
-   fill_in 'School Name', with: 'New School'
-   click_on 'Submit'
+    fill_in 'School Name', with: 'New School'
+    click_on 'Submit'
 
-   expect(page).to have_link('New School')
-   click_on 'New School'
-   expect(page).to have_content('New School')
+    expect(page).to have_link('New School')
+    click_on 'New School'
+    expect(page).to have_content('New School')
 
-   visit schools_path
-   expect(page).to have_content('New School')
+    visit schools_path
+    expect(page).to have_content('New School')
   end
 
   scenario 'editing a school' do
