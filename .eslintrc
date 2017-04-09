@@ -31,6 +31,7 @@
   },
   "plugins": ["react"],
   "parserOptions": {
+    "emcaVersion": 6,
     "sourceType": "module",
     "emcaFeatures": {
       "jsx": true,
