@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import EditableText from '../shared/EditableText'
-import {updateSchool} from '../../helpers/schools/schoolsHelper'
+import {updateSchool, deleteSchool} from '../../helpers/schools/schoolsHelper'
 
 class SchoolDetail extends React.Component {
   state = {
@@ -10,6 +10,20 @@ class SchoolDetail extends React.Component {
 
   static propTypes = {
     school: PropTypes.object
+  }
+
+  deleteSchool = (event) => {
+    event.preventDefault()
+    let confirmed = confirm('Are you sure? This will delete all of the debaters and judges')
+    if (confirmed) {
+      deleteSchool(this.state.school)
+        .then((response) => {
+          window.location = '/schools'
+        })
+        .catch(() => {
+          this.setState({message: 'Could not delete school.'})
+        })
+    }
   }
 
   handleNameUpdate = (name) => {
@@ -32,8 +46,9 @@ class SchoolDetail extends React.Component {
     return (
       <div className="school">
         {this.state.message}
-        <EditableText text={this.state.school.name} name="school_name"
+        <EditableText text={this.state.school.name} name="name"
           onSave={this.handleNameUpdate} />
+        <a href="#delete" onClick={this.deleteSchool}>Delete</a>
       </div>
     )
   }

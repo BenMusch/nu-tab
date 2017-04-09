@@ -9,6 +9,15 @@ class SchoolsController < ApplicationController
     end
   end
 
+  def create
+    @school = School.new(school_params)
+    if @school.save!
+      render json: json_for(@school)
+    else
+      render json: @school.errors, status: :unprocessable
+    end
+  end
+
   def show
     @school = json_for(School.find(params[:id]))
     respond_to do |format|
@@ -22,11 +31,17 @@ class SchoolsController < ApplicationController
     if @school.update(school_params)
       render json: json_for(@school)
     else
-      render json: @school.errors
+      render json: @school.errors, status: :unprocessable
     end
   end
 
   def destroy
+    @school = School.find(params[:id])
+    if @school.destroy!
+      render json: {}, status: 200
+    else
+      render json: {}, status: :unprocessable
+    end
   end
 
   private
