@@ -7,7 +7,6 @@ RSpec.feature 'Viewing schools', js: true do
 
   scenario 'viewing all school' do
     visit root_path
-    binding.pry
     schools.each do |school|
       expect(page).to have_link school.name
     end
