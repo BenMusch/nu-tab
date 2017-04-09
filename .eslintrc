@@ -18,7 +18,6 @@
     "no-undef": 2,
     "no-use-before-define": 2,
     "radix": 2,
-    "semi": 2,
     "space-infix-ops": 2,
     "strict": 0
   },
@@ -32,6 +31,9 @@
   },
   "plugins": ["react"],
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "emcaFeatures": {
+      "jsx": true
+    }
   }
 }
