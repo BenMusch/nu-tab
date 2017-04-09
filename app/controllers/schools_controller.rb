@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SchoolsController < ApplicationController
   def index
     @schools = School.order(:name).to_a

@@ -30,5 +30,8 @@
     "Timer": true,
     "moment": true
   },
-  "plugins": ["react"]
+  "plugins": ["react"],
+  "parserOptions": {
+    "sourceType": "module"
+  }
 }

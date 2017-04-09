@@ -22,10 +22,10 @@ RSpec.describe School, type: :model do
     end
     describe 'name' do
       it 'is no longer than 20 characters' do
-        school.name = 'A'*20
+        school.name = 'A' * 20
         expect(school).to be_valid
 
-        school.name = 'A'*21
+        school.name = 'A' * 21
         expect(school).not_to be_valid
       end
 
