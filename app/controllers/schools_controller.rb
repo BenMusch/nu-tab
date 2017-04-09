@@ -17,12 +17,22 @@ class SchoolsController < ApplicationController
   end
 
   def update
+    @school = School.find(params[:id])
+    if @school.update(school_params)
+      render json: json_for(@school)
+    else
+      render json: @school.errors
+    end
   end
 
   def destroy
   end
 
   private
+
+  def school_params
+    params.require(:school).permit(:name)
+  end
 
   def json_for(school)
     school.as_json.merge(show_path: school_path(school))

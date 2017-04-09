@@ -1,9 +1,43 @@
 import React, {PropTypes} from 'react'
+import EditableText from '../shared/EditableText'
+import {updateSchool} from '../../helpers/schools/schoolsHelper'
 
-export const SchoolDetail = (props) => {
-  return (
-    <div className="school">
-      <h1>{props.school.name}</h1>
-    </div>
-  )
+class SchoolDetail extends React.Component {
+  state = {
+    school: this.props.school,
+    message: ''
+  }
+
+  static propTypes = {
+    school: PropTypes.object
+  }
+
+  handleNameUpdate = (name) => {
+    if (name.trim() !== this.state.school.name) {
+      updateSchool(this.props.school.show_path, {name})
+        .then((response) => {
+          const updatedSchool = {...this.state.school, name: name}
+          this.flashMessage('School updated!')
+          this.setState({school: udpatedSchool})
+        })
+        .catch(this.flashMessage('Error!'))
+    }
+  }
+
+  flashMessage = (message) => {
+    this.setState({message})
+    setTimeout(() => this.setState({message: ''}), 2500)
+  }
+
+  render () {
+    return (
+      <div className="school">
+        {this.state.message}
+        <EditableText text={this.state.school.name}
+          onSave={this.handleNameUpdate} />
+      </div>
+    )
+  }
 }
+
+export default SchoolDetail

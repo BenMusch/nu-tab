@@ -2,4 +2,6 @@ export {SchoolList} from './SchoolList'
 
 export {SchoolItem} from './SchoolItem'
 
-export {SchoolDetail} from './SchoolDetail'
+import SchoolDetail from './SchoolDetail'
+
+export {SchoolDetail}
