@@ -19,5 +19,5 @@ class School < ApplicationRecord
 
   validates :name, uniqueness: true,
                    presence:   true,
-                   length:     { maximum: 10 }
+                   length:     { maximum: 20 }
 end

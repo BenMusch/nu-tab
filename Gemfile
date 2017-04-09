@@ -17,9 +17,7 @@ gem "graph_matching" # max-weight matching algorithm used to pair
 gem "react_on_rails"
 gem "sass-rails", "~> 5.0"
 gem "normalize-rails"
-gem "bourbon", "~> 5.0.0.beta.7"
-gem "neat", "~> 2.0.0.beta.1"
-gem "high_voltage"
+gem "bootstrap", "~> 4.0.0.alpha6"
 
 group :development do
   gem "listen"
