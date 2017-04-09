@@ -5,6 +5,12 @@ abort("DATABASE_URL environment variable is set") if ENV["DATABASE_URL"]
 
 require "rspec/rails"
 
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+end
+
+Capybara.javascript_driver = :poltergeist
+
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |file| require file }
 
 module Features

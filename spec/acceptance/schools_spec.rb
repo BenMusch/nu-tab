@@ -2,11 +2,11 @@
 require 'rails_helper'
 
 RSpec.feature 'Viewing schools', js: true do
-  let(:schools) { create_list(:school, 5) }
+  let!(:schools) { create_list(:school, 5) }
   let(:school) { schools.first }
 
   scenario 'viewing all school' do
-    visit root_path
+    visit schools_path
     schools.each do |school|
       expect(page).to have_link school.name
     end

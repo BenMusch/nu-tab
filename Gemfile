@@ -49,10 +49,10 @@ group :development, :staging do
 end
 
 group :test do
-  gem "capybara-webkit"
+  gem "capybara"
+  gem "poltergeist", require: "capybara/poltergeist"
   gem "database_cleaner"
   gem "formulaic"
-  gem "launchy"
   gem "shoulda-matchers"
   gem "timecop"
   gem "webmock"

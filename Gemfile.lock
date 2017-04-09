@@ -66,9 +66,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.14.0)
-      capybara (>= 2.3.0, < 2.14.0)
-      json
+    cliver (0.3.2)
     code_analyzer (0.4.7)
       sexp_processor
     codeclimate-test-reporter (1.0.8)
@@ -111,8 +109,6 @@ GEM
     hashdiff (0.3.2)
     i18n (0.8.1)
     json (2.0.3)
-    launchy (2.4.3)
-      addressable (~> 2.3)
     lazy_priority_queue (0.1.1)
     libv8 (5.3.332.38.5)
     listen (3.1.5)
@@ -137,6 +133,10 @@ GEM
       mini_portile2 (~> 2.1.0)
     normalize-rails (4.1.1)
     pg (0.20.0)
+    poltergeist (1.10.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -291,7 +291,7 @@ DEPENDENCIES
   bootstrap (~> 4.0.0.alpha6)
   bullet
   bundler-audit (>= 0.5.0)
-  capybara-webkit
+  capybara
   codeclimate-test-reporter (~> 1.0.0)
   database_cleaner
   delayed_job_active_record
@@ -300,11 +300,11 @@ DEPENDENCIES
   faker
   formulaic
   graph_matching
-  launchy
   listen
   mini_racer
   normalize-rails
   pg
+  poltergeist
   pry-byebug
   pry-rails
   puma
