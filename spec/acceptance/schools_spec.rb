@@ -19,11 +19,11 @@ RSpec.feature 'Viewing schools', js: true do
   scenario 'creating a school' do
     visit schools_path
 
-    fill_in 'School Name', with: invalid_school_name
+    fill_in 'name', with: invalid_school_name
     click_on 'Submit'
     expect(page).not_to have_link invalid_school_name
 
-    fill_in 'School Name', with: 'New School'
+    fill_in 'name', with: 'New School'
     click_on 'Submit'
 
     expect(page).to have_link('New School')
@@ -41,12 +41,12 @@ RSpec.feature 'Viewing schools', js: true do
     expect(page).to have_content school.name
     click_on 'edit'
 
-    fill_in 'School Name', with: invalid_school_name
+    fill_in 'name', with: invalid_school_name
     click_on 'save'
     expect(page).not_to have_content invalid_school_name
 
     click_on 'edit'
-    fill_in school.name, with: 'New School Name'
+    fill_in 'name', with: 'New School Name'
     click_on 'save'
 
     expect(page).to have_content 'New School Name'

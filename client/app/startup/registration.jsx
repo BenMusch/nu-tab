@@ -7,6 +7,5 @@ ReactOnRails.register({
   SchoolListContainer,
   SchoolItem,
   SchoolDetail,
-  SchoolList,
-  EditableText
+  SchoolList
 })

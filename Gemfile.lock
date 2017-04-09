@@ -133,7 +133,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     normalize-rails (4.1.1)
     pg (0.20.0)
-    poltergeist (1.10.0)
+    poltergeist (1.13.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
@@ -304,7 +304,7 @@ DEPENDENCIES
   mini_racer
   normalize-rails
   pg
-  poltergeist
+  poltergeist (~> 1.13.0)
   pry-byebug
   pry-rails
   puma

@@ -33,7 +33,7 @@ class SchoolDetail extends React.Component {
           this.flashMessage('School updated!')
           this.setState({school: response.school})
         })
-        .catch(this.flashMessage('Error!'))
+        .catch(() => this.flashMessage('Error!'))
     }
   }
 
