@@ -14,6 +14,8 @@ gem "sprockets", ">= 3.0.0"
 gem "uglifier"
 gem "graph_matching" # max-weight matching algorithm used to pair
 
+
+gem "jquery-rails"
 gem "react_on_rails"
 gem "sass-rails", "~> 5.0"
 gem "normalize-rails"
