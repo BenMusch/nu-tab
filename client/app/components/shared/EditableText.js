@@ -1,11 +1,6 @@
 import React, {PropTypes} from 'react'
 
 class EditableText extends React.Component {
-  constructor (props) {
-    console.log(props)
-    super(props)
-  }
-
   state = {
     isEditing: false,
     text: this.props.text
@@ -13,7 +8,8 @@ class EditableText extends React.Component {
 
   static propTypes = {
     onSave: PropTypes.func,
-    text: PropTypes.string
+    text: PropTypes.string,
+    name: PropTypes.string
   }
 
   handleSaveClick = (event) => {
@@ -48,7 +44,7 @@ class EditableText extends React.Component {
   renderEditor () {
     return (
       <div className="edit">
-        <input type="text" onChange={this.handleInputChange} value={this.state.text}/>
+        <input type="text" name={this.props.name} onChange={this.handleInputChange} value={this.state.text}/>
         <a href="#save" onClick={this.handleSaveClick}>save</a>
       </div>
     )

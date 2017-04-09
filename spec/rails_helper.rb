@@ -22,6 +22,9 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
   config.include RoundsHelper
+  config.define_derived_metadata(file_path: %r{spec/acceptance}) do |metadata|
+    metadata[:feature_spec] = true
+  end
 end
 
 ActiveRecord::Migration.maintain_test_schema!

@@ -16,9 +16,8 @@ class SchoolDetail extends React.Component {
     if (name.trim() !== this.state.school.name) {
       updateSchool(this.props.school.show_path, {name})
         .then((response) => {
-          const updatedSchool = {...this.state.school, name: name}
           this.flashMessage('School updated!')
-          this.setState({school: udpatedSchool})
+          this.setState({school: response.school})
         })
         .catch(this.flashMessage('Error!'))
     }
@@ -33,7 +32,7 @@ class SchoolDetail extends React.Component {
     return (
       <div className="school">
         {this.state.message}
-        <EditableText text={this.state.school.name}
+        <EditableText text={this.state.school.name} name="school_name"
           onSave={this.handleNameUpdate} />
       </div>
     )
