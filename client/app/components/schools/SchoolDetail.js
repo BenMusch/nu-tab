@@ -31,7 +31,8 @@ class SchoolDetail extends React.Component {
       updateSchool(this.props.school.show_path, {name})
         .then((response) => {
           this.flashMessage('School updated!')
-          this.setState({school: response.school})
+          console.log(response)
+          this.setState({school: response.data})
         })
         .catch(() => this.flashMessage('Error!'))
     }

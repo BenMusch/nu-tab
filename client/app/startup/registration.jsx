@@ -4,6 +4,7 @@ import {SchoolListContainer, SchoolList, SchoolItem, SchoolDetail} from '../comp
 import EditableText from '../components/shared/EditableText'
 
 ReactOnRails.register({
+  EditableText,
   SchoolListContainer,
   SchoolItem,
   SchoolDetail,
