@@ -48,9 +48,9 @@ GEM
       execjs
     awesome_print (1.7.0)
     bindex (0.5.0)
-    bourbon (5.0.0.beta.7)
-      sass (~> 3.4.22)
-      thor (~> 0.19.1)
+    bootstrap (4.0.0.alpha6)
+      autoprefixer-rails (>= 6.0.3)
+      sass (>= 3.4.19)
     builder (3.2.3)
     bullet (5.5.1)
       activesupport (>= 3.0.0)
@@ -66,9 +66,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.14.0)
-      capybara (>= 2.3.0, < 2.14.0)
-      json
+    cliver (0.3.2)
     code_analyzer (0.4.7)
       sexp_processor
     codeclimate-test-reporter (1.0.8)
@@ -109,11 +107,8 @@ GEM
     graph_matching (0.0.2)
       rgl (~> 0.5.0)
     hashdiff (0.3.2)
-    high_voltage (3.0.0)
     i18n (0.8.1)
     json (2.0.3)
-    launchy (2.4.3)
-      addressable (~> 2.3)
     lazy_priority_queue (0.1.1)
     libv8 (5.3.332.38.5)
     listen (3.1.5)
@@ -133,14 +128,15 @@ GEM
       libv8 (~> 5.3)
     minitest (5.10.1)
     multi_json (1.12.1)
-    neat (2.0.0)
-      sass (~> 3.4)
-      thor (~> 0.19)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     normalize-rails (4.1.1)
     pg (0.20.0)
+    poltergeist (1.13.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -292,10 +288,10 @@ DEPENDENCIES
   annotate
   autoprefixer-rails
   awesome_print
-  bourbon (~> 5.0.0.beta.7)
+  bootstrap (~> 4.0.0.alpha6)
   bullet
   bundler-audit (>= 0.5.0)
-  capybara-webkit
+  capybara
   codeclimate-test-reporter (~> 1.0.0)
   database_cleaner
   delayed_job_active_record
@@ -304,13 +300,11 @@ DEPENDENCIES
   faker
   formulaic
   graph_matching
-  high_voltage
-  launchy
   listen
   mini_racer
-  neat (~> 2.0.0.beta.1)
   normalize-rails
   pg
+  poltergeist (~> 1.13.0)
   pry-byebug
   pry-rails
   puma

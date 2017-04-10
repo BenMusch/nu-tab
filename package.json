@@ -8,7 +8,13 @@
   },
   "scripts": {
     "postinstall": "cd client && yarn install",
-    "rails-server": "echo 'visit http://localhost:3000/hello_world' && foreman start -f Procfile.dev",
     "test": "bin/jest"
+  },
+  "dependencies": {
+    "axios": "^0.16.1",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "phantomjs": "^2.1.7"
   }
 }
