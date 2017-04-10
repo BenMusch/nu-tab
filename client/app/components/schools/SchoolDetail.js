@@ -16,7 +16,7 @@ class SchoolDetail extends React.Component {
     event.preventDefault()
     let confirmed = confirm('Are you sure? This will delete all of the debaters and judges')
     if (confirmed) {
-      deleteSchool(this.state.school)
+      deleteSchool(this.state.school.id)
         .then((response) => {
           window.location = '/schools'
         })
@@ -28,7 +28,7 @@ class SchoolDetail extends React.Component {
 
   handleNameUpdate = (name) => {
     if (name.trim() !== this.state.school.name) {
-      updateSchool(this.props.school.show_path, {name})
+      updateSchool(this.props.school.id, {name})
         .then((response) => {
           this.flashMessage('School updated!')
           console.log(response)

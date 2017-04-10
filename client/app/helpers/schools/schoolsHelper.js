@@ -1,20 +1,13 @@
-import ReactOnRails from 'react-on-rails'
-import axios from 'axios'
+import Resource from '../../helpers/shared/Resource'
 
-export const updateSchool = (path, updates) => {
-  return axios.put(path,
-    {school: updates, authenticity_token: ReactOnRails.authenticityToken()})
+export const updateSchool = (id, schoolData) => {
+  return new Resource('school', id).update(schoolData)
 }
 
-export const createSchool = (school) => {
-  return axios.post('/schools',
-    {school: school, authenticity_token: ReactOnRails.authenticityToken()})
+export const createSchool = (schoolData) => {
+  return new Resource('school').create(schoolData)
 }
 
-export const deleteSchool = (school) => {
-  return axios.request({
-    url: school.show_path,
-    method: 'delete',
-    data: {authenticity_token: ReactOnRails.authenticityToken()}
-  })
+export const deleteSchool = (id) => {
+  return new Resource('school', id).destroy()
 }

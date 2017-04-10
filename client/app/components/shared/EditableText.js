@@ -12,7 +12,7 @@ class EditableText extends React.Component {
     name: PropTypes.string
   }
 
-  handleSaveClick = (event) => {
+  handleSave = (event) => {
     event.preventDefault()
     this.toggleEditState()
     this.props.onSave(this.state.text)
@@ -43,10 +43,10 @@ class EditableText extends React.Component {
 
   renderEditor () {
     return (
-      <div className="edit">
-        <input type="text" name={this.props.name} onChange={this.handleInputChange} value={this.state.text}/>
-        <a href="#save" onClick={this.handleSaveClick}>save</a>
-      </div>
+      <form className="edit" onSubmit={this.handleSave}>
+        <input type="text" className="form-control" name={this.props.name} onChange={this.handleInputChange} value={this.state.text}/>
+        <input type="submit" value="save"/>
+      </form>
     )
   }
 
