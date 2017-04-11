@@ -39,15 +39,15 @@ RSpec.feature 'Viewing schools', js: true do
     click_on school.name
 
     expect(page).to have_content school.name
-    click_on 'edit'
+    click_on 'Edit'
 
     fill_in 'name', with: invalid_school_name
-    click_on 'save'
+    click_on 'Save'
     expect(page).not_to have_content invalid_school_name
 
-    click_on 'edit'
+    click_on 'Edit'
     fill_in 'name', with: 'New School Name'
-    click_on 'save'
+    click_on 'Save'
 
     expect(page).to have_content 'New School Name'
     visit school_path(school)

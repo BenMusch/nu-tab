@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import {SchoolItem} from './SchoolItem'
 
 export const SchoolList = (props) => {
@@ -9,4 +9,8 @@ export const SchoolList = (props) => {
       })}
     </ul>
   )
+}
+
+SchoolList.propTypes = {
+  schools: React.PropTypes.array
 }

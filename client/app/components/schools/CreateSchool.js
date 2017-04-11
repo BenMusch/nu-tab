@@ -11,9 +11,16 @@ export const CreateSchool = (props) => {
          value={props.schoolName}
          onChange={props.handleInputChange}
          placeholder="School name"
+         name="name"
          />
       </FormGroup>
       <Button type="submit">Submit</Button>
     </form>
   )
+}
+
+CreateSchool.propTypes = {
+  handleSubmit: React.PropTypes.func,
+  handleInputChange: React.PropTypes.func,
+  schoolName: React.PropTypes.string
 }

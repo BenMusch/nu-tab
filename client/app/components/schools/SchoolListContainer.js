@@ -5,6 +5,10 @@ import {CreateSchool} from './CreateSchool'
 import School from '../../resources/School'
 
 export class SchoolListContainer extends React.Component {
+  static propTypes = {
+    schools: React.PropTypes.array
+  }
+
   state = {
     schools: this.props.schools,
     newSchool: '',

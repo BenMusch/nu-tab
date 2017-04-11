@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import {Button} from 'react-bootstrap'
 import EditableText from '../shared/EditableText'
 import School from '../../resources/School'
 
@@ -49,7 +50,7 @@ class SchoolDetail extends React.Component {
         {this.state.message}
         <EditableText text={this.state.school.name} name="name"
           onSave={this.handleNameUpdate} />
-        <a href="#delete" onClick={this.deleteSchool}>Delete</a>
+        <Button onClick={this.deleteSchool} bsStyle="danger">Delete</Button>
       </div>
     )
   }
