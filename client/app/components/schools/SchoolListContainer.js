@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import {SchoolList} from './SchoolList'
 import {CreateSchool} from './CreateSchool'
-import School from '../../helpers/schools/School'
+import School from '../../resources/School'
 
 export class SchoolListContainer extends React.Component {
   state = {

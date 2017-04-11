@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import EditableText from '../shared/EditableText'
-import School from '../../helpers/schools/School'
+import School from '../../resources/School'
 
 class SchoolDetail extends React.Component {
   state = {

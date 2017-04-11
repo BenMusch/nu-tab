@@ -1,4 +1,4 @@
-import Resource from '../shared/Resource'
+import Resource from './Resource'
 
 export default class School extends Resource {
   constructor (id) {
