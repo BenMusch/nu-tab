@@ -2,7 +2,7 @@ import axios from 'axios'
 import ReactOnRails from 'react-on-rails'
 
 export default class Resource {
-  constructor(name, id) {
+  constructor (name, id) {
     this.name = name
     this.id = id
   }

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import EditableText from '../shared/EditableText'
-import {updateSchool, deleteSchool} from '../../helpers/schools/schoolsHelper'
+import School from '../../helpers/schools/School'
 
 class SchoolDetail extends React.Component {
   state = {
@@ -15,23 +15,19 @@ class SchoolDetail extends React.Component {
   deleteSchool = (event) => {
     event.preventDefault()
     let confirmed = confirm('Are you sure? This will delete all of the debaters and judges')
+    const school = this.getSchoolObject()
     if (confirmed) {
-      deleteSchool(this.state.school.id)
-        .then((response) => {
-          window.location = '/schools'
-        })
-        .catch(() => {
-          this.setState({message: 'Could not delete school.'})
-        })
+      school.destroy()
+        .then((response) => school.pathTo().index)
+        .catch(() => this.setState({message: 'Could not delete school.'}))
     }
   }
 
   handleNameUpdate = (name) => {
     if (name.trim() !== this.state.school.name) {
-      updateSchool(this.props.school.id, {name})
+      this.getSchoolObject().update({name})
         .then((response) => {
           this.flashMessage('School updated!')
-          console.log(response)
           this.setState({school: response.data})
         })
         .catch(() => this.flashMessage('Error!'))
@@ -41,6 +37,10 @@ class SchoolDetail extends React.Component {
   flashMessage = (message) => {
     this.setState({message})
     setTimeout(() => this.setState({message: ''}), 2500)
+  }
+
+  getSchoolObject () {
+    return new School(this.state.school.id)
   }
 
   render () {
