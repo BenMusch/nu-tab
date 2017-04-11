@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class DebatersController < ApplicationController
   def index
     @debaters = Debater.all.order(:name).map(&:as_json)
