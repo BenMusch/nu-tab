@@ -1,6 +1,7 @@
 import ReactOnRails from 'react-on-rails'
 
 import {SchoolListContainer, SchoolList, SchoolItem, SchoolDetail} from '../components/schools'
+import {DebaterList, DebaterItem, DebaterDetail} from '../components/debaters'
 import EditableText from '../components/shared/EditableText'
 
 ReactOnRails.register({
@@ -8,5 +9,8 @@ ReactOnRails.register({
   SchoolListContainer,
   SchoolItem,
   SchoolDetail,
-  SchoolList
+  SchoolList,
+  DebaterList,
+  DebaterItem,
+  DebaterDetail
 })
