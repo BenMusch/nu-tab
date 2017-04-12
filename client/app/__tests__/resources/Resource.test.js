@@ -1,4 +1,4 @@
-import Resource from '../../helpers/shared/Resource'
+import Resource from '../../resources/Resource'
 
 test('pathTo should generate the RESTful routes', () => {
   const resource = new Resource('resource', 2)
