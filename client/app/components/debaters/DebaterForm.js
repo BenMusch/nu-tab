@@ -13,10 +13,15 @@ export class DebaterForm extends React.Component {
     handleFailedSubmit: React.PropTypes.func.isRequired
   }
 
+  static defaultProps = {
+    school: { name: '', id: '' },
+    name: ''
+  }
+
   state = {
-    name: this.props.name || '',
+    name: this.props.name,
     novice: this.props.novice,
-    school: this.props.school || {}
+    school: this.props.school
   }
 
   handleSubmit = (event) => {
