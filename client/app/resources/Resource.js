@@ -25,41 +25,49 @@ export default class Resource {
     return {authenticity_token: ReactOnRails.authenticityToken()}
   }
 
-  index () {
-    return axios.get(this.pathTo().index, this.authenticityTokenObject())
+  index (ext) {
+    return axios.get(this.pathTo().index + this._extension(ext), this.authenticityTokenObject())
   }
 
   new () {
-    return axios.get(this.pathTo().new, this.authenticityTokenObject())
+    return axios.get(this.pathTo().new + this._extension(ext), this.authenticityTokenObject())
   }
 
   create (resourceData) {
     let data = {}
     data[this.name] = resourceData
     return axios
-      .post(this.pathTo().create, {...data, ...this.authenticityTokenObject()})
+      .post(this.pathTo().create + this._extension(ext), {...data, ...this.authenticityTokenObject()})
   }
 
   show () {
-    return axios.get(this.pathTo().show, this.authenticityTokenObject())
+    return axios.get(this.pathTo().show + this._extension(ext), this.authenticityTokenObject())
   }
 
   edit () {
-    return axios.get(this.pathTo().edit, this.authenticityTokenObject())
+    return axios.get(this.pathTo().edit + this._extension(ext), this.authenticityTokenObject())
   }
 
   update (resourceData) {
     let data = {}
     data[this.name] = resourceData
     return axios
-      .put(this.pathTo().update, {...data, ...this.authenticityTokenObject()})
+      .put(this.pathTo().update + this._extension(ext), {...data, ...this.authenticityTokenObject()})
   }
 
   destroy () {
     return axios.request({
-      url: this.pathTo().destroy,
+      url: this.pathTo().destroy + this._extension(ext),
       method: 'DELETE',
       data: this.authenticityTokenObject()
     })
+  }
+
+  _extension(extension) {
+    if (extension) {
+      return `.${extension}`
+    } else {
+      return ''
+    }
   }
 }

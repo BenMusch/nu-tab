@@ -4,7 +4,7 @@ class DebatersController < ApplicationController
     @debaters = Debater.all.order(:name).map(&:as_json)
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @schools }
+      format.json { render json: @debaters }
     end
   end
 
@@ -18,7 +18,7 @@ class DebatersController < ApplicationController
   end
 
   def show
-    @debater = Debater.find(params[:id]).as_json
+    @debater = Debater.find(params[:id]).as_json(include: :school)
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @debater }
