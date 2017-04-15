@@ -40,11 +40,11 @@ export default class Resource {
       .post(this.pathTo().create + this._extension(ext), {...data, ...this.authenticityTokenObject()})
   }
 
-  show () {
+  show (ext) {
     return axios.get(this.pathTo().show + this._extension(ext), this.authenticityTokenObject())
   }
 
-  edit () {
+  edit (ext) {
     return axios.get(this.pathTo().edit + this._extension(ext), this.authenticityTokenObject())
   }
 

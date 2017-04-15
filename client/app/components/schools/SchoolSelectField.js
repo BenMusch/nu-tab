@@ -13,9 +13,7 @@ const getSuggestions = (value, options) => {
   const inputLength = inputValue.length;
 
   return inputLength === 0 ? [] : options.filter((school) => {
-    console.log(inputValue)
     const inc = school.name.toLowerCase().includes(inputValue)
-    console.log(inc)
     return inc
   });
 };
@@ -32,7 +30,6 @@ export default class SchoolSelectField extends React.Component {
   }
 
   componentDidMount() {
-    console.log('mount')
     new School().index('json')
       .then((response) => this.setState({ schools: response.data }))
   }
@@ -58,7 +55,7 @@ export default class SchoolSelectField extends React.Component {
     const inputProps = {
       placeholder: 'Type a school name',
       value: this.state.value,
-      onChange: this.onChange,
+      onChange: this.onChange
     }
 
     return (<div className="School_select">
