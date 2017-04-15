@@ -29,11 +29,15 @@ export default class SchoolSelectField extends React.Component {
     defaultSelection: React.PropTypes.object
   }
 
+  static defaultProps = {
+    defaultSelection: emptySchool
+  }
+
   state = {
     suggestions: [],
     schools: [],
-    selectedSchool: this.props.defaultSelection || emptySchool,
-    value: this.props.defaultSelection.name || ''
+    selectedSchool: this.props.defaultSelection,
+    value: this.props.defaultSelection.name
   }
 
   componentDidMount() {

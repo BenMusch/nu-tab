@@ -1,5 +1,4 @@
 import React from 'react'
-import Autosuggest from 'react-autosuggest'
 import {FormControl, ControlLabel, FormGroup, Button} from 'react-bootstrap'
 import Debater from '../../resources/Debater'
 import SchoolSelectField from '../schools/SchoolSelectField'
@@ -9,7 +8,9 @@ export class DebaterForm extends React.Component {
     name: React.PropTypes.string,
     novice: React.PropTypes.bool,
     school: React.PropTypes.object,
-    id: React.PropTypes.number
+    id: React.PropTypes.number,
+    handleSuccessfulSubmit: React.PropTypes.func.isRequired,
+    handleFailedSubmit: React.PropTypes.func.isRequired
   }
 
   state = {
@@ -22,9 +23,9 @@ export class DebaterForm extends React.Component {
     event.preventDefault()
     const debater = new Debater(this.props.id)
     let request = this.props.id ? debater.update : debater.create
-    request(this.paramsToSubmit()).then((response) => {
-      window.location = new Debater(response.data.id).pathTo().show
-    })
+    request(this.paramsToSubmit())
+      .then((response) => this.props.handleSuccessfulSubmit(response))
+      .catch((response) => this.props.handleFailedSubmit(response))
   }
 
   handleNameChange = (event) => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import School from '../../resources/School'
-import SchoolSelectField from '../schools/SchoolSelectField'
 
 export const DebaterDetail = (props) => {
   const school = new School(props.school.id)
@@ -10,7 +9,6 @@ export const DebaterDetail = (props) => {
       <span>School: <a href={school.pathTo().show}>{props.school.name}</a></span>
       <br/>
       <span>{props.novice ? 'Novice' : 'Varsity'}</span>
-      <SchoolSelectField />
     </div>
   )
 }
