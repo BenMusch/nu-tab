@@ -30,7 +30,8 @@
     "moment": true,
     "window": true,
     "console": true.
-    "_": true
+    "_": true,
+    "confirm": true
   },
   "plugins": ["react"],
   "parserOptions": {
