@@ -18,7 +18,7 @@ class DebatersController < ApplicationController
   end
 
   def show
-    @debater = Debater.find(params[:id]).as_json(include: :school)
+    @debater = Debater.find(params[:id]).as_json
     respond_to do |format|
       format.html { render :show }
       format.json { render json: @debater }
@@ -29,7 +29,7 @@ class DebatersController < ApplicationController
     @debater = Debater.find(params[:id])
     @debater.school = School.find_by(debater_params[:school])
     if @debater.update(debater_params)
-      render json: @debater.as_json(include: :school)
+      render json: @debater.as_json
     else
       render json: @debater.errors, status: :unprocessable
     end
