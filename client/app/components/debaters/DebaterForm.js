@@ -8,7 +8,8 @@ export class DebaterForm extends React.Component {
   static propTypes = {
     name: React.PropTypes.string,
     novice: React.PropTypes.bool,
-    school: React.PropTypes.object
+    school: React.PropTypes.object,
+    id: React.PropTypes.number
   }
 
   state = {
@@ -19,14 +20,31 @@ export class DebaterForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    const debater = new Debater(this.props.id)
+    let request = this.props.id ? debater.update : debater.create
+    request(this.paramsToSubmit()).then((response) => {
+      window.location = new Debater(response.data.id).pathTo().show
+    })
   }
 
   handleNameChange = (event) => {
     this.setState({name: event.target.value})
   }
 
+  handleNoviceChange = (event) => {
+    this.setState({novice: !this.state.novice})
+  }
+
   handleSchoolChange = (newValue) => {
     this.setState({school: newValue})
+  }
+
+  paramsToSubmit() {
+    return {
+      name: this.state.name,
+      school_id: this.state.school.id,
+      novice: this.state.novice
+    }
   }
 
   render() {
@@ -45,6 +63,15 @@ export class DebaterForm extends React.Component {
            defaultSelection={this.state.school}
            onSelectionChange={this.handleSchoolChange}
            />
+          <FormGroup controlId="novice">
+            <ControlLabel>Novice</ControlLabel>
+            <FormControl
+             type="checkbox"
+             checked={this.state.novice}
+             onChange={this.handleNoviceChange}
+             />
+          </FormGroup>
+          <Button type="submit">Save</Button>
         </form>
       </div>
     )

@@ -27,8 +27,9 @@ class DebatersController < ApplicationController
 
   def update
     @debater = Debater.find(params[:id])
+    @debater.school = School.find_by(debater_params[:school])
     if @debater.update(debater_params)
-      render json: @debater
+      render json: @debater.as_json(include: :school)
     else
       render json: @debater.errors, status: :unprocessable
     end
@@ -46,6 +47,6 @@ class DebatersController < ApplicationController
   private
 
   def debater_params
-    params.require(:debater).permit(:school, :novice)
+    params.require(:debater).permit(:novice, :name, :school_id)
   end
 end
