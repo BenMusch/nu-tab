@@ -29,11 +29,11 @@ export default class Resource {
     return axios.get(this.pathTo().index + this._extension(ext), this.authenticityTokenObject())
   }
 
-  new () {
+  new (ext) {
     return axios.get(this.pathTo().new + this._extension(ext), this.authenticityTokenObject())
   }
 
-  create (resourceData) {
+  create (resourceData, ext) {
     let data = {}
     data[this.name] = resourceData
     return axios
@@ -48,14 +48,14 @@ export default class Resource {
     return axios.get(this.pathTo().edit + this._extension(ext), this.authenticityTokenObject())
   }
 
-  update (resourceData) {
+  update (resourceData, ext) {
     let data = {}
     data[this.name] = resourceData
     return axios
       .put(this.pathTo().update + this._extension(ext), {...data, ...this.authenticityTokenObject()})
   }
 
-  destroy () {
+  destroy (ext) {
     return axios.request({
       url: this.pathTo().destroy + this._extension(ext),
       method: 'DELETE',
