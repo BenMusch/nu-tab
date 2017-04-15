@@ -1,6 +1,9 @@
 import React from 'react'
 import Autosuggest from 'react-autosuggest'
+import {ControlLabel, FormGroup} from 'react-bootstrap'
 import School from '../../resources/School'
+
+const preprocessName = (name) => name.trim().toLowerCase()
 
 const getSuggestionValue = (school) => school.name
 
@@ -9,56 +12,67 @@ const renderSuggestion = (school) =>  {
 }
 
 const getSuggestions = (value, options) => {
-  const inputValue = value.trim().toLowerCase();
+  const inputValue = preprocessName(value);
   const inputLength = inputValue.length;
 
   return inputLength === 0 ? [] : options.filter((school) => {
-    const inc = school.name.toLowerCase().includes(inputValue)
+    const inc = preprocessName(school.name).includes(inputValue)
     return inc
   });
 };
 
+const emptySchool = { name: '', id: '' }
+
 export default class SchoolSelectField extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      suggestions: [],
-      schools: [],
-      selectedSchool: {},
-      value: ''
-    }
+  static propTypes = {
+    onSelectionChange: React.PropTypes.func,
+    defaultSelection: React.PropTypes.object
+  }
+
+  state = {
+    suggestions: [],
+    schools: [],
+    selectedSchool: this.props.defaultSelection || emptySchool,
+    value: this.props.defaultSelection.name || ''
   }
 
   componentDidMount() {
     new School().index('json')
-      .then((response) => this.setState({ schools: response.data }))
+      .then((response) => this.setState({schools: response.data}))
   }
 
   onSuggestionsClearRequested = () => {
-    this.setState({ suggestions: this.state.schools })
+    this.setState({suggestions: this.state.schools})
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
-    const suggestions = getSuggestions(value, this.state.schools)
-    this.setState({ suggestions: suggestions , selectedSchool: {}})
+    if (preprocessName(value) !== preprocessName(this.state.selectedSchool.name)) {
+      const suggestions = getSuggestions(value, this.state.schools)
+      this.setState({suggestions: suggestions, selectedSchool: emptySchool})
+      if (this.props.onSelectionChange) this.props.onSelectionChange(emptySchool)
+    }
   }
 
   onChange = (event, { newValue }) => {
-    this.setState({ value: newValue || '' })
+    this.setState({value: newValue || ''})
   }
 
   onSuggestionSelected = (event, { suggestion }) => {
     this.setState({ selectedSchool: suggestion })
+    if (this.props.onSelectionChange) this.props.onSelectionChange(suggestion)
   }
 
   render() {
     const inputProps = {
       placeholder: 'Type a school name',
       value: this.state.value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      default: this.state.selectedSchool.name,
+      className: 'form-control'
     }
 
-    return (<div className="School_select">
+    return (<FormGroup controlId="school_select">
+      <ControlLabel>School</ControlLabel>
       <Autosuggest
         suggestions={this.state.suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -69,6 +83,6 @@ export default class SchoolSelectField extends React.Component {
         inputProps={inputProps}
       />
       <input name="school_id" value={this.state.selectedSchool.id} type="hidden"/>
-    </div>)
+    </FormGroup>)
   }
 }

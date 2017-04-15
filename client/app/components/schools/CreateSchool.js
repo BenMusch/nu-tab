@@ -3,7 +3,7 @@ import {FormControl, ControlLabel, FormGroup, Button} from 'react-bootstrap'
 
 export const CreateSchool = (props) => {
   return (
-    <form onSubmit={props.handleSubmit} id="create-school">
+    <form onSubmit={props.handleSubmit} id="create_school">
       <FormGroup controlId="name">
         <ControlLabel>New School</ControlLabel>
         <FormControl
