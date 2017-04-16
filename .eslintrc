@@ -29,7 +29,7 @@
     "Timer": true,
     "moment": true,
     "window": true,
-    "console": true.
+    "console": true,
     "_": true,
     "confirm": true
   },
