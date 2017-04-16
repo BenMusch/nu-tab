@@ -6,7 +6,7 @@ RSpec.feature 'Viewing schools', js: true do
   let(:school)              { schools.first }
   let(:invalid_school_name) { 'Name Invalid Because It Is Too Long' }
 
-  scenario 'viewing all school' do
+  scenario 'viewing all schools' do
     visit schools_path
     schools.each do |school|
       expect(page).to have_link school.name
@@ -27,11 +27,6 @@ RSpec.feature 'Viewing schools', js: true do
     click_on 'Submit'
 
     expect(page).to have_link('New School')
-    click_on 'New School'
-    expect(page).to have_content('New School')
-
-    visit schools_path
-    expect(page).to have_content('New School')
   end
 
   scenario 'editing a school' do
@@ -39,15 +34,15 @@ RSpec.feature 'Viewing schools', js: true do
     click_on school.name
 
     expect(page).to have_content school.name
-    click_on 'edit'
+    click_on 'Edit'
 
     fill_in 'name', with: invalid_school_name
-    click_on 'save'
+    click_on 'Save'
     expect(page).not_to have_content invalid_school_name
 
-    click_on 'edit'
+    click_on 'Edit'
     fill_in 'name', with: 'New School Name'
-    click_on 'save'
+    click_on 'Save'
 
     expect(page).to have_content 'New School Name'
     visit school_path(school)
@@ -57,6 +52,7 @@ RSpec.feature 'Viewing schools', js: true do
   scenario 'deleting a school' do
     visit school_path(school)
     click_on 'Delete'
-    expect(page).not_to have_link school.name
+    page.accept_confirm
+    expect(page).not_to have_content school.name
   end
 end

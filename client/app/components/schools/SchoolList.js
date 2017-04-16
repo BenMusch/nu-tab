@@ -1,12 +1,16 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import {SchoolItem} from './SchoolItem'
 
 export const SchoolList = (props) => {
   return (
-    <ul>
+    <ul className="schools">
       {props.schools.map((school) => {
         return <SchoolItem {...school} key={school.id} />
       })}
     </ul>
   )
+}
+
+SchoolList.propTypes = {
+  schools: React.PropTypes.array
 }

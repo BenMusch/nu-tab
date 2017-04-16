@@ -304,7 +304,7 @@ DEPENDENCIES
   mini_racer
   normalize-rails
   pg
-  poltergeist (~> 1.13.0)
+  poltergeist
   pry-byebug
   pry-rails
   puma

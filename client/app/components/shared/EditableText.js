@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import {Button, FormControl} from 'react-bootstrap'
 
 class EditableText extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class EditableText extends React.Component {
     name: PropTypes.string
   }
 
-  handleSaveClick = (event) => {
+  handleSave = (event) => {
     event.preventDefault()
     this.toggleEditState()
     this.props.onSave(this.state.text)
@@ -36,17 +37,22 @@ class EditableText extends React.Component {
     return (
       <div className="display">
         <h1>{this.props.text}</h1>
-        <a href="#edit" onClick={this.handleEditClick}>edit</a>
+        <Button onClick={this.handleEditClick}>Edit</Button>
       </div>
     )
   }
 
   renderEditor () {
     return (
-      <div className="edit">
-        <input type="text" name={this.props.name} onChange={this.handleInputChange} value={this.state.text}/>
-        <a href="#save" onClick={this.handleSaveClick}>save</a>
-      </div>
+      <form className="edit" onSubmit={this.handleSave}>
+        <FormControl
+          type="text"
+          value={this.state.text}
+          name={this.props.name}
+          onChange={this.handleInputChange}
+        />
+        <Button type="submit">Save</Button>
+      </form>
     )
   }
 

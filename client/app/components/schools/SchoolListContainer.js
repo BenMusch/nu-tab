@@ -2,9 +2,13 @@ import React from 'react'
 import _ from 'lodash'
 import {SchoolList} from './SchoolList'
 import {CreateSchool} from './CreateSchool'
-import {createSchool} from '../../helpers/schools/schoolsHelper'
+import School from '../../resources/School'
 
 export class SchoolListContainer extends React.Component {
+  static propTypes = {
+    schools: React.PropTypes.array
+  }
+
   state = {
     schools: this.props.schools,
     newSchool: '',
@@ -13,7 +17,7 @@ export class SchoolListContainer extends React.Component {
 
   handleAddSchool = (event) => {
     event.preventDefault()
-    createSchool({name: this.state.newSchool})
+    new School().create({name: this.state.newSchool})
       .then((response) => {
         const newSchool = response.data
         const newSchools = this.state.schools.concat(newSchool)
