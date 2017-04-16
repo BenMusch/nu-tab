@@ -27,11 +27,6 @@ RSpec.feature 'Viewing schools', js: true do
     click_on 'Submit'
 
     expect(page).to have_link('New School')
-    click_on 'New School'
-    expect(page).to have_content('New School')
-
-    visit schools_path
-    expect(page).to have_content('New School')
   end
 
   scenario 'editing a school' do
