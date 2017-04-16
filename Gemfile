@@ -51,8 +51,7 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'poltergeist'
+  gem 'poltergeist', require: 'capybara/poltergeist'
   gem 'database_cleaner'
   gem 'formulaic'
   gem 'shoulda-matchers'
