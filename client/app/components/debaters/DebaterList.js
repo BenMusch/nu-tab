@@ -3,7 +3,7 @@ import {DebaterItem} from './DebaterItem'
 
 export const DebaterList = (props) => {
   return (
-    <ul>
+    <ul className="debaters">
       {props.debaters.map((debater) => {
         return <DebaterItem {...debater} key={debater.id} />
       })}

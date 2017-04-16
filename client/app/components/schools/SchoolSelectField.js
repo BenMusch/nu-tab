@@ -72,6 +72,8 @@ export default class SchoolSelectField extends React.Component {
       value: this.state.value,
       onChange: this.onChange,
       default: this.state.selectedSchool.name,
+      id: 'select_school',
+      name: 'school_name',
       className: 'form-control'
     }
 

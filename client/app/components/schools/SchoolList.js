@@ -3,7 +3,7 @@ import {SchoolItem} from './SchoolItem'
 
 export const SchoolList = (props) => {
   return (
-    <ul>
+    <ul className="schools">
       {props.schools.map((school) => {
         return <SchoolItem {...school} key={school.id} />
       })}

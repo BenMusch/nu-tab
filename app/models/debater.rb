@@ -35,8 +35,4 @@ class Debater < ApplicationRecord
   def rounds
     team.rounds
   end
-
-  def as_json
-    super(include: :school)
-  end
 end

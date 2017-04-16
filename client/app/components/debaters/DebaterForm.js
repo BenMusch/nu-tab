@@ -15,7 +15,8 @@ export class DebaterForm extends React.Component {
 
   static defaultProps = {
     school: { name: '', id: '' },
-    name: ''
+    name: '',
+    novice: false
   }
 
   state = {
