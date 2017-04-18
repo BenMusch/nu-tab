@@ -5,9 +5,6 @@
     "APPLICATION_HOST":{
       "required":true
     },
-    "EMAIL_RECIPIENTS":{
-      "required":true
-    },
     "HEROKU_APP_NAME": {
       "required":true
     },
@@ -19,18 +16,6 @@
     },
     "SECRET_KEY_BASE":{
       "generator":"secret"
-    },
-    "SMTP_ADDRESS":{
-      "required":true
-    },
-    "SMTP_DOMAIN":{
-      "required":true
-    },
-    "SMTP_PASSWORD":{
-      "required":true
-    },
-    "SMTP_USERNAME":{
-      "required":true
     }
   },
   "buildpacks": [
