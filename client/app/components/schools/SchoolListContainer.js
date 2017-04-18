@@ -21,7 +21,6 @@ export class SchoolListContainer extends React.Component {
       .then((response) => {
         const newSchool = response.data
         const newSchools = this.state.schools.concat(newSchool)
-        const sortedSchools = _.sortBy(newSchools, (school) => school.name)
         this.setState({
           message: 'School Added!',
           newSchool: '',
@@ -39,14 +38,18 @@ export class SchoolListContainer extends React.Component {
     this.setState({newSchool: event.target.value})
   }
 
-  render () {
+  sortedSchools() {
+    return _.sortBy(this.state.schools, (school) => school.name)
+  }
+
+  render() {
     return (
       <div className='school_list'>
         {this.state.message}
         <CreateSchool handleSubmit={this.handleAddSchool}
                       schoolName={this.state.newSchool}
                       handleInputChange={this.handleSchoolChange} />
-        <SchoolList schools={this.state.schools} />
+        <SchoolList schools={this.sortedSchools()} />
       </div>
     )
   }

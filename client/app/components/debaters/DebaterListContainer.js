@@ -49,7 +49,7 @@ export class DebaterListContainer extends React.Component {
         {this.state.message}
         {!this.state.isAdding && <Button onClick={this.handleAddClick}>Add Debater</Button>}
         {this.state.isAdding && this.renderForm()}
-        <DebaterList debaters={this.state.debaters} />
+        <DebaterList debaters={this.sortedDebaters()} />
       </div>
     )
   }

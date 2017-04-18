@@ -1,7 +1,7 @@
 {
   "name":"nu-tab",
   "scripts": {
-    "postdeploy": "bundle exec rails db:migrate db:seed"
+    "postdeploy": "rails db:migrate db:seed"
   },
   "env":{
     "APPLICATION_HOST":{
