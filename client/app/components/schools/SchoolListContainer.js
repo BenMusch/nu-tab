@@ -20,11 +20,10 @@ export class SchoolListContainer extends React.Component {
     new School().create({name: this.state.newSchool})
       .then((response) => {
         const newSchool = response.data
-        const newSchools = this.state.schools.concat(newSchool)
         this.setState({
           message: 'School Added!',
           newSchool: '',
-          schools: sortedSchools
+          schools: this.state.schools.concat(newSchool)
         })
       })
       .catch((response) => {
