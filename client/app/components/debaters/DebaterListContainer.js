@@ -46,7 +46,7 @@ export class DebaterListContainer extends React.Component {
   render() {
     return (
       <div className="debater_list">
-        {this.stat.message}
+        {this.state.message}
         {!this.state.isAdding && <Button onClick={this.handleAddClick}>Add Debater</Button>}
         {this.state.isAdding && this.renderForm()}
         <DebaterList debaters={this.state.debaters} />
