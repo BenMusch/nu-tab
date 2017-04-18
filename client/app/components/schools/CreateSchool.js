@@ -20,7 +20,7 @@ export const CreateSchool = (props) => {
 }
 
 CreateSchool.propTypes = {
-  handleSubmit: React.PropTypes.func,
-  handleInputChange: React.PropTypes.func,
-  schoolName: React.PropTypes.string
+  handleSubmit: React.PropTypes.func.isRequired,
+  handleInputChange: React.PropTypes.func.isRequired,
+  schoolName: React.PropTypes.string.isRequired
 }

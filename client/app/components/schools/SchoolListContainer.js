@@ -41,7 +41,7 @@ export class SchoolListContainer extends React.Component {
 
   render () {
     return (
-      <div className='school-list'>
+      <div className='school_list'>
         {this.state.message}
         <CreateSchool handleSubmit={this.handleAddSchool}
                       schoolName={this.state.newSchool}
