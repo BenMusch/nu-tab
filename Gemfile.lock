@@ -109,6 +109,9 @@ GEM
     hashdiff (0.3.2)
     i18n (0.8.1)
     json (2.1.0)
+    jsonapi-resources (0.8.3)
+      concurrent-ruby
+      rails (>= 4.0)
     lazy_priority_queue (0.1.1)
     libv8 (5.3.332.38.5)
     listen (3.1.5)
@@ -300,6 +303,7 @@ DEPENDENCIES
   faker
   formulaic
   graph_matching
+  jsonapi-resources
   listen
   mini_racer
   normalize-rails

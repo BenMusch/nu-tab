@@ -25,11 +25,11 @@ export default class Resource {
     return {authenticity_token: ReactOnRails.authenticityToken()}
   }
 
-  index = (ext) => {
+  index = (api=true) => {
     return axios.get(this.pathTo().index + this._extension(ext), this.authenticityTokenObject())
   }
 
-  new = (ext) => {
+  new = (api=true) => {
     return axios.get(this.pathTo().new + this._extension(ext), this.authenticityTokenObject())
   }
 
@@ -40,11 +40,11 @@ export default class Resource {
       .post(this.pathTo().create + this._extension(ext), {...data, ...this.authenticityTokenObject()})
   }
 
-  show = (ext) => {
+  show = (api=true) => {
     return axios.get(this.pathTo().show + this._extension(ext), this.authenticityTokenObject())
   }
 
-  edit = (ext) => {
+  edit = (api=true) => {
     return axios.get(this.pathTo().edit + this._extension(ext), this.authenticityTokenObject())
   }
 
@@ -61,13 +61,5 @@ export default class Resource {
       method: 'DELETE',
       data: this.authenticityTokenObject()
     })
-  }
-
-  _extension(extension) {
-    if (extension) {
-      return `.${extension}`
-    } else {
-      return ''
-    }
   }
 }

@@ -39,7 +39,7 @@ export class DebaterContainer extends React.Component {
     const confirmed = confirm('Are you sure? This will delete all of this debaters stats and affect their team speaks')
     if (confirmed) {
       debater.destroy()
-        .then(() => window.location = debater.pathTo().index)
+        .then(() => window.location = debater.pathTo(false).index)
         .catch(() => this.setState({ message: 'Could not delete this debater' }))
     }
   }

@@ -4,7 +4,7 @@ import Debater from '../../resources/Debater'
 export const DebaterItem = (props) => {
   const debater = new Debater(props.id)
   return (
-    <li><a href={debater.pathTo().show}>{props.name}</a> ({props.school.name})</li>
+    <li><a href={debater.pathTo(false).show}>{props.name}</a> ({props.school.name})</li>
   )
 }
 

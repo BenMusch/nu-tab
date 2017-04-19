@@ -19,7 +19,7 @@ class SchoolDetail extends React.Component {
     const school = this.getSchoolObject()
     if (confirmed) {
       school.destroy()
-        .then((response) => window.location = school.pathTo().index)
+        .then((response) => window.location = school.pathTo(false).index)
         .catch(() => this.setState({message: 'Could not delete school.'}))
     }
   }

@@ -13,6 +13,7 @@ gem 'skylight' # application performance monitoring
 gem 'sprockets', '>= 3.0.0'
 gem 'uglifier'
 gem 'graph_matching' # max-weight matching algorithm used to pair
+gem 'jsonapi-resources' # API is build around this gem
 
 # front-end libraries
 gem 'react_on_rails'

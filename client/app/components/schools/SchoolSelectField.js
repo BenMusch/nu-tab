@@ -41,7 +41,7 @@ export default class SchoolSelectField extends React.Component {
   }
 
   componentDidMount() {
-    new School().index('json')
+    new School().index()
       .then((response) => this.setState({schools: response.data}))
   }
 
