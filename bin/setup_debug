@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Run the script to setup the debug on Codeship
+
+rvm use 2.3.1 --install
+
+bundle install
+
+bundle exec rails db:create db:migrate
+
+yarn install
