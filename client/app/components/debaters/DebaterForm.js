@@ -1,6 +1,6 @@
 import React from 'react'
 import {FormControl, ControlLabel, FormGroup, Button} from 'react-bootstrap'
-import Debater from '../../resources/Debater'
+import {ApiDebater} from '../../resources/Debater'
 import SchoolSelectField from '../schools/SchoolSelectField'
 
 export class DebaterForm extends React.Component {
@@ -27,7 +27,7 @@ export class DebaterForm extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    const debater = new Debater(this.props.id)
+    const debater = new ApiDebater(this.props.id)
     let request = this.props.id ? debater.update : debater.create
     request(this.paramsToSubmit())
       .then((response) => this.props.handleSuccessfulSubmit(response))

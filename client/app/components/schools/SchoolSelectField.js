@@ -1,7 +1,7 @@
 import React from 'react'
 import Autosuggest from 'react-autosuggest'
 import {ControlLabel, FormGroup} from 'react-bootstrap'
-import School from '../../resources/School'
+import {ApiSchool} from '../../resources/School'
 
 const preprocessName = (name) => name.trim().toLowerCase()
 
@@ -41,8 +41,8 @@ export default class SchoolSelectField extends React.Component {
   }
 
   componentDidMount() {
-    new School().index()
-      .then((response) => this.setState({schools: response.data}))
+    new ApiSchool().index()
+      .then((response) => this.setState({schools: response.data.data}))
   }
 
   onSuggestionsClearRequested = () => {
