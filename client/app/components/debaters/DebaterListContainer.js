@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import {Button} from 'react-bootstrap'
 import {DebaterList, DebaterForm} from './index'
 
@@ -29,21 +30,26 @@ export class DebaterListContainer extends React.Component {
 
   handleAddClick = () => this.setState({ isAdding: true })
 
+  sortedDebaters() {
+    return _.sortBy(this.state.debaters, ['school.name', 'name'])
+  }
+
   renderForm() {
     return (
       <DebaterForm
         handleSuccessfulSubmit={this.handleSuccesfulSubmit}
         handleFailedSubmit={this.handleFailedSubmit}
-        />
+      />
     )
   }
 
   render() {
     return (
-      <div className="debater_list_container">
+      <div className="debater_list">
+        {this.state.message}
         {!this.state.isAdding && <Button onClick={this.handleAddClick}>Add Debater</Button>}
         {this.state.isAdding && this.renderForm()}
-        <DebaterList debaters={this.state.debaters} />
+        <DebaterList debaters={this.sortedDebaters()} />
       </div>
     )
   }

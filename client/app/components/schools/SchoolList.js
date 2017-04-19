@@ -12,5 +12,9 @@ export const SchoolList = (props) => {
 }
 
 SchoolList.propTypes = {
-  schools: React.PropTypes.array
+  schools: React.PropTypes.array.isRequired
+}
+
+SchoolList.defaultProps = {
+  schools: []
 }
