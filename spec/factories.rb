@@ -89,7 +89,7 @@ FactoryGirl.define do
   end
 
   factory :judge do
-    sequence(:name) { Faker::Name.unique.name }
+    sequence(:name) { |n| "Judge #{n}" }
     sequence(:rank) { rand(99) + 1 }
   end
 
