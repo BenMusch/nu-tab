@@ -53,22 +53,6 @@ RSpec.describe DebaterRoundStat, type: :model do
         stats.speaks = nil
         expect(stats).not_to be_valid
       end
-
-      it 'is >= 22' do
-        stats.speaks = 21.99
-        expect(stats).not_to be_valid
-
-        stats.speaks = 22
-        expect(stats).to be_valid
-      end
-
-      it 'is <= 28' do
-        stats.speaks = 28.01
-        expect(stats).not_to be_valid
-
-        stats.speaks = 28
-        expect(stats).to be_valid
-      end
     end
 
     describe 'ranks' do

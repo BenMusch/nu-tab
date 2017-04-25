@@ -16,8 +16,8 @@ class TournamentSetting < ApplicationRecord
   validates :value, presence: true
 
   DEFAULTS = {
-    'max_speaks' => 28,
-    'min_speaks' => 22,
+    'max_speaks' => 5,
+    'min_speaks' => 45,
     'rounds' => 5,
     'current_round' => 1,
     'pairings_released' => 0,

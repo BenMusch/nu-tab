@@ -24,8 +24,7 @@ class DebaterRoundStat < ApplicationRecord
   validates :ranks, inclusion:  1..4,
                     presence:   true,
                     uniqueness: { scope: :round }
-  validates :speaks, inclusion: 22..28,
-                     presence:  true
+  validates :speaks, presence:  true
 
   validate do
     validate_team_membership
