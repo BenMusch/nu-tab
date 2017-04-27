@@ -318,6 +318,7 @@ DEPENDENCIES
   refills
   rollbar
   rspec-rails (~> 3.5)
+  rspec-retry
   sass-rails (~> 5.0)
   shoulda-matchers
   simplecov
