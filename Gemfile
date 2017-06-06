@@ -15,7 +15,7 @@ gem 'uglifier'
 gem 'graph_matching' # max-weight matching algorithm used to pair
 
 # front-end libraries
-gem 'react_on_rails'
+gem 'react_on_rails', '~> 6.9.1'
 gem 'sass-rails', '~> 5.0'
 gem 'normalize-rails'
 gem 'bootstrap', '~> 4.0.0.alpha6'
