@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
 import {DebaterForm, DebaterDetail} from './index'
-import Debater from '../../resources/Debater'
+import {Debater, ApiDebater} from '../../resources/Debater'
 
 export class DebaterContainer extends React.Component {
   static propTypes = {
@@ -35,11 +35,11 @@ export class DebaterContainer extends React.Component {
   handleEditClick = () => this.setState({ isEditing: true })
 
   handleDeleteClick = () =>  {
-    const debater = new Debater(this.state.debater.id)
+    const debater = new ApiDebater(this.state.debater.id)
     const confirmed = confirm('Are you sure? This will delete all of this debaters stats and affect their team speaks')
     if (confirmed) {
       debater.destroy()
-        .then(() => window.location = debater.pathTo().index)
+        .then(() => window.location = new Debater().pathTo(false).index)
         .catch(() => this.setState({ message: 'Could not delete this debater' }))
     }
   }

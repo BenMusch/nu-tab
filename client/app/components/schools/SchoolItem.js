@@ -1,5 +1,5 @@
 import React from 'react'
-import School from '../../resources/School'
+import {School} from '../../resources/School'
 
 export const SchoolItem = (props) => {
   return (

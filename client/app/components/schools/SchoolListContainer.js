@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import {SchoolList} from './SchoolList'
 import {CreateSchool} from './CreateSchool'
-import School from '../../resources/School'
+import {ApiSchool} from '../../resources/School'
 
 export class SchoolListContainer extends React.Component {
   static propTypes = {
@@ -17,7 +17,7 @@ export class SchoolListContainer extends React.Component {
 
   handleAddSchool = (event) => {
     event.preventDefault()
-    new School().create({name: this.state.newSchool})
+    new ApiSchool().create({name: this.state.newSchool})
       .then((response) => {
         const newSchool = response.data
         this.setState({

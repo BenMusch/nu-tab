@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
-  resources :debaters
-  get 'debaters/index'
-
-  get 'debaters/create'
-
-  get 'debaters/show'
-
-  get 'debaters/update'
-
-  get 'debaters/destroy'
-
   root 'application#index'
-  resources :schools, only: [:index, :create, :show, :update, :destroy]
+  resources :debaters, only: [:index, :show]
+  resource :schools, only: [:index, :show]
+
+  namespace :api do
+    jsonapi_resources :schools
+    jsonapi_resources :debaters
+  end
 end

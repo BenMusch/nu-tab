@@ -2,7 +2,7 @@ import axios from 'axios'
 import ReactOnRails from 'react-on-rails'
 
 export default class Resource {
-  constructor (name, id) {
+  constructor(name, id) {
     this.name = name
     this.id = id
   }
@@ -25,49 +25,41 @@ export default class Resource {
     return {authenticity_token: ReactOnRails.authenticityToken()}
   }
 
-  index = (ext) => {
-    return axios.get(this.pathTo().index + this._extension(ext), this.authenticityTokenObject())
+  index = () => {
+    return axios.get(this.pathTo().index, this.authenticityTokenObject())
   }
 
-  new = (ext) => {
-    return axios.get(this.pathTo().new + this._extension(ext), this.authenticityTokenObject())
+  new = () => {
+    return axios.get(this.pathTo().new, this.authenticityTokenObject())
   }
 
   create = (resourceData, ext) => {
     let data = {}
     data[this.name] = resourceData
     return axios
-      .post(this.pathTo().create + this._extension(ext), {...data, ...this.authenticityTokenObject()})
+      .post(this.pathTo().create, {...data, ...this.authenticityTokenObject()})
   }
 
-  show = (ext) => {
-    return axios.get(this.pathTo().show + this._extension(ext), this.authenticityTokenObject())
+  show = () => {
+    return axios.get(this.pathTo().show, this.authenticityTokenObject())
   }
 
-  edit = (ext) => {
-    return axios.get(this.pathTo().edit + this._extension(ext), this.authenticityTokenObject())
+  edit = () => {
+    return axios.get(this.pathTo().edit, this.authenticityTokenObject())
   }
 
   update = (resourceData, ext) => {
     let data = {}
     data[this.name] = resourceData
     return axios
-      .put(this.pathTo().update + this._extension(ext), {...data, ...this.authenticityTokenObject()})
+      .put(this.pathTo().update, {...data, ...this.authenticityTokenObject()})
   }
 
-  destroy = (ext) => {
+  destroy = () => {
     return axios.request({
-      url: this.pathTo().destroy + this._extension(ext),
+      url: this.pathTo().destroy,
       method: 'DELETE',
       data: this.authenticityTokenObject()
     })
-  }
-
-  _extension(extension) {
-    if (extension) {
-      return `.${extension}`
-    } else {
-      return ''
-    }
   }
 }

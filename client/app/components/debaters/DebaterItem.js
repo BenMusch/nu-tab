@@ -1,5 +1,5 @@
 import React from 'react'
-import Debater from '../../resources/Debater'
+import {Debater} from '../../resources/Debater'
 
 export const DebaterItem = (props) => {
   const debater = new Debater(props.id)
