@@ -53,6 +53,6 @@ class SchoolsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def school_params
-      params.fetch(:school, {})
+      params.require(:school).permit(:name)
     end
 end
