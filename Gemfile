@@ -15,6 +15,7 @@ gem 'uglifier'
 gem 'graph_matching' # max-weight matching algorithm used to pair
 
 # front-end libraries
+gem 'simple_form'
 gem 'react_on_rails', '~> 6.9.1'
 gem 'sass-rails', '~> 5.0'
 gem 'normalize-rails'
@@ -26,6 +27,7 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'web-console'
   gem 'annotate'
+  gem 'rails_layout'
   gem 'rdoc'
 end
 
