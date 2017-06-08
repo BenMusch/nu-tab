@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :school do
+    
+  end
   factory :tournament_setting do
     key 'key'
     value 1
