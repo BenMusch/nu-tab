@@ -46,13 +46,16 @@ class TeamsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def team_params
-      params.fetch(:team, {})
+  # Use callbacks to share common setup or constraints between actions.
+  def set_team
+    @team = Team.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def team_params
+    params.require(:team).permit(:school_id, :name, :seed, debater_ids: []).tap do |p|
+      p[:seed] = p[:seed].to_i if p[:seed]
     end
+  end
 end

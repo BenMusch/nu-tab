@@ -2,7 +2,7 @@ class CreateTeams < ActiveRecord::Migration[5.0]
   def change
     create_table :teams do |t|
       t.string :name
-      t.integer :seed
+      t.integer :seed, default: 3
 
       t.timestamps
     end

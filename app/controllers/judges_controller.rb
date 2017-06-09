@@ -53,6 +53,6 @@ class JudgesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def judge_params
-      params.fetch(:judge, {})
+      params.require(:judge).permit(:name, :rank, school_ids: [])
     end
 end

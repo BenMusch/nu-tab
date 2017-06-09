@@ -46,13 +46,14 @@ class DebatersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_debater
-      @debater = Debater.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def debater_params
-      params.fetch(:debater, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_debater
+    @debater = Debater.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def debater_params
+    params.require(:debater).permit(:novice, :name, :school_id, :team_id)
+  end
 end
