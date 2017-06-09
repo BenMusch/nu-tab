@@ -10,4 +10,8 @@ module ApplicationHelper
   def body_class
     'app'
   end
+
+  def link_or_none(model, method: :name)
+    model ? link_to(model.send(method), model) : 'None'
+  end
 end

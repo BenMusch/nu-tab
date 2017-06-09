@@ -1,4 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @school.name %>
+</p>
+
+<div class="row">
+  <div id="judges" class="col col-md-3">
+    <strong><%= pluralize(@school.judges.count, 'Judge') %>:</strong>
+    <%= render 'shared/simple_list', items: @school.judges %>
+  </div>
+
+  <div id="teams" class="col col-md-3">
+    <strong><%= pluralize(@school.teams.count, 'Team') %>:</strong>
+    <%= render 'shared/simple_list', items: @school.teams.uniq %>
+  </div>
+
+  <div id="debaters" class="col col-md-3">
+    <strong><%= pluralize(@school.debaters.count, 'Debater') %>:</strong>
+    <%= render 'shared/simple_list', items: @school.debaters %>
+  </div>
+</div>
+
 <%= link_to 'Edit', edit_school_path(@school) %> |
 <%= link_to 'Back', schools_path %>

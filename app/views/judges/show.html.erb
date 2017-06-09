@@ -1,4 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @judge.name %>
+</p>
+
+<p>
+  <strong>Rank:</strong>
+  <%= @judge.rank %>
+</p>
+
+<p>
+  <strong>Teams:</strong>
+  <%= render 'shared/simple_list', items: @judge.schools %>
+</p>
+
 <%= link_to 'Edit', edit_judge_path(@judge) %> |
 <%= link_to 'Back', judges_path %>

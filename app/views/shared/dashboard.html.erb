@@ -1,0 +1,31 @@
+<div class="row">
+  <div id="schools" class="col col-md-2">
+    <h3><%= pluralize(@schools.count, 'School') %></h3>
+    <span><%= link_to 'List', schools_path %> | <%= link_to 'New', new_school_path %></span>
+    <%= render 'shared/simple_list', items: @schools %>
+  </div>
+
+  <div id="judges" class="col col-md-2">
+    <h3><%= pluralize(@judges.count, 'Judge') %></h3>
+    <span><%= link_to 'List', judges_path %> | <%= link_to 'New', new_judge_path %></span>
+    <%= render 'shared/simple_list', items: @judges %>
+  </div>
+
+  <div id="teams" class="col col-md-2">
+    <h3><%= pluralize(@teams.count, 'Team') %></h3>
+    <span><%= link_to 'List', teams_path %> | <%= link_to 'New', new_team_path %></span>
+    <%= render 'shared/simple_list', items: @teams %>
+  </div>
+
+  <div id="debaters" class="col col-md-2">
+    <h3><%= pluralize(@debaters.count, 'Debater') %></h3>
+    <span><%= link_to 'List', debaters_path %> | <%= link_to 'New', new_debater_path %></span>
+    <%= render 'shared/simple_list', items: @debaters %>
+  </div>
+
+  <div id="rooms" class="col col-md-2">
+    <h3><%= pluralize(@rooms.count, 'Room') %></h3>
+    <span><%= link_to 'List', rooms_path %> | <%= link_to 'New', new_room_path %></span>
+    <%= render 'shared/simple_list', items: @rooms %>
+  </div>
+</div>

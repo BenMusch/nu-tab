@@ -1,4 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @debater.name %>
+</p>
+
+<p>
+  <strong>Novice:</strong>
+  <%= @debater.novice %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= link_or_none @debater.team %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= link_or_none @debater.school %>
+</p>
+
 <%= link_to 'Edit', edit_debater_path(@debater) %> |
 <%= link_to 'Back', debaters_path %>
