@@ -94,7 +94,7 @@ class Team < ApplicationRecord
   private
 
   def validate_team_size
-    errors.add(:base, 'Team must have two debaters') unless debaters.size == 2
+    errors.add(:debaters, 'Team must have two debaters') unless debaters.size == 2
   end
 
   def validate_school_membership

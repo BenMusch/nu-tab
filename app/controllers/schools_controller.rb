@@ -1,50 +1,59 @@
 # frozen_string_literal: true
 class SchoolsController < ApplicationController
+  before_action :set_school, only: [:show, :edit, :update, :destroy]
+
+  # GET /schools
   def index
-    @schools = School.order(:name).map(&:as_json)
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @schools }
-    end
+    @schools = School.all
   end
 
+  # GET /schools/1
+  def show
+  end
+
+  # GET /schools/new
+  def new
+    @school = School.new
+  end
+
+  # GET /schools/1/edit
+  def edit
+  end
+
+  # POST /schools
   def create
     @school = School.new(school_params)
+
     if @school.save
-      render json: @school
+      redirect_to @school, notice: 'School was successfully created.'
     else
-      render json: @school.errors, status: :unprocessable
+      render :new
     end
   end
 
-  def show
-    @school = School.find(params[:id]).as_json
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @school }
-    end
-  end
-
+  # PATCH/PUT /schools/1
   def update
-    @school = School.find(params[:id])
     if @school.update(school_params)
-      render json: @school
+      redirect_to @school, notice: 'School was successfully updated.'
     else
-      render json: @school.errors, status: :unprocessable
+      render :edit
     end
   end
 
+  # DELETE /schools/1
   def destroy
-    @school = School.find(params[:id])
-    if @school.destroy
-      render json: {}, status: 200
-    else
-      render json: {}, status: :unprocessable
-    end
+    @school.destroy
+    redirect_to schools_url, notice: 'School was successfully destroyed.'
   end
 
   private
 
+  # Use callbacks to share common setup or constraints between actions.
+  def set_school
+    @school = School.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
   def school_params
     params.require(:school).permit(:name)
   end

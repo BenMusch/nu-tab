@@ -1,52 +1,60 @@
 # frozen_string_literal: true
 class DebatersController < ApplicationController
+  before_action :set_debater, only: [:show, :edit, :update, :destroy]
+
+  # GET /debaters
   def index
-    @debaters = Debater.all.order(:name).map { |d| d.as_json(include: :school) }
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @debaters }
-    end
+    @debaters = Debater.all
   end
 
+  # GET /debaters/1
+  def show
+  end
+
+  # GET /debaters/new
+  def new
+    @debater = Debater.new
+  end
+
+  # GET /debaters/1/edit
+  def edit
+  end
+
+  # POST /debaters
   def create
     @debater = Debater.new(debater_params)
+
     if @debater.save
-      render json: @debater.as_json(include: :school)
+      redirect_to @debater, notice: 'Debater was successfully created.'
     else
-      render json: @debater.errors, status: :unprocessable
+      render :new
     end
   end
 
-  def show
-    @debater = Debater.find(params[:id]).as_json(include: :school)
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @debater }
-    end
-  end
-
+  # PATCH/PUT /debaters/1
   def update
-    @debater = Debater.find(params[:id])
-    @debater.school = School.find_by(debater_params[:school])
     if @debater.update(debater_params)
-      render json: @debater.as_json(include: :school)
+      redirect_to @debater, notice: 'Debater was successfully updated.'
     else
-      render json: @debater.errors, status: :unprocessable
+      render :edit
     end
   end
 
+  # DELETE /debaters/1
   def destroy
-    @debater = Debater.find(params[:id])
-    if @debater.destroy
-      render json: {}, status: 200
-    else
-      render json: {}, status: :unprocessable
-    end
+    @debater.destroy
+    redirect_to debaters_url, notice: 'Debater was successfully destroyed.'
   end
 
   private
 
+  # Use callbacks to share common setup or constraints between actions.
+  def set_debater
+    @debater = Debater.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
   def debater_params
-    params.require(:debater).permit(:novice, :name, :school_id)
+    params.require(:debater).permit(:novice, :name, :school_id, :team_id)
   end
 end

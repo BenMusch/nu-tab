@@ -13,8 +13,9 @@
 #
 class School < ApplicationRecord
   has_many :debaters
+  has_many :judge_schools
   has_many :teams, through: :debaters
-  has_many :judges
+  has_many :judges, through: :judge_schools
   has_many :debaters
 
   validates :name, uniqueness: true,

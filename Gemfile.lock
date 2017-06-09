@@ -182,6 +182,7 @@ GEM
       json
       require_all
       ruby-progressbar
+    rails_layout (1.0.41)
     railties (5.0.3)
       actionpack (= 5.0.3)
       activesupport (= 5.0.3)
@@ -238,6 +239,9 @@ GEM
     sexp_processor (4.9.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -314,6 +318,7 @@ DEPENDENCIES
   rack-timeout
   rails (~> 5.0.0)
   rails_best_practices
+  rails_layout
   rdoc
   react_on_rails (~> 6.9.1)
   refills
@@ -321,6 +326,7 @@ DEPENDENCIES
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   shoulda-matchers
+  simple_form
   simplecov
   skylight
   spring

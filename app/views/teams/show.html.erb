@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+
+<p>
+  <strong>Seed:</strong>
+  <%= @team.seed %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= link_or_none @team.school %>
+</p>
+
+<p>
+  <strong>Debaters:</strong>
+  <%= render 'shared/simple_list', items: @team.debaters %>
+</p>
+
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

@@ -1,15 +1,8 @@
 Rails.application.routes.draw do
+  resources :schools
+  resources :judges
+  resources :teams
   resources :debaters
-  get 'debaters/index'
-
-  get 'debaters/create'
-
-  get 'debaters/show'
-
-  get 'debaters/update'
-
-  get 'debaters/destroy'
-
+  resources :rooms
   root 'application#index'
-  resources :schools, only: [:index, :create, :show, :update, :destroy]
 end

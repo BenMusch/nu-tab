@@ -1,1 +1,25 @@
-<%= react_component('DebaterListContainer', props: { debaters: @debaters }) %>
+<p id="notice"><%= notice %></p>
+
+<h1>Debaters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @debaters.each do |debater| %>
+      <tr>
+        <td><%= link_to debater.name, debater %></td>
+        <td><%= link_to 'Edit', edit_debater_path(debater) %></td>
+        <td><%= link_to 'Destroy', debater, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Debater', new_debater_path %>
