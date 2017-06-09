@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class JudgesController < ApplicationController
   before_action :set_judge, only: [:show, :edit, :update, :destroy]
 

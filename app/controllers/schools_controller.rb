@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
 
