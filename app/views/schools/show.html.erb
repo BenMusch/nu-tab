@@ -13,7 +13,7 @@
 
   <div id="teams" class="col col-md-3">
     <strong><%= pluralize(@school.teams.count, 'Team') %>:</strong>
-    <%= render 'shared/simple_list', items: @school.teams.uniq %>
+    <%= render 'shared/simple_list', items: @school.teams %>
   </div>
 
   <div id="debaters" class="col col-md-3">

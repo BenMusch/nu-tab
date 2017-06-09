@@ -21,4 +21,8 @@ class School < ApplicationRecord
   validates :name, uniqueness: true,
                    presence:   true,
                    length:     { maximum: 20 }
+
+  def teams
+    super.uniq
+  end
 end
