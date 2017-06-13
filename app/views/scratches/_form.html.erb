@@ -2,9 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :team_id %>
-    <%= f.association :debater_id %>
-    <%= f.input :type %>
+    <%= f.input :type, collection: Scratch.types, selected: @scratch.type %>
+    <%= f.association :team %>
+    <%= f.association :judge %>
   </div>
 
   <div class="form-actions">

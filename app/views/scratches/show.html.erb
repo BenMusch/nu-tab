@@ -2,12 +2,12 @@
 
 <p>
   <strong>Team:</strong>
-  <%= @scratch.team_id %>
+  <%= link_or_none @scratch.team %>
 </p>
 
 <p>
-  <strong>Debater:</strong>
-  <%= @scratch.debater_id %>
+  <strong>Judge:</strong>
+  <%= link_or_none @scratch.judge %>
 </p>
 
 <p>

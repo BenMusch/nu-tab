@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
+  root to: 'application#index'
+
   resources :schools
-  resources :judges
-  resources :teams
+
+  resources :scratches, only: [:new, :create]
+
+  resources :judges do
+    resources :scratches, only: [:index]
+  end
+
+  resources :teams do
+    resources :scratches, only: [:index]
+  end
+
   resources :debaters
+
   resources :rooms
-  root 'application#index'
 end
