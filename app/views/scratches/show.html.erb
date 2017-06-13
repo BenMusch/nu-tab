@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @scratch.team_id %>
+</p>
+
+<p>
+  <strong>Debater:</strong>
+  <%= @scratch.debater_id %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @scratch.type %>
+</p>
+
+<%= link_to 'Edit', edit_scratch_path(@scratch) %> |
+<%= link_to 'Back', scratches_path %>
