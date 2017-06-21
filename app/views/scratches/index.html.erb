@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Scratches for <%= @entity.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= judge_page? ? 'Team' : 'Judge' %></th>
+      <th>Type</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scratches.each do |scratch| %>
+      <tr>
+        <td><%= link_or_none(judge_page? ? scratch.team : scratch.judge) %></td>
+        <td><%= scratch.scratch_type %></td>
+        <td><%= link_to 'Destroy', scratch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scratch', new_scratch_path(judge_id: params[:judge_id], team_id: params[:team_id]) %>

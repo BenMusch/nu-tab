@@ -66,7 +66,7 @@ FactoryGirl.define do
   factory :scratch do
     association :judge, factory: :school
     association :team, factory: :team
-    type 1
+    scratch_type 1
   end
 
   factory :team do
