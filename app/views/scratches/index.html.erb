@@ -5,20 +5,17 @@
 <table>
   <thead>
     <tr>
-      <th>Team</th>
-      <th>Judge</th>
+      <th><%= judge_page? ? 'Team' : 'Judge' %></th>
       <th>Type</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @scratches.each do |scratch| %>
       <tr>
-        <td><%= link_or_none scratch.team %></td>
-        <td><%= link_or_none scratch.debater %></td>
-        <td><%= scratch.type %></td>
-        <td><%= link_to 'Show', scratch %></td>
+        <td><%= link_or_none(judge_page? ? scratch.team : scratch.judge) %></td>
+        <td><%= scratch.scratch_type %></td>
         <td><%= link_to 'Destroy', scratch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -27,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Scratch', new_scratch_path %>
+<%= link_to 'New Scratch', new_scratch_path(judge_id: params[:judge_id], team_id: params[:team_id]) %>

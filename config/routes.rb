@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :schools
 
-  resources :scratches, only: [:new, :create]
+  resources :scratches, only: [:new, :create, :destroy]
 
   resources :judges do
     resources :scratches, only: [:index]

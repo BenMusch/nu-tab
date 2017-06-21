@@ -5,7 +5,7 @@ class ScratchesController < ApplicationController
   def index
     if params[:judge_id]
       @entity = Judge.find(params[:judge_id])
-      @scratches = Scratch.where(debater_id: params[:judge_id])
+      @scratches = Scratch.where(judge_id: params[:judge_id])
     elsif params[:team_id]
       @entity = Team.find(params[:team_id])
       @scratches = Scratch.where(team_id: params[:team_id])
@@ -19,6 +19,8 @@ class ScratchesController < ApplicationController
   # GET /scratches/new
   def new
     @scratch = Scratch.new
+    @scratch.team_id = params[:team_id]
+    @scratch.judge_id = params[:judge_id]
   end
 
   # GET /scratches/1/edit
@@ -30,7 +32,7 @@ class ScratchesController < ApplicationController
     @scratch = Scratch.new(scratch_params)
 
     if @scratch.save
-      redirect_to root_path, notice: 'Scratch was successfully created.'
+      redirect_to :back, fallback_location: root_path, notice: 'Scratch was successfully created.'
     else
       render :new
     end
@@ -39,7 +41,7 @@ class ScratchesController < ApplicationController
   # DELETE /scratches/1
   def destroy
     @scratch.destroy
-    redirect_to root_path, notice: 'Scratch was successfully destroyed.'
+    redirect_to :back, fallback_location: root_path, notice: 'Scratch was successfully destroyed.'
   end
 
   private
@@ -51,8 +53,8 @@ class ScratchesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def scratch_params
-    params.require(:scratch).permit(:team_id, :judge_id, :type).tap do |p|
-      p[:type] = p[:type].to_i if p[:type]
+    params.require(:scratch).permit(:team_id, :judge_id, :scratch_type).tap do |p|
+      p[:scratch_type] = p[:scratch_type].to_i if p[:scratch_type]
     end
   end
 end
