@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ScratchesController < ApplicationController
   before_action :set_scratch, only: [:show, :destroy]
 
@@ -12,19 +13,11 @@ class ScratchesController < ApplicationController
     end
   end
 
-  # GET /scratches/1
-  def show
-  end
-
   # GET /scratches/new
   def new
     @scratch = Scratch.new
     @scratch.team_id = params[:team_id]
     @scratch.judge_id = params[:judge_id]
-  end
-
-  # GET /scratches/1/edit
-  def edit
   end
 
   # POST /scratches
